@@ -1,1 +1,1 @@
-Repository for code and artifacts
+Repository for code and artifacts.
