@@ -1,0 +1,1665 @@
+!SESSION 2012-08-12 23:59:57.269 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_29
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/james/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/james/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2012-08-13 00:03:10.619
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:05:22.584
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse_1.6.5.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse_1.6.5.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 19 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:05:22.608
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse_1.6.5.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse_1.6.5.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:05:22.610
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse_1.6.5.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:05:23.796
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/com.collabnet.subversion.merge.feature_1.10.0.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/com.collabnet.subversion.merge.feature_1.10.0.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 19 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:05:23.796
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/com.collabnet.subversion.merge.feature_1.10.0.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/com.collabnet.subversion.merge.feature_1.10.0.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:05:23.797
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/com.collabnet.subversion.merge.feature_1.10.0.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:05:24.959
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse.graph.feature_1.0.7.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse.graph.feature_1.0.7.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 19 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:05:24.959
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse.graph.feature_1.0.7.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse.graph.feature_1.0.7.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:05:24.960
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse.graph.feature_1.0.7.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:05:26.120
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.feature_1.6.4.1.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.feature_1.6.4.1.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 19 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:05:26.121
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.feature_1.6.4.1.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.feature_1.6.4.1.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:05:26.183
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.feature_1.6.4.1.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:05:27.872
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tmatesoft.svnkit_1.3.0.5847.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tmatesoft.svnkit_1.3.0.5847.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 19 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:05:27.873
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tmatesoft.svnkit_1.3.0.5847.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tmatesoft.svnkit_1.3.0.5847.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:05:27.874
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tmatesoft.svnkit_1.3.0.5847.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:05:29.162
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/com.sun.jna_3.0.9.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/com.sun.jna_3.0.9.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 19 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:05:29.163
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/com.sun.jna_3.0.9.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/com.sun.jna_3.0.9.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:05:29.165
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/com.sun.jna_3.0.9.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:05:30.351
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.javahl.feature_1.6.5.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.javahl.feature_1.6.5.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 19 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:05:30.352
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.javahl.feature_1.6.5.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.javahl.feature_1.6.5.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:05:30.352
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.javahl.feature_1.6.5.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:05:31.503
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.svnkit.feature_1.6.4.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.svnkit.feature_1.6.4.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 19 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:05:31.504
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.svnkit.feature_1.6.4.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.svnkit.feature_1.6.4.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteFeaturesAction.perform(RemoteFeaturesAction.java:39)
+	at org.eclipse.equinox.internal.p2.updatesite.RemoteUpdateSiteAction.perform(RemoteUpdateSiteAction.java:50)
+	at org.eclipse.equinox.p2.publisher.Publisher$ArtifactProcess.run(Publisher.java:207)
+	at org.eclipse.equinox.p2.publisher.Publisher.publish(Publisher.java:237)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.generateMetadata(UpdateSiteMetadataRepositoryFactory.java:108)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.initializeRepository(UpdateSiteMetadataRepositoryFactory.java:93)
+	at org.eclipse.equinox.internal.p2.updatesite.metadata.UpdateSiteMetadataRepositoryFactory.load(UpdateSiteMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:05:31.504
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.svnkit.feature_1.6.4.jar.
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:06:38.845
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.operations 1 10001 2012-08-13 00:06:38.845
+!MESSAGE Your original request has been modified.
+!SUBENTRY 2 org.eclipse.equinox.p2.operations 1 10003 2012-08-13 00:06:38.845
+!MESSAGE "Eclipse EGit" is already installed, so an update will be performed instead.
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:06:38.845
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.846
+!MESSAGE Software being installed: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.846
+!MESSAGE Software currently installed: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:06:38.846
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.846
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.846
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.846
+!MESSAGE Git Team Provider UI 1.3.0.201202151440-r (org.eclipse.egit.ui 1.3.0.201202151440-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:06:38.846
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.846
+!MESSAGE From: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.846
+!MESSAGE To: org.eclipse.egit.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:06:38.846
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.846
+!MESSAGE From: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.846
+!MESSAGE To: org.eclipse.egit.mylyn.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:06:38.846
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.846
+!MESSAGE From: EGit Mylyn UI 1.1.0.201109151100-r (org.eclipse.egit.mylyn.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.846
+!MESSAGE To: package org.eclipse.egit.ui [1.1.0,1.2.0)
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:06:38.862
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.operations 1 10001 2012-08-13 00:06:38.862
+!MESSAGE Your original request has been modified.
+!SUBENTRY 2 org.eclipse.equinox.p2.operations 1 10003 2012-08-13 00:06:38.862
+!MESSAGE "Eclipse EGit" is already installed, so an update will be performed instead.
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:06:38.862
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.862
+!MESSAGE Software being installed: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.862
+!MESSAGE Software currently installed: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:06:38.862
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.862
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.862
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.862
+!MESSAGE Git Team Provider UI 1.3.0.201202151440-r (org.eclipse.egit.ui 1.3.0.201202151440-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:06:38.862
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.862
+!MESSAGE From: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.862
+!MESSAGE To: org.eclipse.egit.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:06:38.863
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.863
+!MESSAGE From: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.863
+!MESSAGE To: org.eclipse.egit.mylyn.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:06:38.863
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.863
+!MESSAGE From: EGit Mylyn UI 1.1.0.201109151100-r (org.eclipse.egit.mylyn.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:06:38.863
+!MESSAGE To: package org.eclipse.egit.ui [1.1.0,1.2.0)
+
+!ENTRY org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:55.963
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:55.963
+!MESSAGE Software being installed: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:55.963
+!MESSAGE Software currently installed: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:55.963
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:55.963
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:55.963
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:55.963
+!MESSAGE Git Team Provider UI 1.3.0.201202151440-r (org.eclipse.egit.ui 1.3.0.201202151440-r)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:55.963
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:55.963
+!MESSAGE From: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:55.963
+!MESSAGE To: org.eclipse.egit.ui [2.0.0.201206130900-r]
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:55.963
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:55.963
+!MESSAGE From: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:55.963
+!MESSAGE To: org.eclipse.egit.mylyn.ui [1.1.0.201109151100-r]
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:55.963
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:55.963
+!MESSAGE From: EGit Mylyn UI 1.1.0.201109151100-r (org.eclipse.egit.mylyn.ui 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:55.963
+!MESSAGE To: package org.eclipse.egit.ui [1.1.0,1.2.0)
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:09:56.424
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.424
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.424
+!MESSAGE Software being installed: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.424
+!MESSAGE Software currently installed: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.424
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.424
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.424
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.424
+!MESSAGE Git Team Provider UI 1.3.0.201202151440-r (org.eclipse.egit.ui 1.3.0.201202151440-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.424
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.424
+!MESSAGE From: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.424
+!MESSAGE To: org.eclipse.egit.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.424
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.424
+!MESSAGE From: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.424
+!MESSAGE To: org.eclipse.egit.mylyn.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.424
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.425
+!MESSAGE From: EGit Mylyn UI 1.1.0.201109151100-r (org.eclipse.egit.mylyn.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.425
+!MESSAGE To: package org.eclipse.egit.ui [1.1.0,1.2.0)
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:09:56.499
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.499
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.499
+!MESSAGE Software being installed: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.499
+!MESSAGE Software currently installed: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.499
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.500
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.500
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.500
+!MESSAGE Git Team Provider UI 1.3.0.201202151440-r (org.eclipse.egit.ui 1.3.0.201202151440-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.500
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.500
+!MESSAGE From: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.500
+!MESSAGE To: org.eclipse.egit.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.500
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.500
+!MESSAGE From: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.500
+!MESSAGE To: org.eclipse.egit.mylyn.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.500
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.500
+!MESSAGE From: EGit Mylyn UI 1.1.0.201109151100-r (org.eclipse.egit.mylyn.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.500
+!MESSAGE To: package org.eclipse.egit.ui [1.1.0,1.2.0)
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:09:56.508
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.508
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.508
+!MESSAGE Software being installed: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.508
+!MESSAGE Software currently installed: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.508
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.508
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.508
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.508
+!MESSAGE Git Team Provider UI 1.3.0.201202151440-r (org.eclipse.egit.ui 1.3.0.201202151440-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.509
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.509
+!MESSAGE From: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.509
+!MESSAGE To: org.eclipse.egit.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.509
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.509
+!MESSAGE From: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.509
+!MESSAGE To: org.eclipse.egit.mylyn.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:56.509
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.509
+!MESSAGE From: EGit Mylyn UI 1.1.0.201109151100-r (org.eclipse.egit.mylyn.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:56.509
+!MESSAGE To: package org.eclipse.egit.ui [1.1.0,1.2.0)
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:09:57.537
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:57.537
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.537
+!MESSAGE Software being installed: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.537
+!MESSAGE Software currently installed: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:57.537
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.537
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.537
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.537
+!MESSAGE Git Team Provider UI 1.3.0.201202151440-r (org.eclipse.egit.ui 1.3.0.201202151440-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:57.537
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.537
+!MESSAGE From: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.537
+!MESSAGE To: org.eclipse.egit.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:57.537
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.537
+!MESSAGE From: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.537
+!MESSAGE To: org.eclipse.egit.mylyn.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:57.537
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.537
+!MESSAGE From: EGit Mylyn UI 1.1.0.201109151100-r (org.eclipse.egit.mylyn.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.537
+!MESSAGE To: package org.eclipse.egit.ui [1.1.0,1.2.0)
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:09:57.538
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:57.538
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.538
+!MESSAGE Software being installed: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.538
+!MESSAGE Software currently installed: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:57.538
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.538
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.538
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.538
+!MESSAGE Git Team Provider UI 1.3.0.201202151440-r (org.eclipse.egit.ui 1.3.0.201202151440-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:57.538
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.538
+!MESSAGE From: Eclipse EGit 2.0.0.201206130900-r (org.eclipse.egit.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.539
+!MESSAGE To: org.eclipse.egit.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:57.539
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.539
+!MESSAGE From: EGit Mylyn 1.1.0.201109151100-r (org.eclipse.egit.mylyn.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.539
+!MESSAGE To: org.eclipse.egit.mylyn.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:09:57.553
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.553
+!MESSAGE From: EGit Mylyn UI 1.1.0.201109151100-r (org.eclipse.egit.mylyn.ui 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:09:57.553
+!MESSAGE To: package org.eclipse.egit.ui [1.1.0,1.2.0)
+
+!ENTRY org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:19.914
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:19.914
+!MESSAGE Software being installed: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:19.914
+!MESSAGE Software currently installed: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:19.914
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:19.914
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:19.914
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:19.914
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:19.914
+!MESSAGE From: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:19.914
+!MESSAGE To: org.eclipse.egit.ui [1.1.0.201109151100-r]
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:19.914
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:19.914
+!MESSAGE From: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:19.914
+!MESSAGE To: org.eclipse.egit.mylyn.ui [2.0.0.201206130900-r]
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:19.914
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:19.914
+!MESSAGE From: EGit Mylyn UI 2.0.0.201206130900-r (org.eclipse.egit.mylyn.ui 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:19.914
+!MESSAGE To: package org.eclipse.egit.ui [2.0.0,2.1.0)
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:10:20.127
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.127
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.127
+!MESSAGE Software being installed: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.127
+!MESSAGE Software currently installed: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.127
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.127
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.127
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.127
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.127
+!MESSAGE From: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.127
+!MESSAGE To: org.eclipse.egit.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.127
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.127
+!MESSAGE From: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.127
+!MESSAGE To: org.eclipse.egit.mylyn.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.127
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.127
+!MESSAGE From: EGit Mylyn UI 2.0.0.201206130900-r (org.eclipse.egit.mylyn.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.127
+!MESSAGE To: package org.eclipse.egit.ui [2.0.0,2.1.0)
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:10:20.215
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.215
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.215
+!MESSAGE Software being installed: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.215
+!MESSAGE Software currently installed: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.215
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.215
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.215
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.215
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.215
+!MESSAGE From: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.215
+!MESSAGE To: org.eclipse.egit.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.216
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.216
+!MESSAGE From: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.216
+!MESSAGE To: org.eclipse.egit.mylyn.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.216
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.216
+!MESSAGE From: EGit Mylyn UI 2.0.0.201206130900-r (org.eclipse.egit.mylyn.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.216
+!MESSAGE To: package org.eclipse.egit.ui [2.0.0,2.1.0)
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:10:20.226
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.226
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.226
+!MESSAGE Software being installed: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.226
+!MESSAGE Software currently installed: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.227
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.227
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.227
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.227
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.227
+!MESSAGE From: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.227
+!MESSAGE To: org.eclipse.egit.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.227
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.227
+!MESSAGE From: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.227
+!MESSAGE To: org.eclipse.egit.mylyn.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:20.227
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.227
+!MESSAGE From: EGit Mylyn UI 2.0.0.201206130900-r (org.eclipse.egit.mylyn.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:20.227
+!MESSAGE To: package org.eclipse.egit.ui [2.0.0,2.1.0)
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:10:21.553
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:21.554
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.554
+!MESSAGE Software being installed: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.554
+!MESSAGE Software currently installed: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:21.554
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.554
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.554
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:21.554
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.554
+!MESSAGE From: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.554
+!MESSAGE To: org.eclipse.egit.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:21.554
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.554
+!MESSAGE From: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.554
+!MESSAGE To: org.eclipse.egit.mylyn.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:21.554
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.554
+!MESSAGE From: EGit Mylyn UI 2.0.0.201206130900-r (org.eclipse.egit.mylyn.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.554
+!MESSAGE To: package org.eclipse.egit.ui [2.0.0,2.1.0)
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:10:21.555
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:21.555
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.555
+!MESSAGE Software being installed: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.555
+!MESSAGE Software currently installed: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:21.555
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.555
+!MESSAGE Git Team Provider UI 2.0.0.201206130900-r (org.eclipse.egit.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.555
+!MESSAGE Git Team Provider UI 1.1.0.201109151100-r (org.eclipse.egit.ui 1.1.0.201109151100-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:21.555
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.555
+!MESSAGE From: Eclipse EGit 1.1.0.201109151100-r (org.eclipse.egit.feature.group 1.1.0.201109151100-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.555
+!MESSAGE To: org.eclipse.egit.ui [1.1.0.201109151100-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:21.555
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.555
+!MESSAGE From: EGit Mylyn 2.0.0.201206130900-r (org.eclipse.egit.mylyn.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.555
+!MESSAGE To: org.eclipse.egit.mylyn.ui [2.0.0.201206130900-r]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:10:21.555
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.555
+!MESSAGE From: EGit Mylyn UI 2.0.0.201206130900-r (org.eclipse.egit.mylyn.ui 2.0.0.201206130900-r)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:10:21.555
+!MESSAGE To: package org.eclipse.egit.ui [2.0.0,2.1.0)
+
+!ENTRY org.eclipse.ui 4 4 2012-08-13 00:11:08.712
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-08-13 00:11:25.089 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_29
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/james/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/james/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2012-08-13 00:12:36.989
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.mylyn.tasks.ui 2 0 2012-08-13 00:12:37.693
+!MESSAGE No search provider was registed. Tasks search is not available.
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:14:06.724
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:14:06.724
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:14:06.724
+!MESSAGE Software being installed: EGit Import Support 2.0.0.201206130900-r (org.eclipse.egit.import.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:14:06.724
+!MESSAGE Missing requirement: EGit Import Support 2.0.0.201206130900-r (org.eclipse.egit.import.feature.group 2.0.0.201206130900-r) requires 'org.eclipse.team.core 3.6.100' but it could not be found
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2012-08-13 00:14:06.780
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2012-08-13 00:14:06.780
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:14:06.780
+!MESSAGE Software being installed: EGit Import Support 2.0.0.201206130900-r (org.eclipse.egit.import.feature.group 2.0.0.201206130900-r)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2012-08-13 00:14:06.780
+!MESSAGE Missing requirement: EGit Import Support 2.0.0.201206130900-r (org.eclipse.egit.import.feature.group 2.0.0.201206130900-r) requires 'org.eclipse.team.core 3.6.100' but it could not be found
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:18:12.561
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse_1.6.5.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse_1.6.5.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 21 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:18:12.562
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse_1.6.5.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse_1.6.5.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:18:12.619
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse_1.6.5.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:18:14.010
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/com.collabnet.subversion.merge.feature_1.10.0.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/com.collabnet.subversion.merge.feature_1.10.0.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 21 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:18:14.011
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/com.collabnet.subversion.merge.feature_1.10.0.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/com.collabnet.subversion.merge.feature_1.10.0.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:18:14.049
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/com.collabnet.subversion.merge.feature_1.10.0.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:18:15.200
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse.graph.feature_1.0.7.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse.graph.feature_1.0.7.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 21 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:18:15.200
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse.graph.feature_1.0.7.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse.graph.feature_1.0.7.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:18:15.238
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.subclipse.graph.feature_1.0.7.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:18:16.408
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.feature_1.6.4.1.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.feature_1.6.4.1.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 21 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:18:16.408
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.feature_1.6.4.1.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.feature_1.6.4.1.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:18:16.570
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.feature_1.6.4.1.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:18:17.774
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tmatesoft.svnkit_1.3.0.5847.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tmatesoft.svnkit_1.3.0.5847.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 21 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:18:17.775
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tmatesoft.svnkit_1.3.0.5847.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tmatesoft.svnkit_1.3.0.5847.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:18:17.775
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tmatesoft.svnkit_1.3.0.5847.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:18:18.914
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/com.sun.jna_3.0.9.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/com.sun.jna_3.0.9.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 21 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:18:18.915
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/com.sun.jna_3.0.9.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/com.sun.jna_3.0.9.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:18:18.916
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/com.sun.jna_3.0.9.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:18:20.063
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.javahl.feature_1.6.5.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.javahl.feature_1.6.5.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 21 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:18:20.064
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.javahl.feature_1.6.5.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.javahl.feature_1.6.5.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:18:20.065
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.javahl.feature_1.6.5.jar.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2012-08-13 00:18:21.241
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.svnkit.feature_1.6.4.jar.
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:279)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.svnkit.feature_1.6.4.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	... 21 more
+!SUBENTRY 1 org.eclipse.equinox.p2.transport.ecf 4 1200 2012-08-13 00:18:21.242
+!MESSAGE Artifact not found: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.svnkit.feature_1.6.4.jar.
+!STACK 0
+java.io.FileNotFoundException: http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.svnkit.feature_1.6.4.jar
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:384)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:358)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:295)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:80)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:130)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.parseFeature(UpdateSite.java:264)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeaturesFromSite(UpdateSite.java:531)
+	at org.eclipse.equinox.internal.p2.updatesite.UpdateSite.loadFeatures(UpdateSite.java:437)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.generateArtifactDescriptors(UpdateSiteArtifactRepositoryFactory.java:104)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.initializeRepository(UpdateSiteArtifactRepositoryFactory.java:99)
+	at org.eclipse.equinox.internal.p2.updatesite.artifact.UpdateSiteArtifactRepositoryFactory.load(UpdateSiteArtifactRepositoryFactory.java:57)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:69)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:749)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:651)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:96)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getLoadedArtifactRepositories(ProvisioningContext.java:160)
+	at org.eclipse.equinox.p2.engine.ProvisioningContext.getArtifactRepositories(ProvisioningContext.java:143)
+	at org.eclipse.equinox.internal.p2.engine.phases.Sizing.completePhase(Sizing.java:91)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:216)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollBackPhase(EngineSession.java:239)
+	at org.eclipse.equinox.internal.p2.engine.EngineSession.rollback(EngineSession.java:178)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:84)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:230)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.equinox.p2.updatesite 4 0 2012-08-13 00:18:21.250
+!MESSAGE Error reading feature http://subclipse.tigris.org/update_1.6.x//features/org.tigris.subversion.clientadapter.svnkit.feature_1.6.4.jar.
+
+!ENTRY org.eclipse.ui 4 4 2012-08-13 00:24:50.176
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-08-13 00:24:58.065 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_29
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/james/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/james/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2012-08-13 00:25:34.705
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.mylyn.tasks.ui 2 0 2012-08-13 00:25:35.374
+!MESSAGE No search provider was registed. Tasks search is not available.
+
+!ENTRY org.eclipse.ui 4 4 2012-08-13 00:26:17.466
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-08-13 16:02:05.531 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_29
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/james/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/james/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2012-08-13 16:02:18.213
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.mylyn.tasks.ui 2 0 2012-08-13 16:02:19.695
+!MESSAGE No search provider was registed. Tasks search is not available.
+
+!ENTRY org.eclipse.ui 4 4 2012-08-13 16:03:02.154
+!MESSAGE Invalid preference page path: XML Syntax
