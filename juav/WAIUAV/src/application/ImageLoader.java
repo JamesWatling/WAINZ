@@ -1,8 +1,8 @@
 package application;
 
 import gui.ApplicationWindow;
-
 import javax.swing.JFileChooser;
+import java.io.File;
 
 public class ImageLoader {
 	
@@ -10,9 +10,11 @@ public class ImageLoader {
 	
 	public ImageLoader() {
 		fileChooser = new JFileChooser();
+		fileChooser.setMultiSelectionEnabled(true);
 	}
 	
-	public void importImages(ApplicationWindow app) {
+	public File[] importImages(ApplicationWindow app) {
 		fileChooser.showOpenDialog(app);
+		return fileChooser.getSelectedFiles();
 	}
 }

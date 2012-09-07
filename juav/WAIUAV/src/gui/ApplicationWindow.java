@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -22,6 +23,7 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 
 	private ImageLoader imageLoader;
 	private static final long serialVersionUID = 1L;
+	private File[] selectedImages = null;
 
 	public ApplicationWindow(){
 		setLayout(new FlowLayout());
@@ -77,13 +79,16 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 		setJMenuBar(menuBar);
 	}
 	private void initialiseWindow(){
+		
 		JPanel leftPanel = new JPanel();
 		leftPanel.setLayout(new GridLayout(0, 2));
-		for(int i = 0;i<20;i++){
-			JLabel l = new JLabel(new ImageIcon("a.jpg"));
-			l.setBackground(new Color(0, 0, 255));
-			l.setPreferredSize(new Dimension(100, 100));
-			leftPanel.add(l);
+		if(selectedImages != null){
+			for(File f:selectedImages){
+				JLabel l = new JLabel(new ImageIcon(f.getAbsolutePath()));
+				l.setBackground(new Color(0, 0, 255));
+				l.setPreferredSize(new Dimension(100, 100));
+				leftPanel.add(l);
+			}
 		}
 		JScrollPane leftPane = new JScrollPane(leftPanel);
 
@@ -96,6 +101,7 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 		rightPanel.setPreferredSize(new Dimension(550, 600));
 		rightPanel.setBackground(new Color(0, 225, 0));
 
+		
 		add(leftPane);
 		add(rightPanel);
 
@@ -109,7 +115,8 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 
 		if (action.equals("Import")) {
 			//import features
-			imageLoader.importImages(this);
+			selectedImages = imageLoader.importImages(this);
+			initialiseWindow();
 		}
 		if (action.equals("Export")) {
 			//export features
