@@ -2,7 +2,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.InputStream;
 
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -62,15 +70,25 @@ public class ApplicationWindow extends JFrame{
 				setJMenuBar(menuBar);
 				
 				JPanel leftPanel = new JPanel();
+				leftPanel.setLayout(new GridLayout(0, 2));
+				for(int i = 0;i<20;i++){
+					JLabel l = new JLabel(new ImageIcon("a.jpg"));
+					l.setBackground(new Color(0, 0, 255));
+					l.setPreferredSize(new Dimension(100, 100));
+					leftPanel.add(l);
+				}
+				JScrollPane leftPane = new JScrollPane(leftPanel);
+				
 				JPanel rightPanel = new JPanel();
+				
 
-				leftPanel.setPreferredSize(new Dimension(250, 600));
+				leftPane.setPreferredSize(new Dimension(250, 600));
 				leftPanel.setBackground(new Color(225, 0, 0));
 				
 				rightPanel.setPreferredSize(new Dimension(550, 600));
 				rightPanel.setBackground(new Color(0, 225, 0));
 				
-				add(leftPanel);
+				add(leftPane);
 				add(rightPanel);
 				
 				pack();
