@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,9 +17,16 @@ import javax.swing.JTextArea;
 
 public class ApplicationWindow extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ApplicationWindow(){
-		setLayout(new BorderLayout());
-		setSize(800, 600);
+
+		setLayout(new FlowLayout());
+		//setPreferredSize(new Dimension(800, 600));
+		setResizable(false);
 		JMenuBar menuBar = new JMenuBar();
 		//menuBar
 
@@ -55,31 +64,16 @@ public class ApplicationWindow extends JFrame{
 		JPanel leftPanel = new JPanel();
 		JPanel rightPanel = new JPanel();
 
-		JScrollPane listScrollPane = new JScrollPane(leftPanel);
-		JScrollPane pictureScrollPane = new JScrollPane(rightPanel);
+		leftPanel.setPreferredSize(new Dimension(250, 600));
+		leftPanel.setBackground(new Color(225, 0, 0));
 
-		//Create a split pane with the two scroll panes in it.
-		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-				listScrollPane, pictureScrollPane);
+		rightPanel.setPreferredSize(new Dimension(550, 600));
+		rightPanel.setBackground(new Color(0, 225, 0));
 
-		splitPane.setDividerLocation(150);
+		add(leftPanel);
+		add(rightPanel);
 
-		//Provide minimum sizes for the two components in the split pane
-		Dimension minimumSize = new Dimension(100, 50);
-		listScrollPane.setMinimumSize(minimumSize);
-		pictureScrollPane.setMinimumSize(minimumSize);
-		listScrollPane.setMaximumSize(minimumSize);
-		pictureScrollPane.setMaximumSize(minimumSize);
-		splitPane.setMaximumSize(minimumSize);
-		splitPane.setMinimumSize(minimumSize);
-
-		leftPanel.add(new JLabel("Growl"));
-		rightPanel.add(new JLabel("ER"));
-
-
-
-		add(splitPane);
-
+		pack();
 		setVisible(true);
 	}
 }
