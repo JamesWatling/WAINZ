@@ -21,7 +21,6 @@ public class ApplicationWindow extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 	public ApplicationWindow(){
-		// TODO Auto-generated method stub
 		setLayout(new FlowLayout());
 		//setPreferredSize(new Dimension(800, 600));
 		setResizable(false);
