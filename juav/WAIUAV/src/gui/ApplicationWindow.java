@@ -87,13 +87,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JScrollPane leftPane = new JScrollPane(leftPanel);
 
 		JPanel rightPanel = new JPanel();
-		leftPane.setPreferredSize(new Dimension(250, 600));
+		leftPane.setPreferredSize(new Dimension(300, 800));
 		leftPanel.setBackground(new Color(225, 0, 0));
 
-		rightPanel.setPreferredSize(new Dimension(550, 600));
+		rightPanel.setPreferredSize(new Dimension(660, 800));
 		rightPanel.setBackground(new Color(0, 225, 0));
-
-		
 		add(leftPane);
 		add(rightPanel);
 
