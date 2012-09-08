@@ -11,11 +11,11 @@ import java.awt.image.BufferedImage;
  */
 public class ImageThumbnail {
 	
-	private TaggableImage image;
 	private BufferedImage thumb;
 
 	public ImageThumbnail(TaggableImage image, Dimension size) {
 		//resize the argument image to the argument size and store
+	
 	}
 
 }

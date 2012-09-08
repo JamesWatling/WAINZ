@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -25,7 +25,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 	private ImageLoader imageLoader;
 	private static final long serialVersionUID = 1L;
-	private File[] selectedImages = null;
+	
+	private List<TaggableImage> importedImageList;
+	
+	private ImageGridPanel imageGrid; 
 
 	public ApplicationWindow(){
 		setLayout(new FlowLayout());
@@ -83,12 +86,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	private void initialiseWindow(){		
 		//initialise empty image grid jm 080912
-		ImageGridPanel leftPanel = new ImageGridPanel(null);
-		JScrollPane leftPane = new JScrollPane(leftPanel);
+		imageGrid = new ImageGridPanel(null);
+		JScrollPane leftPane = new JScrollPane(imageGrid);
 
 		JPanel rightPanel = new JPanel();
 		leftPane.setPreferredSize(new Dimension(300, 800));
-		leftPanel.setBackground(new Color(225, 0, 0));
 
 		rightPanel.setPreferredSize(new Dimension(660, 800));
 		rightPanel.setBackground(new Color(0, 225, 0));
@@ -105,8 +107,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 		if (action.equals("Import")) {
 			//import features
-			selectedImages = imageLoader.importImages(this);
-			initialiseWindow();
+			importedImageList = imageLoader.importImages(this);
+			imageGrid.setImageList(importedImageList);
+			imageGrid.initialise();
+			imageGrid.repaint();
 		}
 		if (action.equals("Export")) {
 			//export features

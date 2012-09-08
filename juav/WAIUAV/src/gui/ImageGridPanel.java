@@ -19,25 +19,34 @@ public class ImageGridPanel extends JPanel {
 	private List<TaggableImage> images;
 	private TaggableImage selectedImage;
 
-	public ImageGridPanel(File[] imagePaths) {
+	public ImageGridPanel(List<TaggableImage> imageList) {
 		//TODO fill with actual images
-		images = new ArrayList<TaggableImage>();
+		images = imageList;
+		setLayout(new GridLayout(0, 2));
 		initialise();
+	}
+	
+	public void setImageList(List<TaggableImage> newImageList) {
+		images = newImageList;
 	}
 
 	public void initialise() {
-		setLayout(new GridLayout(0, 2));
+		//trash the existing contents of the image panel if there
+		//are already images (on a reload)
+		removeAll();
+		
+		Debug: System.out.println("initialise imageGrid");
 		ImageThumbPanel itp;
 		if(images != null){
-			for(int i = 0; i < 30; i++){
-				//JLabel l = new JLabel(new ImageIcon(f.getAbsolutePath()));
-				//l.setBackground(new Color(0, 0, 255));
-				//l.setPreferredSize(new Dimension(100, 100));
-				//leftPanel.add(l);
-				
-				itp = new ImageThumbPanel(null, gridPanelSize);
-				add(itp);
+			for(TaggableImage timg: images){
+				for (int j = 0; j < 20; j++) {
+					Debug: System.out.println("adding image to grid");
+					itp = new ImageThumbPanel(timg, gridPanelSize);
+					add(itp);
+				}
 			}
 		}
+		revalidate();
+		repaint();
 	}
 }

@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -19,13 +20,13 @@ import javax.swing.JPanel;
  */
 public class ImageThumbPanel extends JPanel {
 	
-	private ImageThumbnail image;
-	private ImageTag tag;
+	private TaggableImage image;
+	private ImageTag tag; 
 	private String fileName;
 	private boolean selected;
 
 	public ImageThumbPanel(TaggableImage ti, Dimension dim) {
-		//image = new ImageThumbnail(ti, new Dimension(dim.width-10, dim.height-20));
+		image = ti;//new ImageThumbnail(ti, new Dimension(dim.width-10, dim.height-20));
 		//tag = ti.getTag();
 		fileName = "testing.jpg"; //TODO replace with actual filenames jm 080512
 		initLayout(dim);
@@ -36,10 +37,7 @@ public class ImageThumbPanel extends JPanel {
 		setLayout(new FlowLayout());
 		
 		//image label TODO replace with actual ImageThumbail rendered image
-		JLabel imageLabel = new JLabel();
-		imageLabel.setOpaque(true);
-		imageLabel.setForeground(Color.BLUE);
-		imageLabel.setBackground(Color.CYAN);
+		JLabel imageLabel = new JLabel(new ImageIcon(image.getImage()));
 		imageLabel.setPreferredSize(new Dimension(dim.width-10, dim.height-20)); //temporary
 		add(imageLabel);
 		
