@@ -1,15 +1,15 @@
 package gui;
+import images.TaggableImage;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -78,23 +78,12 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 		help.add(about);
 		setJMenuBar(menuBar);
 	}
-	private void initialiseWindow(){
-		
-		JPanel leftPanel = new JPanel();
-		leftPanel.setLayout(new GridLayout(0, 2));
-		if(selectedImages != null){
-			for(File f:selectedImages){
-				JLabel l = new JLabel(new ImageIcon(f.getAbsolutePath()));
-				l.setBackground(new Color(0, 0, 255));
-				l.setPreferredSize(new Dimension(100, 100));
-				leftPanel.add(l);
-			}
-		}
+	private void initialiseWindow(){		
+		//initialise empty image grid jm 080912
+		ImageGridPanel leftPanel = new ImageGridPanel(null);
 		JScrollPane leftPane = new JScrollPane(leftPanel);
 
 		JPanel rightPanel = new JPanel();
-
-
 		leftPane.setPreferredSize(new Dimension(250, 600));
 		leftPanel.setBackground(new Color(225, 0, 0));
 

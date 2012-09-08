@@ -11,15 +11,17 @@ import java.awt.image.BufferedImage;
 public class TaggableImage {
 	
 	private BufferedImage image;
+	private String fileName;
 	private ImageTag tag;
 	
 	/**
 	 * Constructs a new TaggableImage with an untagged status
 	 * @param image - image stored with this taggable
 	 */
-	public TaggableImage(BufferedImage image){
+	public TaggableImage(BufferedImage image, String file){
 		this.image = image;
 		tag = ImageTag.UNTAGGED;
+		fileName = file;
 	}
 	
 	public void setTag(ImageTag newTag) {

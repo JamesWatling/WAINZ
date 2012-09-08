@@ -1,6 +1,7 @@
 package images;
 
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 
 /**
  * Representation of a taggable image
@@ -11,9 +12,10 @@ import java.awt.Dimension;
 public class ImageThumbnail {
 	
 	private TaggableImage image;
+	private BufferedImage thumb;
 
-	public ImageThumbnail(Dimension size, TaggableImage image) {
-		
+	public ImageThumbnail(TaggableImage image, Dimension size) {
+		//resize the argument image to the argument size and store
 	}
 
 }
