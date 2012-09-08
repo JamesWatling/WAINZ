@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -19,7 +21,7 @@ import javax.swing.JScrollPane;
 import application.ImageLoader;
 
 
-public class ApplicationWindow extends JFrame implements ActionListener {
+public class ApplicationWindow extends JFrame implements ActionListener, WindowListener {
 
 	private ImageLoader imageLoader;
 	private static final long serialVersionUID = 1L;
@@ -28,6 +30,7 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 	public ApplicationWindow(){
 		setLayout(new FlowLayout());
 		setResizable(false);
+		addWindowListener(this);
 		initialiseMenus();
 		initialiseWindow();
 		initialiseApplication();
@@ -140,4 +143,14 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 			//about dialog
 		}
 	}
+
+	public void windowOpened(WindowEvent e) {}
+	public void windowClosing(WindowEvent e) {
+		System.exit(0);
+	}
+	public void windowClosed(WindowEvent e) {}
+	public void windowIconified(WindowEvent e) {}
+	public void windowDeiconified(WindowEvent e) {}
+	public void windowActivated(WindowEvent e) {}
+	public void windowDeactivated(WindowEvent e) {}
 }
