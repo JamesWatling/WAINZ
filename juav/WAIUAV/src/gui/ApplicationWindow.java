@@ -1,8 +1,11 @@
 package gui;
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -26,6 +29,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private ImageLoader imageLoader;
 	private static final long serialVersionUID = 1L;
 	private File[] selectedImages = null;
+	private int currentImage = 0;
 
 	public ApplicationWindow(){
 		setLayout(new FlowLayout());
@@ -96,7 +100,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JScrollPane leftPane = new JScrollPane(leftPanel);
 
 		JPanel rightPanel = new JPanel();
-
+		
 
 		leftPane.setPreferredSize(new Dimension(250, 600));
 		leftPanel.setBackground(new Color(225, 0, 0));
@@ -104,12 +108,49 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		rightPanel.setPreferredSize(new Dimension(550, 600));
 		rightPanel.setBackground(new Color(0, 225, 0));
 
+		Canvas c = new Canvas(){
+			private static final long serialVersionUID = 2491198060037716312L;
+
+			public void paint(Graphics g){
+				Image currentImage = currentImage();
+				if(currentImage==null)return;
+				double width = getWidth();
+				double imageWidth = currentImage.getWidth(this);
+				double height = getHeight();
+				double imageHeight = currentImage.getHeight(this);
+				
+				System.out.println(width+","+imageWidth+","+height+","+imageHeight);
+				
+				if(imageHeight>height){
+					width = imageWidth * (height/imageHeight);
+					System.out.println(1);
+				}
+				else if(imageWidth>width){
+					height = imageHeight * (width/imageWidth);
+					System.out.println(2);
+				}
+				
+				System.out.println("w"+width);
+				System.out.println("h"+height);
+				
+				g.drawImage(currentImage(), 0, 0, (int)width, (int)height, this);
+			}
+		};
+		c.setSize(rightPanel.getPreferredSize());
+		rightPanel.add(c);
 		
 		add(leftPane);
 		add(rightPanel);
 
 		pack();
 		setVisible(true);
+		
+	}
+	
+	private Image currentImage(){
+		if(selectedImages==null)
+			return null;
+		return new ImageIcon(selectedImages[currentImage].getAbsolutePath()).getImage();
 	}
 
 	public void actionPerformed(ActionEvent e) {
