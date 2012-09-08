@@ -32,7 +32,7 @@ public class ImageThumbPanel extends JPanel {
 	}
 	
 	public void initLayout(Dimension dim) {
-		setSize(dim);
+		setPreferredSize(dim);
 		setLayout(new FlowLayout());
 		
 		//image label TODO replace with actual ImageThumbail rendered image
@@ -40,11 +40,13 @@ public class ImageThumbPanel extends JPanel {
 		imageLabel.setOpaque(true);
 		imageLabel.setForeground(Color.BLUE);
 		imageLabel.setBackground(Color.CYAN);
-		imageLabel.setSize(new Dimension(dim.width-10, dim.height-20)); //temporary
+		imageLabel.setPreferredSize(new Dimension(dim.width-10, dim.height-20)); //temporary
 		add(imageLabel);
 		
 		//add string and tag below image
-		
+		JLabel nameLabel = new JLabel();
+		nameLabel.setText(fileName);
+		add(nameLabel);
 	}
 	
 	public void toggleSelected() { selected = !selected; }

@@ -21,14 +21,15 @@ public class ImageGridPanel extends JPanel {
 
 	public ImageGridPanel(File[] imagePaths) {
 		//TODO fill with actual images
-		images = new ArrayList<TaggableImage>(); 
+		images = new ArrayList<TaggableImage>();
+		initialise();
 	}
 
 	public void initialise() {
 		setLayout(new GridLayout(0, 2));
 		ImageThumbPanel itp;
 		if(images != null){
-			for(int i = 0; i < 20; i++){
+			for(int i = 0; i < 30; i++){
 				//JLabel l = new JLabel(new ImageIcon(f.getAbsolutePath()));
 				//l.setBackground(new Color(0, 0, 255));
 				//l.setPreferredSize(new Dimension(100, 100));

@@ -135,6 +135,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 	public void windowOpened(WindowEvent e) {}
 	public void windowClosing(WindowEvent e) {
+		//TODO popup are you sure? dialog
 		System.exit(0);
 	}
 	public void windowClosed(WindowEvent e) {}
