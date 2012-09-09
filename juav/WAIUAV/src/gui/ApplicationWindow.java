@@ -116,8 +116,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				double height = getHeight();
 				double imageHeight = currentImage.getHeight(this);
 				
-				System.out.println(width+","+imageWidth+","+height+","+imageHeight);
-				
 				if(imageHeight>height){
 					width = imageWidth * (height/imageHeight);
 					System.out.println(1);
@@ -126,9 +124,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 					height = imageHeight * (width/imageWidth);
 					System.out.println(2);
 				}
-				
-				System.out.println("w"+width);
-				System.out.println("h"+height);
 				
 				g.drawImage(currentImage(), 0, 0, (int)width, (int)height, this);
 			}
