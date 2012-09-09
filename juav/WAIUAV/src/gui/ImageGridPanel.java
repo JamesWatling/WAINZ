@@ -3,8 +3,10 @@ import images.TaggableImage;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		//trash the existing contents of the image panel if there
 		//are already images (on a reload)
 		removeAll();
+		
 		
 		//Debug:
 		System.out.println("initialise imageGrid");
