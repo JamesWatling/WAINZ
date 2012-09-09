@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
 
 public class ImageLoader {
 	
@@ -17,6 +18,7 @@ public class ImageLoader {
 	
 	public ImageLoader() {
 		fileChooser = new JFileChooser();
+		fileChooser.setFileFilter(new ImageFileFilter());
 		fileChooser.setMultiSelectionEnabled(true);
 	}
 	
@@ -72,4 +74,27 @@ public class ImageLoader {
 			return n;
 			
 	}
+	
+	 public class ImageFileFilter extends FileFilter{
+		   private final String[] okFileExtensions = 
+		     new String[] {"jpg", "png", "gif", "bmp"};
+
+		   public boolean accept(File file)
+		   {
+		     for (String extension : okFileExtensions)
+		     {
+		       if (file.getName().toLowerCase().endsWith(extension))
+		       {
+		         return true;
+		       }
+		     }
+		     return false;
+		   }
+
+		@Override
+		public String getDescription() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		 }
 }
