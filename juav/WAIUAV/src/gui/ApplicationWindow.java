@@ -22,6 +22,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.KeyStroke;
 
 import application.ImageLoader;
 
@@ -79,6 +80,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		flagItem.addActionListener(this);
 		unflagItem.addActionListener(this);
 		preferencesItem.addActionListener(this);
+		
+				
 		option.add(flagItem);
 		option.add(unflagItem);
 		option.add(preferencesItem);
@@ -90,6 +93,33 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JMenuItem manual = new JMenuItem("Manual");
 		about.addActionListener(this);
 		manual.addActionListener(this);
+		
+		
+		
+		//Setting shortcuts and Mnemonics for Options Menu
+		flagItem.setMnemonic('F');
+		flagItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.Event.CTRL_MASK));
+		unflagItem.setMnemonic('U');
+		unflagItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.Event.CTRL_MASK));
+		preferencesItem.setMnemonic('P');
+		preferencesItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.Event.CTRL_MASK));
+		
+		//Setting shortcuts and Mnemonics for File Menu
+		importItem.setMnemonic('I');
+		importItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.Event.CTRL_MASK));
+		exportItem.setMnemonic('E');
+		exportItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.Event.CTRL_MASK));
+		quitItem.setMnemonic('W');
+		quitItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.Event.CTRL_MASK));
+		
+		//Setting shortcuts and Mnemonics for Help Menu
+		about.setMnemonic('A');
+		about.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.Event.CTRL_MASK));
+		manual.setMnemonic('M');
+		manual.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.Event.CTRL_MASK));
+		
+		
+				
 		help.add(manual);
 		help.add(about);
 		setJMenuBar(menuBar);
@@ -187,10 +217,17 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 	public void windowOpened(WindowEvent e) {}
 	public void windowClosing(WindowEvent e) {
-		//TODO popup are you sure? dialog
+		//TODO Uncomment later and ovveride default action
+		///int promptOnClose = JOptionPane.showConfirmDialog(this, "Are you sure you want to close?");
+		
+		//if (promptOnClose ==0){
+			
 		System.exit(0);
+		//}
 	}
-	public void windowClosed(WindowEvent e) {}
+	public void windowClosed(WindowEvent e) {
+		
+	}
 	public void windowIconified(WindowEvent e) {}
 	public void windowDeiconified(WindowEvent e) {}
 	public void windowActivated(WindowEvent e) {}
