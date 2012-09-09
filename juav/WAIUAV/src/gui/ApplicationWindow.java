@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -140,9 +141,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	
 	private Image currentImage(){
+		if(importedImageList != null){
 		if(importedImageList.size()==0)
 			return null;
 		return importedImageList.get(currentImage).getImage();
+	}
+		return null;
 	}
 
 	public void actionPerformed(ActionEvent e) {
