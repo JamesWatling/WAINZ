@@ -7,16 +7,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -29,16 +27,19 @@ import application.ImageLoader;
 
 public class ApplicationWindow extends JFrame implements ActionListener, WindowListener {
 
+	private static final Dimension RIGHT_PANEL_SIZE = new Dimension(660, 800);
 	private ImageLoader imageLoader;
 	private static final long serialVersionUID = 1L;
+	private static final Dimension leftPaneSize = new Dimension(300, 800);
 	
 	private List<TaggableImage> importedImageList;
-	
-	private ImageGridPanel imageGrid; 
-	private File[] selectedImages = null;
+
+	private ImageGridPanel imageGrid;
+	private Canvas mainImageViewCanvas;
 	private int currentImage = 0;
 
 	public ApplicationWindow(){
+		importedImageList = new ArrayList<TaggableImage>();
 		setLayout(new FlowLayout());
 		setResizable(false);
 		addWindowListener(this);
@@ -98,15 +99,16 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JScrollPane leftPane = new JScrollPane(imageGrid);
 
 		JPanel rightPanel = new JPanel();
-		leftPane.setPreferredSize(new Dimension(300, 800));
+		leftPane.setPreferredSize(leftPaneSize);
 
-		rightPanel.setPreferredSize(new Dimension(660, 800));
+		rightPanel.setPreferredSize(RIGHT_PANEL_SIZE);
 		rightPanel.setBackground(new Color(0, 225, 0));
 		
-		Canvas c = new Canvas(){
+		mainImageViewCanvas = new Canvas(){
 			private static final long serialVersionUID = 2491198060037716312L;
 
 			public void paint(Graphics g){
+				setSize(RIGHT_PANEL_SIZE);
 				Image currentImage = currentImage();
 				if(currentImage==null)return;
 				double width = getWidth();
@@ -131,8 +133,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				g.drawImage(currentImage(), 0, 0, (int)width, (int)height, this);
 			}
 		};
-		c.setSize(rightPanel.getPreferredSize());
-		rightPanel.add(c);
+		mainImageViewCanvas.setSize(rightPanel.getPreferredSize());
+		rightPanel.add(mainImageViewCanvas);
 		
 		add(leftPane);
 		add(rightPanel);
@@ -143,14 +145,15 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	
 	private Image currentImage(){
-		if(selectedImages==null)
+		if(importedImageList.size()==0)
 			return null;
-		return new ImageIcon(selectedImages[currentImage].getAbsolutePath()).getImage();
+		return importedImageList.get(currentImage).getImage();
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
-		Debug: System.out.println(action); //jm 070912
+		//Debug:
+		System.out.println(action); //jm 070912
 
 		if (action.equals("Import")) {
 			//import features
@@ -158,6 +161,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			imageGrid.setImageList(importedImageList);
 			imageGrid.initialise();
 			imageGrid.repaint();
+			mainImageViewCanvas.repaint();
 		}
 		if (action.equals("Export")) {
 			//export features

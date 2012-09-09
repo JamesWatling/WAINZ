@@ -26,7 +26,7 @@ public class TaggableImage {
 		try {
 			image = ImageIO.read(f);
 			tag = ImageTag.UNTAGGED;
-			fileName = f.getName();
+			setFileName(f.getName());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,4 +36,12 @@ public class TaggableImage {
 	public void setTag(ImageTag newTag) { tag = newTag; }
 	public ImageTag getTag() { return tag; }
 	public BufferedImage getImage() { return image; }
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 }

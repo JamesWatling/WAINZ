@@ -1,10 +1,8 @@
 package gui;
 
 import images.ImageTag;
-import images.ImageThumbnail;
 import images.TaggableImage;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
@@ -20,6 +18,7 @@ import javax.swing.JPanel;
  */
 public class ImageThumbPanel extends JPanel {
 	
+	private static final long serialVersionUID = 1L;
 	private TaggableImage image;
 	private ImageTag tag; 
 	private String fileName;
@@ -48,5 +47,13 @@ public class ImageThumbPanel extends JPanel {
 	}
 	
 	public void toggleSelected() { selected = !selected; }
+
+	public ImageTag getTag() {
+		return tag;
+	}
+
+	public void setTag(ImageTag tag) {
+		this.tag = tag;
+	}
 
 }

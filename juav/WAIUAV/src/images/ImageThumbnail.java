@@ -18,4 +18,12 @@ public class ImageThumbnail {
 	
 	}
 
+	public BufferedImage getThumb() {
+		return thumb;
+	}
+
+	public void setThumb(BufferedImage thumb) {
+		this.thumb = thumb;
+	}
+
 }

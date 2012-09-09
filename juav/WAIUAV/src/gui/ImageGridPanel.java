@@ -1,23 +1,19 @@
 package gui;
 import images.TaggableImage;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
 public class ImageGridPanel extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private static final Dimension gridPanelSize = new Dimension(100, 100);
 	private List<TaggableImage> images;
-	private TaggableImage selectedImage;
+	//private TaggableImage selectedImage;
 
 	public ImageGridPanel(List<TaggableImage> imageList) {
 		//TODO fill with actual images
@@ -35,12 +31,14 @@ public class ImageGridPanel extends JPanel {
 		//are already images (on a reload)
 		removeAll();
 		
-		Debug: System.out.println("initialise imageGrid");
+		//Debug:
+		System.out.println("initialise imageGrid");
 		ImageThumbPanel itp;
 		if(images != null){
 			for(TaggableImage timg: images){
 				for (int j = 0; j < 20; j++) {
-					Debug: System.out.println("adding image to grid");
+					//Debug:
+					System.out.println("adding image to grid");
 					itp = new ImageThumbPanel(timg, gridPanelSize);
 					add(itp);
 				}
