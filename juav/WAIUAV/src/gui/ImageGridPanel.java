@@ -60,7 +60,6 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 			i.setSelected(false);
 		}
 		((ImageThumbPanel)e.getSource()).setSelected(true);
-		for(ImageThumbPanel i : imageThumbPanels)
 		repaint();
 	}
 	public void mousePressed(MouseEvent e) {}
