@@ -36,4 +36,8 @@ public class TaggableImage {
 	public void setTag(ImageTag newTag) { tag = newTag; }
 	public ImageTag getTag() { return tag; }
 	public BufferedImage getImage() { return image; }
+
+	public String getFileName() {
+		return fileName;
+	}
 }

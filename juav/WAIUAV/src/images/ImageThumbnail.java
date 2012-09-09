@@ -18,4 +18,8 @@ public class ImageThumbnail {
 	
 	}
 
+	public BufferedImage getThumb() {
+		return thumb;
+	}
+
 }

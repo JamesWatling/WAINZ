@@ -1,12 +1,11 @@
 package gui;
 
-import images.ImageTag;
-import images.ImageThumbnail;
 import images.TaggableImage;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -21,27 +20,35 @@ import javax.swing.JPanel;
 public class ImageThumbPanel extends JPanel {
 	
 	private static final String flag_overlay = "flag20.png";
-	
+	private static final long serialVersionUID = 1L;
 	private TaggableImage image;
-	private ImageTag tag; 
 	private String fileName;
 	private boolean selected;
+
+	@Override
+	public String toString() {
+		return "ImageThumbPanel [fileName=" + fileName + ", selected="
+				+ selected + "]";
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 
 	public ImageThumbPanel(TaggableImage ti, Dimension dim) {
 		image = ti;//new ImageThumbnail(ti, new Dimension(dim.width-10, dim.height-20));
 		//tag = ti.getTag();
-		fileName = "testing.jpg"; //TODO replace with actual filenames jm 080512
+		fileName = ti.getFileName();
 		initLayout(dim);
 	}
 	
 	public void initLayout(Dimension dim) {
-		setPreferredSize(dim);
-		setSize(dim);
+		setPreferredSize(dim); setSize(dim); setMaximumSize(dim);
 		setLayout(new FlowLayout());
 		
 		JLabel imageLabel = new JLabel(new ImageIcon(image.getImage()));
-		imageLabel.setPreferredSize(new Dimension(dim.width-10, dim.height-20));
-		imageLabel.setSize(new Dimension(dim.width-10, dim.height-20)); 
+		imageLabel.setPreferredSize(new Dimension(dim.width-10, dim.height-30));
+		imageLabel.setSize(new Dimension(dim.width-10, dim.height-30)); 
 		add(imageLabel);
 		
 		//add string and tag below image
@@ -49,7 +56,16 @@ public class ImageThumbPanel extends JPanel {
 		nameLabel.setText(fileName);
 		add(nameLabel);
 	}
+
+	@Override
+	public void paint(Graphics g) {
+		if(selected)
+			setBackground(Color.BLUE);
+		else
+			setBackground(null);
+		super.paint(g);
+	}
 	
-	public void toggleSelected() { selected = !selected; }
+	
 
 }
