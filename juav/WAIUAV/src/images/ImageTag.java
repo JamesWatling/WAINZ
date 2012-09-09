@@ -8,7 +8,6 @@ package images;
 public enum ImageTag {
 	
 	UNTAGGED,
-	NON_INFRINGEMENT,
 	INFRINGEMENT
 
 }

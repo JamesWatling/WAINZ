@@ -20,6 +20,8 @@ import javax.swing.JPanel;
  */
 public class ImageThumbPanel extends JPanel {
 	
+	private static final String flag_overlay = "flag20.png";
+	
 	private TaggableImage image;
 	private ImageTag tag; 
 	private String fileName;
@@ -34,11 +36,12 @@ public class ImageThumbPanel extends JPanel {
 	
 	public void initLayout(Dimension dim) {
 		setPreferredSize(dim);
+		setSize(dim);
 		setLayout(new FlowLayout());
 		
-		//image label TODO replace with actual ImageThumbail rendered image
 		JLabel imageLabel = new JLabel(new ImageIcon(image.getImage()));
-		imageLabel.setPreferredSize(new Dimension(dim.width-10, dim.height-20)); //temporary
+		imageLabel.setPreferredSize(new Dimension(dim.width-10, dim.height-20));
+		imageLabel.setSize(new Dimension(dim.width-10, dim.height-20)); 
 		add(imageLabel);
 		
 		//add string and tag below image

@@ -39,7 +39,7 @@ public class ImageGridPanel extends JPanel {
 		ImageThumbPanel itp;
 		if(images != null){
 			for(TaggableImage timg: images){
-				for (int j = 0; j < 20; j++) {
+				for (int j = 0; j < 30; j++) {
 					Debug: System.out.println("adding image to grid");
 					itp = new ImageThumbPanel(timg, gridPanelSize);
 					add(itp);
