@@ -22,8 +22,4 @@ public class ImageThumbnail {
 		return thumb;
 	}
 
-	public void setThumb(BufferedImage thumb) {
-		this.thumb = thumb;
-	}
-
 }

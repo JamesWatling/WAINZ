@@ -1,6 +1,5 @@
 package gui;
 
-import images.ImageTag;
 import images.TaggableImage;
 
 import java.awt.Dimension;
@@ -20,7 +19,6 @@ public class ImageThumbPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private TaggableImage image;
-	private ImageTag tag; 
 	private String fileName;
 	private boolean selected;
 
@@ -47,13 +45,5 @@ public class ImageThumbPanel extends JPanel {
 	}
 	
 	public void toggleSelected() { selected = !selected; }
-
-	public ImageTag getTag() {
-		return tag;
-	}
-
-	public void setTag(ImageTag tag) {
-		this.tag = tag;
-	}
 
 }
