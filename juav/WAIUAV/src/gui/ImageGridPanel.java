@@ -57,14 +57,11 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 
 	public void mouseClicked(MouseEvent e) {
 		for(ImageThumbPanel i : imageThumbPanels){
-			System.out.println("b:"+i);
 			i.setSelected(false);
 		}
 		((ImageThumbPanel)e.getSource()).setSelected(true);
 		for(ImageThumbPanel i : imageThumbPanels)
-			System.out.println("a:"+i);
 		repaint();
-		System.out.println();
 	}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
