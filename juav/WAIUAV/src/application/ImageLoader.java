@@ -54,6 +54,10 @@ public class ImageLoader {
 	}
 	
 	public int ImportImageAction(ApplicationWindow app){
+		
+		if(selectedImageFiles == null){
+			return 0; //will overwrite existing image set (which will be empty)
+		}
 		Object[] options = {"Yes, Overwrite",
                 "Yes, Add to existing",
                 "Do Nothing"};
