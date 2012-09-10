@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -28,11 +29,14 @@ import application.ImageLoader;
 
 
 public class ApplicationWindow extends JFrame implements ActionListener, WindowListener {
-
-	private static final Dimension RIGHT_PANEL_SIZE = new Dimension(660, 800);
+	private static Toolkit toolkit = Toolkit.getDefaultToolkit();
+	private static Dimension dim = toolkit.getScreenSize();
+	
+	
+	private static final Dimension RIGHT_PANEL_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 110);
 	private ImageLoader imageLoader;
 	private static final long serialVersionUID = 1L;
-	private static final Dimension leftPaneSize = new Dimension(300, 800);
+	private static final Dimension leftPaneSize = new Dimension(dim.width * 1 / 5, dim.height - 110);
 	
 	private List<TaggableImage> importedImageList;
 
@@ -117,8 +121,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		about.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.Event.CTRL_MASK));
 		manual.setMnemonic('M');
 		manual.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.Event.CTRL_MASK));
-		
-		
+			
 				
 		help.add(manual);
 		help.add(about);
@@ -197,6 +200,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		}
 		if (action.equals("Quit")) {
 			//quit popup
+			int n = JOptionPane.showConfirmDialog(
+				    this,
+				    "Would you like to exit now?",
+				    "Quit",
+				    JOptionPane.YES_NO_OPTION);
+			if(n == 0){System.exit(0);}
 		}
 		if (action.equals("Flag Image")) {
 			//flag currently selected image
