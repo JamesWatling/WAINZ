@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="36" version="2.0">
+<workbench progressCount="33" version="2.0">
 <workbenchAdvisor/>
 <window height="822" maximized="true" width="1305" x="92" y="49">
 <fastViewData fastViewLocation="1024"/>
@@ -46,11 +46,11 @@
 </editorArea>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ApplicationWindow.java" partName="ApplicationWindow.java" path="/am/state-opera/home1/watlinjame/uav/juav/WAIUAV/src/gui/ApplicationWindow.java" title="ApplicationWindow.java" tooltip="WAIUAV/src/gui/ApplicationWindow.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/WAIUAV/src/gui/ApplicationWindow.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6522" selectionTopPixel="2276"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="2638"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ImageLoader.java" partName="ImageLoader.java" path="/am/state-opera/home1/watlinjame/uav/juav/WAIUAV/src/application/ImageLoader.java" title="ImageLoader.java" tooltip="WAIUAV/src/application/ImageLoader.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ImageLoader.java" partName="ImageLoader.java" path="/am/state-opera/home1/watlinjame/uav/juav/WAIUAV/src/application/ImageLoader.java" title="ImageLoader.java" tooltip="WAIUAV/src/application/ImageLoader.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/WAIUAV/src/application/ImageLoader.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="26" selectionOffset="1972" selectionTopPixel="327"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1086" selectionTopPixel="86"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ImageThumbnail.java" partName="ImageThumbnail.java" path="/am/state-opera/home1/watlinjame/uav/juav/WAIUAV/src/images/ImageThumbnail.java" title="ImageThumbnail.java" tooltip="WAIUAV/src/images/ImageThumbnail.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/WAIUAV/src/images/ImageThumbnail.java"/>
@@ -68,9 +68,9 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/WAIUAV/src/gui/ImageThumbPanel.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="60"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ImageGridPanel.java" partName="ImageGridPanel.java" path="/am/state-opera/home1/watlinjame/uav/juav/WAIUAV/src/gui/ImageGridPanel.java" title="ImageGridPanel.java" tooltip="WAIUAV/src/gui/ImageGridPanel.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ImageGridPanel.java" partName="ImageGridPanel.java" path="/am/state-opera/home1/watlinjame/uav/juav/WAIUAV/src/gui/ImageGridPanel.java" title="ImageGridPanel.java" tooltip="WAIUAV/src/gui/ImageGridPanel.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/WAIUAV/src/gui/ImageGridPanel.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1034" selectionTopPixel="45"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1049" selectionTopPixel="212"/>
 </editor>
 </editors>
 <views>
@@ -80,8 +80,7 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings (1 item)"/>
-<category IMemento.internal.id="Warnings"/>
+<category IMemento.internal.id="Warnings (4 items)"/>
 <category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="428" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
@@ -311,25 +310,9 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/WAIUAV/src/images/TaggableImage.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/WAIUAV/src/gui/ImageThumbPanel.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/WAIUAV/src/gui/ImageGridPanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/WAIUAV/src/application/ImageLoader.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/WAIUAV/src/gui/ApplicationWindow.java"/>
 </editors>
-<item historyLabel="ApplicationWindow.java" index="0">
-<position info="not_deleted" x="505" y="31"/>
-</item>
-<item historyLabel="ImageLoader.java" index="1">
-<position info="not_deleted" x="154" y="0"/>
-</item>
-<item historyLabel="ImageLoader.java" index="1">
-<position info="not_deleted" x="721" y="0"/>
-</item>
-<item historyLabel="ImageLoader.java" index="1">
-<position info="not_deleted" x="1284" y="0"/>
-</item>
-<item historyLabel="ImageLoader.java" index="1">
-<position info="not_deleted" x="1284" y="0"/>
-</item>
-<item historyLabel="ImageLoader.java" index="1">
-<position info="not_deleted" x="1020" y="0"/>
-</item>
 <item historyLabel="ImageLoader.java" index="1">
 <position info="not_deleted" x="936" y="0"/>
 </item>
@@ -459,8 +442,26 @@
 <item historyLabel="ImageThumbPanel.java" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item active="true" historyLabel="ImageGridPanel.java" index="6">
+<item historyLabel="ImageGridPanel.java" index="6">
 <position info="not_deleted" x="554" y="15"/>
+</item>
+<item historyLabel="ImageLoader.java" index="7">
+<position info="not_deleted" x="1897" y="26"/>
+</item>
+<item historyLabel="ApplicationWindow.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ApplicationWindow.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ImageLoader.java" index="7">
+<position info="not_deleted" x="1667" y="0"/>
+</item>
+<item historyLabel="ImageLoader.java" index="7">
+<position info="not_deleted" x="1271" y="17"/>
+</item>
+<item active="true" historyLabel="ImageLoader.java" index="7">
+<position info="not_deleted" x="700" y="22"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
