@@ -37,7 +37,7 @@ public class ImageLoader {
 			
 			return result;
 		}
-		if (action ==1){ // Merge Images
+		else{ // Merge Images
 			File [] newImages = fileChooser.getSelectedFiles();
 			for (File file: newImages) {
 				result.add(new TaggableImage(file));
@@ -48,9 +48,8 @@ public class ImageLoader {
 			
 			
 			return result;
-		}
-		else{ //Cancel Action
-			return null;
+
+
 	}
 		
 	}
@@ -63,8 +62,7 @@ public class ImageLoader {
 		Object[] options = {"Yes, Overwrite",
                 "Yes, Add to existing",
                 "Do Nothing"};
-			int n = JOptionPane.showOptionDialog(app, "Overwrite existing images or add to set "
-			+ "with that ham?",
+			int n = JOptionPane.showOptionDialog(app, "Overwrite existing images or add to set ",
 			"A Silly Question",
 			JOptionPane.YES_NO_CANCEL_OPTION,
 			JOptionPane.QUESTION_MESSAGE,
