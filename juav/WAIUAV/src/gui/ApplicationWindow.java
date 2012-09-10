@@ -167,7 +167,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		add(leftPane);
 		add(rightPanel);
-
+		this.setAlwaysOnTop(true);
 		pack();
 		setVisible(true);
 		
