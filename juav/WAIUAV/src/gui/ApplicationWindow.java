@@ -43,7 +43,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 	private ImageGridPanel imageGrid;
 	private Canvas mainImageViewCanvas;
-	private int currentImage = 0;
 
 	public ApplicationWindow(){
 		importedImageList = new ArrayList<TaggableImage>();
@@ -130,11 +129,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	private void initialiseWindow(){		
 		//initialise empty image grid jm 080912
-		imageGrid = new ImageGridPanel(null);
-		JScrollPane leftPane = new JScrollPane(imageGrid);
 
 		JPanel rightPanel = new JPanel();
-		leftPane.setPreferredSize(leftPaneSize);
 
 		rightPanel.setPreferredSize(RIGHT_PANEL_SIZE);
 		rightPanel.setBackground(new Color(0, 225, 0));
@@ -144,8 +140,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 			public void paint(Graphics g){
 				setSize(RIGHT_PANEL_SIZE);
-				Image currentImage = currentImage();
-				if(currentImage==null)return;
+				Image currentImage;
+				if(imageGrid.getSelectedImage()==null)
+					return;
+				else
+					currentImage = imageGrid.getSelectedImage().getImage();
 				double width = getWidth();
 				double imageWidth = currentImage.getWidth(this);
 				double height = getHeight();
@@ -160,27 +159,22 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 					System.out.println(2);
 				}
 				
-				g.drawImage(currentImage(), 0, 0, (int)width, (int)height, this);
+				g.drawImage(currentImage, 0, 0, (int)width, (int)height, this);
 			}
 		};
 		mainImageViewCanvas.setSize(rightPanel.getPreferredSize());
 		rightPanel.add(mainImageViewCanvas);
-		
-		add(leftPane);
+
+		imageGrid = new ImageGridPanel(null, mainImageViewCanvas);
+		imageGrid.addNotify();
+		JScrollPane leftPane = new JScrollPane(imageGrid);
+		leftPane.setPreferredSize(leftPaneSize);
+
 		add(rightPanel);
+		add(leftPane);
 		this.setAlwaysOnTop(true);
 		pack();
 		setVisible(true);
-		
-	}
-	
-	private Image currentImage(){
-		if(importedImageList != null){
-		if(importedImageList.size()==0)
-			return null;
-		return importedImageList.get(currentImage).getImage();
-	}
-		return null;
 	}
 
 	public void actionPerformed(ActionEvent e) {

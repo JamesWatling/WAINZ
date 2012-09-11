@@ -30,6 +30,8 @@ public class ImageThumbPanel extends JPanel {
 				+ selected + "]";
 	}
 	
+	public TaggableImage getImage(){return image;}
+	
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}

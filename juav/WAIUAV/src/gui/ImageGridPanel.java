@@ -1,6 +1,7 @@
 package gui;
 import images.TaggableImage;
 
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -19,9 +20,16 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 	private static final Dimension gridPanelSize = new Dimension(100, 100);
 	private List<TaggableImage> images;
 	private List<ImageThumbPanel> imageThumbPanels;
+	private TaggableImage selectedImage;
+	private Canvas canvas;
 	//private TaggableImage selectedImage;
 
-	public ImageGridPanel(List<TaggableImage> imageList) {
+	public ImageGridPanel(List<TaggableImage> imageList, Canvas canvas) {
+		this.canvas = canvas;
+		if(imageList == null || imageList.size()==0)
+			selectedImage=null;
+		else
+			selectedImage = imageList.get(0);
 		imageThumbPanels = new ArrayList<ImageThumbPanel>();
 		images = imageList;
 		setLayout(new GridLayout(0, 2));
@@ -59,11 +67,15 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 			i.setSelected(false);
 			i.imageLabel().setBorder(null);
 		}
-		((ImageThumbPanel)e.getSource()).setSelected(true);
-		((ImageThumbPanel)e.getSource()).imageLabel().setBorder(BorderFactory.createLineBorder(Color.red, 3));
-		
-		repaint();
+		ImageThumbPanel clickedThumb = (ImageThumbPanel)e.getSource();
+		clickedThumb.setSelected(true);
+		clickedThumb.imageLabel().setBorder(BorderFactory.createLineBorder(Color.red, 3));
+		setSelectedImage(clickedThumb.getImage());
+		canvas.repaint();
 	}
+	private void setSelectedImage(TaggableImage image) {selectedImage = image;}
+	public TaggableImage getSelectedImage(){return selectedImage;}
+
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
