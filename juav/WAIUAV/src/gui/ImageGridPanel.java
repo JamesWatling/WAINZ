@@ -57,6 +57,14 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 				itp.addMouseListener(this);
 				add(itp);
 			}
+			if(images.size()<10){
+				System.out.println("growler");
+				for(int i = images.size();i<10;i++){
+					itp = new ImageThumbPanel(null, gridPanelSize);
+					imageThumbPanels.add(itp);
+					add(itp);
+				}
+			}
 		}
 		revalidate();
 		repaint();

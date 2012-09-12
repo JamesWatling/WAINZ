@@ -1,7 +1,9 @@
 package gui;
 
+import images.ImageTag;
 import images.TaggableImage;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -143,7 +146,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 		rightPanel.setPreferredSize(RIGHT_PANEL_SIZE);
 		//rightPanel.setBackground(new Color(0, 225, 0));
-		rightPanel.setLayout(null);
+		rightPanel.setLayout(new BorderLayout());
 		
 		mainImageViewCanvas = new Canvas() {
 			private static final long serialVersionUID = 2491198060037716312L;
@@ -181,13 +184,27 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JLabel infoLabel = new JLabel(infoIcon);
 		infoLabel.setBounds(10, 10, infoIcon.getIconWidth(), infoIcon.getIconHeight());
 		infoLabel.addMouseListener(this);
-		rightPanel.add(infoLabel);
-		
-		mainImageViewCanvas.setSize(RIGHT_PANEL_SIZE);
-		rightPanel.add(mainImageViewCanvas);
+		//rightPanel.add(infoLabel);
 
+		mainImageViewCanvas.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,RIGHT_PANEL_SIZE.height-30));
+
+		
+		JPanel flagButtons = new JPanel();
+		JButton flagButton = new JButton("Flag");
+		JButton unFlagButton = new JButton("UnFlag");
+		flagButton.addActionListener(this);
+		unFlagButton.addActionListener(this);
+		flagButtons.add(flagButton);
+		flagButtons.add(unFlagButton);
+		flagButtons.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,30));
+		
+		rightPanel.add(flagButtons, BorderLayout.SOUTH);
+		rightPanel.add(mainImageViewCanvas, BorderLayout.CENTER);
+		
+		
+		//leftPanel
 		imageGrid = new ImageGridPanel(null, mainImageViewCanvas);
-		imageGrid.addNotify();
+		
 		JScrollPane leftPane = new JScrollPane(imageGrid);
 		leftPane.setPreferredSize(leftPaneSize);
 		
@@ -218,10 +235,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			imageGrid.repaint();
 			mainImageViewCanvas.repaint();
 		}
-		if (action.equals("Export")) {
+		else if (action.equals("Export")) {
 			//export features
 		}
-		if (action.equals("Quit")) {
+		else if (action.equals("Quit")) {
 			//quit popup
 			int n = JOptionPane.showConfirmDialog(
 				    this,
@@ -230,20 +247,32 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				    JOptionPane.YES_NO_OPTION);
 			if(n == 0){System.exit(0);}
 		}
-		if (action.equals("Flag Image")) {
+		else if (action.equals("Flag Image")) {
 			//flag currently selected image
 		}
-		if (action.equals("Unflag Image")) {
+		else if (action.equals("Unflag Image")) {
 			//unflag the selected image
 		}
-		if (action.equals("Preferences")) {
+		else if (action.equals("Preferences")) {
 			//open preferences window
 		}
-		if (action.equals("Manual")) {
+		else if (action.equals("Manual")) {
 			//manual features
 		}
-		if (action.equals("About")) {
+		else if (action.equals("About")) {
 			//about dialog
+		}
+		else if (action.equals("Flag")){
+			//flag image
+			imageGrid.getSelectedImage().setTag(ImageTag.INFRINGEMENT);
+			repaint();
+			System.out.println("flag");
+		}
+		else if (action.equals("UnFlag")){
+			//unflag image
+			imageGrid.getSelectedImage().setTag(ImageTag.UNTAGGED);
+			repaint();
+			System.out.println("unflag");
 		}
 	}
 
