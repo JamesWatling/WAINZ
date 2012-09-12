@@ -3,14 +3,12 @@ package gui;
 import images.TaggableImage;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -29,7 +27,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.ToolTipManager;
 
@@ -156,21 +153,25 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				else {
 					currentImage = imageGrid.getSelectedImage().getImage();
 				}
-				double width = getWidth();
+				
+				double windowWidth = getWidth();
+				double windowHeight = getHeight();
 				double imageWidth = currentImage.getWidth(this);
-				double height = getHeight();
 				double imageHeight = currentImage.getHeight(this);
-				
-				if(imageHeight>height){
-					width = imageWidth * (height/imageHeight);
-					System.out.println(1);
+				double drawWidth = 10;
+				double drawHeight = 10;
+
+				double aspectRatio = imageWidth/imageHeight;
+				if(aspectRatio>1){
+					drawWidth=windowWidth;
+					drawHeight=drawWidth/aspectRatio;
 				}
-				else if(imageWidth>width){
-					height = imageHeight * (width/imageWidth);
-					System.out.println(2);
+				else{
+					drawHeight=windowHeight;
+					drawWidth=aspectRatio*drawHeight;
 				}
 				
-				g.drawImage(currentImage, 0, 0, (int)width, (int)height, this);
+				g.drawImage(currentImage, 0, 0, (int)drawWidth, (int)drawHeight, this);
 			}
 		};
 		
