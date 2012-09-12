@@ -199,8 +199,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	    dismissDelay = Integer.MAX_VALUE;
 	    ToolTipManager.sharedInstance().setDismissDelay(dismissDelay);
 
-		add(rightPanel);
 		add(leftPane);
+		add(rightPanel);
 		pack();
 		setVisible(true);
 	}
