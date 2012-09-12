@@ -5,6 +5,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.drew.imaging.jpeg.JpegMetadataReader;
+import com.drew.imaging.jpeg.JpegProcessingException;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
+
 /**
  * Class containing an image and an associated tag
  * of the type ImageTag
@@ -17,6 +23,7 @@ public class TaggableImage {
 	private BufferedImage image;
 	private String fileName;
 	private ImageTag tag;
+	private Metadata metadata;
 	
 	/**
 	 * Constructs a new TaggableImage with an untagged status
@@ -27,6 +34,9 @@ public class TaggableImage {
 			image = ImageIO.read(f);
 			tag = ImageTag.UNTAGGED;
 			fileName = f.getName();
+			try {
+				metadata = JpegMetadataReader.readMetadata(f);
+			} catch(JpegProcessingException e) {}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,5 +49,17 @@ public class TaggableImage {
 
 	public String getFileName() {
 		return fileName;
+	}
+	
+	public String getMetaData() {
+		String data = "";
+		
+		for (Directory directory : metadata.getDirectories()) {
+		    for (Tag tag : directory.getTags()) {
+		    	data += tag.toString() + " \n ";
+		    }
+		}
+		
+		return data;
 	}
 }

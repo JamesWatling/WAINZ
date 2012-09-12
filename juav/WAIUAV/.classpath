@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="lib/javacv-windows-x86.jar"/>
 	<classpathentry kind="lib" path="lib/javacv.jar"/>
 	<classpathentry kind="lib" path="lib/JPhotoAlbum.jar"/>
+	<classpathentry kind="lib" path="lib/metadata-extractor-2.6.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

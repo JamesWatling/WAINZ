@@ -10,8 +10,11 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -127,7 +130,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		help.add(about);
 		setJMenuBar(menuBar);
 	}
-	private void initialiseWindow(){		
+	private void initialiseWindow(){
 		//initialise empty image grid jm 080912
 
 		JPanel rightPanel = new JPanel();
@@ -135,7 +138,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		rightPanel.setPreferredSize(RIGHT_PANEL_SIZE);
 		rightPanel.setBackground(new Color(0, 225, 0));
 		
-		mainImageViewCanvas = new Canvas(){
+		mainImageViewCanvas = new Canvas() {
 			private static final long serialVersionUID = 2491198060037716312L;
 
 			public void paint(Graphics g){
@@ -143,11 +146,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				Image currentImage;
 				if(imageGrid.getSelectedImage()==null)
 					return;
-				else
+				else {
 					currentImage = imageGrid.getSelectedImage().getImage();
+					System.out.println(imageGrid.getSelectedImage().getMetaData());
+				}
 				double width = getWidth();
 				double imageWidth = currentImage.getWidth(this);
-				double height = getHeight();
+				double height = getHeight()-100;
 				double imageHeight = currentImage.getHeight(this);
 				
 				if(imageHeight>height){
@@ -160,6 +165,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				}
 				
 				g.drawImage(currentImage, 0, 0, (int)width, (int)height, this);
+				g.drawString(imageGrid.getSelectedImage().getMetaData(), 0, getHeight()-80);
 			}
 		};
 		mainImageViewCanvas.setSize(rightPanel.getPreferredSize());
@@ -236,4 +242,5 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public void windowDeiconified(WindowEvent e) {}
 	public void windowActivated(WindowEvent e) {}
 	public void windowDeactivated(WindowEvent e) {}
+	
 }

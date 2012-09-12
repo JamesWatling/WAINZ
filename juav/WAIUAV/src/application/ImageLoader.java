@@ -22,7 +22,7 @@ public class ImageLoader {
 		fileChooser.setMultiSelectionEnabled(true);
 	}
 	
-	public List<TaggableImage> importImages(ApplicationWindow app) {
+	public List<TaggableImage> importImages(ApplicationWindow app){
 		List<TaggableImage> result = new ArrayList<TaggableImage>();
 		fileChooser.showOpenDialog(app);
 		int action = ImportImageAction(app);
