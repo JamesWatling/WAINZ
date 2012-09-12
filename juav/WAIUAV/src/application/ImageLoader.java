@@ -81,7 +81,7 @@ public class ImageLoader {
 		   {
 		     for (String extension : okFileExtensions)
 		     {
-		       if (file.getName().toLowerCase().endsWith(extension))
+		       if (file.getName().toLowerCase().endsWith(extension) || file.isDirectory())
 		       {
 		         return true;
 		       }
