@@ -52,7 +52,7 @@ public class ImageThumbPanel extends JPanel {
 		setPreferredSize(dim); setSize(dim); setMaximumSize(dim);
 		setLayout(new FlowLayout());
 		
-		imageLabel = new JLabel(new ImageIcon(image.getImage()));
+		imageLabel = new JLabel(new ImageIcon(image.getImage(dim.width-10, dim.height-30)));
 		imageLabel.setPreferredSize(new Dimension(dim.width-10, dim.height-30));
 		imageLabel.setSize(new Dimension(dim.width-10, dim.height-30)); 
 		add(imageLabel);

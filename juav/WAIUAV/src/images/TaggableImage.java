@@ -1,4 +1,5 @@
 package images;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +47,7 @@ public class TaggableImage {
 	public void setTag(ImageTag newTag) { tag = newTag; }
 	public ImageTag getTag() { return tag; }
 	public BufferedImage getImage() { return image; }
+	public Image getImage(int width, int height) { return image.getScaledInstance(width, height, Image.SCALE_FAST); }
 
 	public String getFileName() {
 		return fileName;
