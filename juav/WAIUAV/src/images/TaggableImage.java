@@ -52,13 +52,15 @@ public class TaggableImage {
 	}
 	
 	public String getMetaData() {
-		String data = "";
+		String data = "<html>";
 		
 		for (Directory directory : metadata.getDirectories()) {
 		    for (Tag tag : directory.getTags()) {
-		    	data += tag.toString() + " \n ";
+		    	data += "<p>" + tag.toString() + "</p>";
 		    }
 		}
+		
+		data += "</html>";
 		
 		return data;
 	}

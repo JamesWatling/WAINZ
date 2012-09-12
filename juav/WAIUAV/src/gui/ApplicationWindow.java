@@ -20,19 +20,23 @@ import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import javax.swing.ToolTipManager;
 
 import application.ImageLoader;
 
 
-public class ApplicationWindow extends JFrame implements ActionListener, WindowListener {
+public class ApplicationWindow extends JFrame implements ActionListener, WindowListener, MouseListener {
 	private static DisplayMode mode = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].getDisplayMode();
 	private static Dimension dim = new Dimension(mode.getWidth(), mode.getHeight());
 	
@@ -46,6 +50,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 	private ImageGridPanel imageGrid;
 	private Canvas mainImageViewCanvas;
+	
+	private ImageIcon infoIcon = new ImageIcon("lib/information-icon.png");
 
 	public ApplicationWindow(){
 		importedImageList = new ArrayList<TaggableImage>();
@@ -136,7 +142,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JPanel rightPanel = new JPanel();
 
 		rightPanel.setPreferredSize(RIGHT_PANEL_SIZE);
-		rightPanel.setBackground(new Color(0, 225, 0));
+		//rightPanel.setBackground(new Color(0, 225, 0));
+		rightPanel.setLayout(null);
 		
 		mainImageViewCanvas = new Canvas() {
 			private static final long serialVersionUID = 2491198060037716312L;
@@ -148,11 +155,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 					return;
 				else {
 					currentImage = imageGrid.getSelectedImage().getImage();
-					System.out.println(imageGrid.getSelectedImage().getMetaData());
 				}
 				double width = getWidth();
 				double imageWidth = currentImage.getWidth(this);
-				double height = getHeight()-100;
+				double height = getHeight();
 				double imageHeight = currentImage.getHeight(this);
 				
 				if(imageHeight>height){
@@ -165,16 +171,29 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				}
 				
 				g.drawImage(currentImage, 0, 0, (int)width, (int)height, this);
-				g.drawString(imageGrid.getSelectedImage().getMetaData(), 0, getHeight()-80);
 			}
 		};
-		mainImageViewCanvas.setSize(rightPanel.getPreferredSize());
+		
+		JLabel infoLabel = new JLabel(infoIcon);
+		infoLabel.setBounds(10, 10, infoIcon.getIconWidth(), infoIcon.getIconHeight());
+		infoLabel.addMouseListener(this);
+		rightPanel.add(infoLabel);
+		
+		mainImageViewCanvas.setSize(RIGHT_PANEL_SIZE);
 		rightPanel.add(mainImageViewCanvas);
 
 		imageGrid = new ImageGridPanel(null, mainImageViewCanvas);
 		imageGrid.addNotify();
 		JScrollPane leftPane = new JScrollPane(imageGrid);
 		leftPane.setPreferredSize(leftPaneSize);
+		
+		ToolTipManager.sharedInstance().setInitialDelay(0);
+		
+		int dismissDelay = ToolTipManager.sharedInstance().getDismissDelay();
+
+	    // Keep the tool tip showing
+	    dismissDelay = Integer.MAX_VALUE;
+	    ToolTipManager.sharedInstance().setDismissDelay(dismissDelay);
 
 		add(rightPanel);
 		add(leftPane);
@@ -242,5 +261,23 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public void windowDeiconified(WindowEvent e) {}
 	public void windowActivated(WindowEvent e) {}
 	public void windowDeactivated(WindowEvent e) {}
+	
+	public void mouseClicked(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {
+		Object object = e.getComponent();
+
+		if(object instanceof JLabel) {
+			JLabel label = (JLabel) object;
+
+			if(label.getIcon().toString().contains("information-icon")) {
+				if(imageGrid.getSelectedImage() == null) return;
+				label.setToolTipText(imageGrid.getSelectedImage().getMetaData());
+			}
+		}
+		
+	}
+	public void mouseExited(MouseEvent e) {}
 	
 }
