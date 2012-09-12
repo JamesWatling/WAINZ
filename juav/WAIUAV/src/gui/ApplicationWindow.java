@@ -26,6 +26,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.ToolTipManager;
@@ -51,6 +52,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private ImageIcon infoIcon = new ImageIcon("lib/information-icon.png");
 
 	public ApplicationWindow(){
+		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
+		ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
 		importedImageList = new ArrayList<TaggableImage>();
 		setLayout(new FlowLayout());
 		setResizable(false);
