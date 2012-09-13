@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -31,6 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 import javax.swing.ToolTipManager;
 
@@ -51,6 +51,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 	private ImageGridPanel imageGrid;
 	private Canvas mainImageViewCanvas;
+	private JToggleButton flagToggle;
 	
 	private ImageIcon infoIcon = new ImageIcon("lib/information-icon.png");
 
@@ -190,12 +191,9 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 		
 		JPanel flagButtons = new JPanel();
-		JButton flagButton = new JButton("Flag");
-		JButton unFlagButton = new JButton("UnFlag");
-		flagButton.addActionListener(this);
-		unFlagButton.addActionListener(this);
-		flagButtons.add(flagButton);
-		flagButtons.add(unFlagButton);
+		flagToggle = new JToggleButton("Flag Image");
+		flagToggle.addActionListener(this);
+		flagButtons.add(flagToggle);
 		flagButtons.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,30));
 		
 		rightPanel.add(flagButtons, BorderLayout.SOUTH);
@@ -203,7 +201,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		
 		//leftPanel
-		imageGrid = new ImageGridPanel(null, mainImageViewCanvas);
+		imageGrid = new ImageGridPanel(null, this);
 		
 		JScrollPane leftPane = new JScrollPane(imageGrid);
 		leftPane.setPreferredSize(leftPaneSize);
@@ -220,6 +218,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		add(rightPanel);
 		pack();
 		setVisible(true);
+	}
+	
+	public Canvas getMainCanvas(){
+		return mainImageViewCanvas;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -249,9 +251,17 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		}
 		else if (action.equals("Flag Image")) {
 			//flag currently selected image
+			imageGrid.getSelectedImage().setTag(ImageTag.INFRINGEMENT);
+			flagToggle.setText("Unflag Image");
+			repaint();
+			System.out.println("flag");
 		}
 		else if (action.equals("Unflag Image")) {
 			//unflag the selected image
+			imageGrid.getSelectedImage().setTag(ImageTag.UNTAGGED);
+			flagToggle.setText("Flag Image");
+			repaint();
+			System.out.println("unflag");
 		}
 		else if (action.equals("Preferences")) {
 			//open preferences window
@@ -262,18 +272,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		else if (action.equals("About")) {
 			//about dialog
 		}
-		else if (action.equals("Flag")){
-			//flag image
-			imageGrid.getSelectedImage().setTag(ImageTag.INFRINGEMENT);
-			repaint();
-			System.out.println("flag");
-		}
-		else if (action.equals("UnFlag")){
-			//unflag image
-			imageGrid.getSelectedImage().setTag(ImageTag.UNTAGGED);
-			repaint();
-			System.out.println("unflag");
-		}
+	}
+	
+	public void setFlagButton(boolean pressed){
+		flagToggle.setText(pressed?"Unflag Image":"Flag Image");
+		flagToggle.setSelected(pressed);
 	}
 
 	public void windowOpened(WindowEvent e) {}
