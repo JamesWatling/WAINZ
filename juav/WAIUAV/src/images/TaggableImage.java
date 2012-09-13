@@ -56,6 +56,8 @@ public class TaggableImage {
 	public String getMetaData() {
 		String data = "<html>";
 		
+		if(metadata==null)
+			return "No Metadata";
 		for (Directory directory : metadata.getDirectories()) {
 		    for (Tag tag : directory.getTags()) {
 		    	data += "<p>" + tag.toString() + "</p>";
