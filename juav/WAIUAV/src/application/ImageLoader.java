@@ -29,6 +29,14 @@ public class ImageLoader {
 		
 		System.out.println(action);
 		
+		if(action == -1){
+			try {
+				throw new Exception("Null value has been passed to imageloader!");
+			} catch (Exception e) {
+				e.printStackTrace();
+		}}
+		
+		
 		if (action ==0){ //Overwrite Existing Images
 			selectedImageFiles = fileChooser.getSelectedFiles();
 			for (File file: selectedImageFiles) {
@@ -54,10 +62,21 @@ public class ImageLoader {
 		
 	}
 	
-	public int ImportImageAction(ApplicationWindow app){
-		
+	
+	// for testing
+	public void setSelectedFiletoDefaultValue(File[] input){
+//		selectedImageFiles;
+		selectedImageFiles = input;
+	}
+	
+	// for testing
+	public JFileChooser fileChooser(){
+		return fileChooser;
+	}
+	
+	public int ImportImageAction(ApplicationWindow app){		
 		if(selectedImageFiles == null){
-			return 0; //will overwrite existing image set (which will be empty)
+			return -1; //will overwrite existing image set (which will be empty)
 		}
 		Object[] options = {"Yes, Overwrite",
                 "Yes, Add to existing",
