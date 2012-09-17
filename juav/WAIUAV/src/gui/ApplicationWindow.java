@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -191,10 +192,14 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 		
 		JPanel flagButtons = new JPanel();
+		flagButtons.setLayout(new BorderLayout());
 		flagToggle = new JToggleButton("Flag Image");
 		flagToggle.addActionListener(this);
-		flagButtons.add(flagToggle);
-		flagButtons.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,30));
+		flagButtons.add(flagToggle, BorderLayout.NORTH);
+		JButton metadatabutton = new JButton("Show Metadata");
+		metadatabutton.addActionListener(this);
+		flagButtons.add(metadatabutton, BorderLayout.SOUTH);
+		flagButtons.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,50));
 		
 		rightPanel.add(flagButtons, BorderLayout.SOUTH);
 		rightPanel.add(mainImageViewCanvas, BorderLayout.CENTER);
@@ -227,7 +232,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
 		//Debug:
-		System.out.println(action); //jm 070912
+		//System.out.println(action); //jm 070912
 
 		if (action.equals("Import")) {
 			//import features
@@ -271,6 +276,9 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		}
 		else if (action.equals("About")) {
 			//about dialog
+		}
+		else if (action.equals("Show Metadata")){
+			JOptionPane.showMessageDialog(null, imageGrid!=null&&imageGrid.getSelectedImage()!=null&&imageGrid.getSelectedImage().getMetaData()!=null?imageGrid.getSelectedImage().getMetaData():"NO METADATA");
 		}
 	}
 	
