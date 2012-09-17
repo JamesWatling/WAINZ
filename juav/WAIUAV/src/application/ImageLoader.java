@@ -29,12 +29,12 @@ public class ImageLoader {
 		
 		System.out.println(action);
 		
-		if(action == -1){
-			try {
-				throw new Exception("Null value has been passed to imageloader!");
-			} catch (Exception e) {
-				e.printStackTrace();
-		}}
+//		if(action == -1){
+//			try {
+//				throw new Exception("Null value has been passed to imageloader!");
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//		}}
 		
 		
 		if (action ==0){ //Overwrite Existing Images
@@ -76,7 +76,7 @@ public class ImageLoader {
 	
 	public int ImportImageAction(ApplicationWindow app){		
 		if(selectedImageFiles == null){
-			return -1; //will overwrite existing image set (which will be empty)
+			return 0; //will overwrite existing image set (which will be empty)
 		}
 		Object[] options = {"Yes, Overwrite",
                 "Yes, Add to existing",
