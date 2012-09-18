@@ -21,6 +21,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -153,8 +154,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	private void initialiseWindow(){
 		try {
-			String logoPath = "../images/wai-logo.jpg";
-			WAI_LOGO = ImageIO.read(getClass().getResourceAsStream(logoPath));
+			String logoPath = "lib/wai-logo.jpg";
+			WAI_LOGO = ImageIO.read(new File(logoPath));
 		} catch (IOException e) {
 			System.out.println("Error reading WAI Logo");
 		}
