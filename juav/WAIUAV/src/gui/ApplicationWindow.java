@@ -356,12 +356,18 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		else if (action.equals("About")) {
 			//about dialog
 		}
-		else if (action.equals("Show Metadata")){
+		else if (action.equals("Show Metadata")) {
 			JOptionPane.showMessageDialog(
 					null,
 					imageGrid!=null&&imageGrid.getSelectedImage()!=null&&imageGrid.getSelectedImage().getMetaData()!=null?
 							imageGrid.getSelectedImage().getMetaData():
 								"NO METADATA");
+		}
+		else if (action.equals("Previous Image")) {
+			imageGrid.browse("previous");
+		}
+		else if(action.endsWith("Next Image")) {
+			imageGrid.browse("next");
 		}
 	}
 
