@@ -39,7 +39,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 import javax.swing.ToolTipManager;
 
@@ -66,7 +65,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private static Font mainImageViewCanvasFont = new Font("Arial", Font.BOLD, 14);
 	private static Font defaultImageViewCanvasFont = new Font("Arial", Font.BOLD, 18);
 	
-	private JToggleButton flagToggle;
 	private JButton nextImageButton;
 	private JButton prevImageButton;
 	
@@ -85,15 +83,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		initialiseMenus();
 		initialiseWindow();
 		initialiseApplication();
-		
-
+	
 		pack();
 		setVisible(true);
 	}
 
 	public void initialiseApplication(){
 		imageLoader = new ImageLoader();
-		
 	}
 
 	public void initialiseMenus(){
@@ -174,7 +170,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		mainImageViewCanvas = new Canvas() {
 			private static final long serialVersionUID = 2491198060037716312L;
-
+		     
 			public void paint(Graphics g){
 				Color background;
 				setSize(IMAGE_CANVAS_SIZE);
@@ -276,29 +272,24 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageButtonPanel.setPreferredSize(IMAGE_BUTTON_PANEL_SIZE);
 		imageButtonPanel.setMaximumSize(IMAGE_BUTTON_PANEL_SIZE);
 		
-		
-		
 		//previous button
 		prevImageButton = new JButton("Previous Image");
 		prevImageButton.addActionListener(this);
 		imageButtonPanel.add(prevImageButton);
 		
 		//flag/unflag button
-		flagToggle = new JToggleButton("Flag Image");
-		flagToggle.addActionListener(this);
-		imageButtonPanel.add(flagToggle);
+		JButton flagButton = new JButton("Flag Image");
+		JButton unflagButton = new JButton("Unflag Image");
+		flagButton.addActionListener(this);
+		unflagButton.addActionListener(this);
+		imageButtonPanel.add(flagButton);
+		imageButtonPanel.add(unflagButton);
 		
 		//next button
 		nextImageButton = new JButton("Next Image");
 		nextImageButton.addActionListener(this);
 		imageButtonPanel.add(nextImageButton);
-		
-		
-		
-		//JButton metadatabutton = new JButton("Show Metadata");
-		//metadatabutton.addActionListener(this);
-		//imageButtonPanel.add(metadatabutton, BorderLayout.SOUTH);
-		//imageButtonPanel.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,50));
+	
 		
 		rightPanel.add(mainImageViewCanvas);
 		rightPanel.add(imageButtonPanel);
@@ -351,15 +342,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		else if (action.equals("Flag Image")) {
 			//flag currently selected image
 			imageGrid.getSelectedImage().setTag(ImageTag.INFRINGEMENT);
-			flagToggle.setText("Unflag Image");
-			repaint();
-			System.out.println("flag");
+			imageGrid.repaint();
 		}
 		else if (action.equals("Unflag Image")) {
 			//unflag the selected image
 			imageGrid.getSelectedImage().setTag(ImageTag.UNTAGGED);
-			flagToggle.setText("Flag Image");
-			repaint();
+			imageGrid.repaint();
 		}
 		else if (action.equals("Preferences")) {
 			//open preferences window
@@ -371,13 +359,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			//about dialog
 		}
 		else if (action.equals("Show Metadata")){
-			JOptionPane.showMessageDialog(null, imageGrid!=null&&imageGrid.getSelectedImage()!=null&&imageGrid.getSelectedImage().getMetaData()!=null?imageGrid.getSelectedImage().getMetaData():"NO METADATA");
+			JOptionPane.showMessageDialog(
+					null,
+					imageGrid!=null&&imageGrid.getSelectedImage()!=null&&imageGrid.getSelectedImage().getMetaData()!=null?
+							imageGrid.getSelectedImage().getMetaData():
+								"NO METADATA");
 		}
-	}
-	
-	public void setFlagButton(boolean pressed){
-		flagToggle.setText(pressed?"Unflag Image":"Flag Image");
-		flagToggle.setSelected(pressed);
 	}
 
 	public void windowOpened(WindowEvent e) {}
@@ -397,31 +384,18 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public void windowDeiconified(WindowEvent e) {}
 	public void windowActivated(WindowEvent e) {}
 	public void windowDeactivated(WindowEvent e) {}
-	
-	public void mouseClicked(MouseEvent e) {}
-	public void mousePressed(MouseEvent e) {}
-	public void mouseReleased(MouseEvent e) {}
-	public void mouseEntered(MouseEvent e) {
-		Object object = e.getComponent();
-
-		if(object instanceof JLabel) {
-			JLabel label = (JLabel) object;
-
-			if(label.getIcon().toString().contains("information-icon")) {
-				if(imageGrid.getSelectedImage() == null) return;
-				label.setToolTipText(imageGrid.getSelectedImage().getMetaData());
-			}
-		}
-		
-	}
-	public void mouseExited(MouseEvent e) {}
 
 	public static List<TaggableImage> getImportedImageList() {
 		return importedImageList;
 	}
 
 	private void setImportedImageList(List<TaggableImage> importedImageList) {
-		this.importedImageList = importedImageList;
+		ApplicationWindow.importedImageList = importedImageList;
 	}
+	public void mouseClicked(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
 	
 }
