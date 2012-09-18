@@ -48,7 +48,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private static final long serialVersionUID = 1L;
 	private static final Dimension leftPaneSize = new Dimension(dim.width * 1 / 5, dim.height - 110);
 	
-	private List<TaggableImage> importedImageList;
+	private static List<TaggableImage> importedImageList;
 
 	private ImageGridPanel imageGrid;
 	private Canvas mainImageViewCanvas;
@@ -59,7 +59,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public ApplicationWindow(){
 		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
 		ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
-		importedImageList = new ArrayList<TaggableImage>();
+		setImportedImageList(new ArrayList<TaggableImage>());
 		setLayout(new FlowLayout());
 		setResizable(false);
 		addWindowListener(this);
@@ -236,8 +236,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 		if (action.equals("Import")) {
 			//import features
-			importedImageList = imageLoader.importImages(this);
-			imageGrid.setImageList(importedImageList);
+			setImportedImageList(imageLoader.importImages(this));
+			imageGrid.setImageList(getImportedImageList());
 			imageGrid.initialise();
 			imageGrid.repaint();
 			mainImageViewCanvas.repaint();
@@ -322,5 +322,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 	}
 	public void mouseExited(MouseEvent e) {}
+
+	public static List<TaggableImage> getImportedImageList() {
+		return importedImageList;
+	}
+
+	private void setImportedImageList(List<TaggableImage> importedImageList) {
+		this.importedImageList = importedImageList;
+	}
 	
 }

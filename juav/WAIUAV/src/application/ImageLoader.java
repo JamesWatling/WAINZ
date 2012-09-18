@@ -50,8 +50,11 @@ public class ImageLoader {
 			for (File file: newImages) {
 				result.add(new TaggableImage(file));
 			}
-			for (File file: selectedImageFiles) {
-				result.add(new TaggableImage(file));
+			//for (File file: selectedImageFiles) {
+			//	result.add(new TaggableImage(file));
+			//}
+			for (TaggableImage file: ApplicationWindow.getImportedImageList()) {
+				result.add((file));
 			}
 			
 			
