@@ -1,6 +1,7 @@
 package gui;
 import images.TaggableImage;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -22,6 +24,8 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 	private List<ImageThumbPanel> imageThumbPanels;
 	private TaggableImage selectedImage;
 	private Canvas canvas;
+	private JPanel gridbox;
+	private JLabel importedLabel;
 	//private TaggableImage selectedImage;
 
 	public ImageGridPanel(List<TaggableImage> imageList, ApplicationWindow window) {
@@ -32,7 +36,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 			selectedImage = imageList.get(0);
 		imageThumbPanels = new ArrayList<ImageThumbPanel>();
 		images = imageList;
-		setLayout(new GridLayout(0, 2));
+		setLayout(new BorderLayout());
 		initialise();
 	}
 	
@@ -45,6 +49,14 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		//are already images (on a reload)
 		removeAll();
 		
+		if(images!=null){
+			importedLabel = new JLabel("Imported Images: "+images.size()+" images.");
+			add(importedLabel,BorderLayout.NORTH);
+		}
+		
+		gridbox = new JPanel();
+		gridbox.setLayout(new GridLayout(0, 2));
+		
 		
 		//Debug:
 		System.out.println("initialise imageGrid");
@@ -55,16 +67,17 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 				itp = new ImageThumbPanel(timg, gridPanelSize);
 				imageThumbPanels.add(itp);
 				itp.addMouseListener(this);
-				add(itp);
+				gridbox.add(itp);
 			}
 			if(images.size()<10){
 				for(int i = images.size();i<10;i++){
 					itp = new ImageThumbPanel(null, gridPanelSize);
 					imageThumbPanels.add(itp);
-					add(itp);
+					gridbox.add(itp);
 				}
 			}
 		}
+		add(gridbox, BorderLayout.CENTER);
 		revalidate();
 		repaint();
 	}
