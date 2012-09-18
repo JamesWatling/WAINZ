@@ -157,7 +157,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	private void initialiseWindow(){
 		try {
-			String logoPath = "lib/wai-logo.jpg";
+			String logoPath = "lib/wai-default.jpg";
 			WAI_LOGO = ImageIO.read(new File(logoPath));
 		} catch (IOException e) {
 			System.out.println("Error reading WAI Logo");
@@ -182,22 +182,14 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 					background = Color.WHITE;
 					g.setColor(background);
 					g.fillRect(0, 0, getWidth(), getHeight());
-					int drawHeight = (int)(WAI_LOGO.getHeight() / 2.0);
-					int drawWidth = (int)(WAI_LOGO.getHeight() / 2.0);
+					int drawHeight = WAI_LOGO.getHeight();
+					int drawWidth = WAI_LOGO.getWidth();
 					int widthOffset = getWidth() - drawWidth;
 					int heightOffset = getHeight() - drawHeight;
 					int xPos = widthOffset / 2;
 					int yPos = heightOffset / 2;
 					
 					g.drawImage(WAI_LOGO, xPos, yPos-100, drawWidth, drawHeight, null);
-					g.setColor(WAI_BLUE);
-					g.setFont(defaultImageViewCanvasFont);
-					String prompt = "Welcome to WAI UAVTool. Select File from the Menu above to import photos.";
-					FontMetrics fm = g.getFontMetrics();
-					int strWidth = fm.stringWidth(prompt);
-					int strX = (getWidth()-strWidth)/2;
-					g.drawString(prompt, strX, yPos+drawHeight-100);
-				
 					return;
 				}
 				
