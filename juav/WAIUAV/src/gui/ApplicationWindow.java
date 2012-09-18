@@ -189,7 +189,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 					int xPos = widthOffset / 2;
 					int yPos = heightOffset / 2;
 					
-					g.drawImage(WAI_LOGO, xPos, yPos-100, drawWidth, drawHeight, null);
+					g.drawImage(WAI_LOGO, xPos, yPos, drawWidth, drawHeight, null);
 					return;
 				}
 				
