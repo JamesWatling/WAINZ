@@ -46,10 +46,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private static DisplayMode mode = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].getDisplayMode();
 	private static Dimension dim = new Dimension(mode.getWidth(), mode.getHeight());
 	
-	
 	private static final Dimension RIGHT_PANEL_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 110);
 	private static final Dimension IMAGE_CANVAS_SIZE = new Dimension(dim.width * 3 / 5, 600); //this one will be dynamic
 	private static final Dimension IMAGE_BUTTON_PANEL_SIZE = new Dimension(dim.width * 3 / 5, 45);
+	private static final Dimension IMAGE_METADATA_PANEL_SIZE = new Dimension(dim.width * 3 / 5, 300);
+	
 	private ImageLoader imageLoader;
 	private static final long serialVersionUID = 1L;
 	private static final Dimension leftPaneSize = new Dimension(dim.width * 1 / 5, dim.height - 110);
@@ -61,6 +62,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private Canvas mainImageViewCanvas;
 	private static Font mainImageViewCanvasFont = new Font("Arial", Font.BOLD, 14);
 	private static Font defaultImageViewCanvasFont = new Font("Arial", Font.BOLD, 18);
+	
+	private JPanel imageMetadataPanel;
 	
 	private JButton nextImageButton;
 	private JButton prevImageButton;
@@ -263,7 +266,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		//infoLabel.addMouseListener(this);
 		
 		JPanel imageButtonPanel = new JPanel();
-		imageButtonPanel.setLayout(new GridLayout(1, 3)); //changed to GridLayout jm 180912
+		imageButtonPanel.setLayout(new GridLayout(1, 4)); //changed to GridLayout jm 180912
 		imageButtonPanel.setPreferredSize(IMAGE_BUTTON_PANEL_SIZE);
 		imageButtonPanel.setMaximumSize(IMAGE_BUTTON_PANEL_SIZE);
 		
@@ -286,8 +289,15 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageButtonPanel.add(nextImageButton);
 	
 		
+		//meta-data pane below buttons
+		imageMetadataPanel = new JPanel();
+		imageMetadataPanel.setPreferredSize(IMAGE_METADATA_PANEL_SIZE);
+		imageMetadataPanel.setSize(IMAGE_METADATA_PANEL_SIZE);
+		imageMetadataPanel.setBackground(Color.RED);
+		
 		rightPanel.add(mainImageViewCanvas);
 		rightPanel.add(imageButtonPanel);
+		rightPanel.add(imageMetadataPanel);
 		
 		//leftPanel
 		imageGrid = new ImageGridPanel(null, this);
