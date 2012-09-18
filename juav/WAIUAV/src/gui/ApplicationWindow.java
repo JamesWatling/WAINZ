@@ -34,7 +34,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 import javax.swing.ToolTipManager;
 
@@ -58,8 +57,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	private Canvas mainImageViewCanvas;
 	private static Font mainImageViewCanvasFont = new Font("Arial", Font.BOLD, 14);
-	
-	private JToggleButton flagToggle;
 	
 	private ImageIcon infoIcon = new ImageIcon("lib/information-icon.png");
 
@@ -214,17 +211,27 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		mainImageViewCanvas.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,RIGHT_PANEL_SIZE.height-30));
 
 		
-		JPanel flagButtons = new JPanel();
-		flagButtons.setLayout(new BorderLayout());
-		flagToggle = new JToggleButton("Flag Image");
-		flagToggle.addActionListener(this);
-		flagButtons.add(flagToggle, BorderLayout.NORTH);
+		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new BorderLayout());
+		
+		JPanel flagButtonsPanel = new JPanel();
+		flagButtonsPanel.setLayout(new FlowLayout());
+		
+		JButton flagButton = new JButton("Flag Image");
+		JButton unflagButton = new JButton("Unflag Image");
+		flagButton.addActionListener(this);
+		unflagButton.addActionListener(this);
+		
+		flagButtonsPanel.add(flagButton);
+		flagButtonsPanel.add(unflagButton);
+		
+		buttonsPanel.add(flagButtonsPanel, BorderLayout.NORTH);
 		JButton metadatabutton = new JButton("Show Metadata");
 		metadatabutton.addActionListener(this);
-		flagButtons.add(metadatabutton, BorderLayout.SOUTH);
-		flagButtons.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,50));
+		buttonsPanel.add(metadatabutton, BorderLayout.SOUTH);
+		buttonsPanel.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,60));
 		
-		rightPanel.add(flagButtons, BorderLayout.SOUTH);
+		rightPanel.add(buttonsPanel, BorderLayout.SOUTH);
 		rightPanel.add(mainImageViewCanvas, BorderLayout.CENTER);
 		
 		
@@ -280,16 +287,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		else if (action.equals("Flag Image")) {
 			//flag currently selected image
 			imageGrid.getSelectedImage().setTag(ImageTag.INFRINGEMENT);
-			flagToggle.setText("Unflag Image");
-			repaint();
-			System.out.println("flag");
+			imageGrid.repaint();
 		}
 		else if (action.equals("Unflag Image")) {
 			//unflag the selected image
 			imageGrid.getSelectedImage().setTag(ImageTag.UNTAGGED);
-			flagToggle.setText("Flag Image");
-			repaint();
-			System.out.println("unflag");
+			imageGrid.repaint();
 		}
 		else if (action.equals("Preferences")) {
 			//open preferences window
@@ -307,11 +310,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 							imageGrid.getSelectedImage().getMetaData():
 								"NO METADATA");
 		}
-	}
-	
-	public void setFlagButton(boolean pressed){
-		flagToggle.setText(pressed?"Unflag Image":"Flag Image");
-		flagToggle.setSelected(pressed);
 	}
 
 	public void windowOpened(WindowEvent e) {}

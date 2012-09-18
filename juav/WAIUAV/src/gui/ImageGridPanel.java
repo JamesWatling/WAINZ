@@ -1,5 +1,4 @@
 package gui;
-import images.ImageTag;
 import images.TaggableImage;
 
 import java.awt.Canvas;
@@ -22,12 +21,10 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 	private List<TaggableImage> images;
 	private List<ImageThumbPanel> imageThumbPanels;
 	private TaggableImage selectedImage;
-	private ApplicationWindow window;
 	private Canvas canvas;
 	//private TaggableImage selectedImage;
 
 	public ImageGridPanel(List<TaggableImage> imageList, ApplicationWindow window) {
-		this.window = window;
 		this.canvas = window.getMainCanvas();
 		if(imageList == null || imageList.size()==0)
 			selectedImage=null;
@@ -81,7 +78,6 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		clickedThumb.setSelected(true);
 		clickedThumb.imageLabel().setBorder(BorderFactory.createLineBorder(Color.red, 3));
 		setSelectedImage(clickedThumb.getImage());
-		window.setFlagButton(clickedThumb.getImage().getTag()==ImageTag.INFRINGEMENT);
 		canvas.repaint();
 	}
 	private void setSelectedImage(TaggableImage image) {selectedImage = image;}
