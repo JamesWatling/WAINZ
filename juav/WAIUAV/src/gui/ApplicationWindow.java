@@ -5,9 +5,12 @@ import images.TaggableImage;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
@@ -44,6 +47,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	
 	private static final Dimension RIGHT_PANEL_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 110);
+	private static final Dimension IMAGE_CANVAS_SIZE = new Dimension(dim.width * 3 / 5, 600);
 	private ImageLoader imageLoader;
 	private static final long serialVersionUID = 1L;
 	private static final Dimension leftPaneSize = new Dimension(dim.width * 1 / 5, dim.height - 110);
@@ -51,7 +55,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private static List<TaggableImage> importedImageList;
 
 	private ImageGridPanel imageGrid;
+	
 	private Canvas mainImageViewCanvas;
+	private static Font mainImageViewCanvasFont = new Font("Arial", Font.BOLD, 14);
+	
 	private JToggleButton flagToggle;
 	
 	private ImageIcon infoIcon = new ImageIcon("lib/information-icon.png");
@@ -111,9 +118,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JMenuItem manual = new JMenuItem("Manual");
 		about.addActionListener(this);
 		manual.addActionListener(this);
-		
-		
-		
+			
 		//Setting shortcuts and Mnemonics for Options Menu
 		flagItem.setMnemonic('F');
 		flagItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.Event.CTRL_MASK));
@@ -142,19 +147,16 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		setJMenuBar(menuBar);
 	}
 	private void initialiseWindow(){
-		//initialise empty image grid jm 080912
-
 		JPanel rightPanel = new JPanel();
 
 		rightPanel.setPreferredSize(RIGHT_PANEL_SIZE);
-		//rightPanel.setBackground(new Color(0, 225, 0));
 		rightPanel.setLayout(new BorderLayout());
 		
 		mainImageViewCanvas = new Canvas() {
 			private static final long serialVersionUID = 2491198060037716312L;
 
 			public void paint(Graphics g){
-				setSize(RIGHT_PANEL_SIZE);
+				setSize(IMAGE_CANVAS_SIZE);
 				Image currentImage;
 				if(imageGrid.getSelectedImage()==null)
 					return;
@@ -162,24 +164,44 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 					currentImage = imageGrid.getSelectedImage().getImage();
 				}
 				
-				double windowWidth = getWidth();
-				double windowHeight = getHeight();
-				double imageWidth = currentImage.getWidth(this);
-				double imageHeight = currentImage.getHeight(this);
-				double drawWidth = 10;
-				double drawHeight = 10;
+				int canvasWidth = getWidth();
+				int canvasHeight = getHeight();
+				int imageWidth = currentImage.getWidth(this);
+				int imageHeight = currentImage.getHeight(this);
+				int drawWidth, drawHeight = 0;
 
 				double aspectRatio = imageWidth/imageHeight;
-				if(aspectRatio>1){
-					drawWidth=windowWidth;
-					drawHeight=drawWidth/aspectRatio;
-				}
-				else{
-					drawHeight=windowHeight;
-					drawWidth=aspectRatio*drawHeight;
+				if(aspectRatio > 1){
+					// wider than it is tall, scale to fit on canvas
+					drawWidth = canvasWidth;
+					drawHeight = (int)(drawWidth/aspectRatio * 1.0);
+				} else { 
+					// taller than it is wide, height should be the same as canvasHeight
+					// and width scaled down appropriately
+					drawHeight = canvasHeight;
+					drawWidth = (int)(aspectRatio*drawHeight);
 				}
 				
-				g.drawImage(currentImage, 0, 0, (int)drawWidth, (int)drawHeight, this);
+				// get position required for painting to center the image jm 180912
+				int widthOffset = canvasWidth - imageWidth;
+				int heightOffset = canvasHeight - imageHeight;
+				
+				int xPos = widthOffset / 2;
+				int yPos = heightOffset / 2;
+				
+				// paint canvas background black, paint image jm 180912
+				g.setColor(Color.BLACK);
+				g.fillRect(0, 0, getWidth(), getHeight());
+				g.drawImage(currentImage, xPos, yPos, imageWidth, imageHeight, this);
+				
+				// paint image filename label underneath image jm 180912
+				String filename = imageGrid.getSelectedImage().getFileName();
+				g.setFont(mainImageViewCanvasFont);
+				FontMetrics fm = g.getFontMetrics();
+				int strWidth = fm.stringWidth(filename);
+				int strX = (canvasWidth-strWidth)/2;
+				g.setColor(Color.WHITE);				
+				g.drawString(imageGrid.getSelectedImage().getFileName(), strX, canvasHeight - 20);
 			}
 		};
 		
