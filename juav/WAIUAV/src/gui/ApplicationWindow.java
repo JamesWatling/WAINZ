@@ -154,8 +154,9 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		mainImageViewCanvas = new Canvas() {
 			private static final long serialVersionUID = 2491198060037716312L;
-
+		     
 			public void paint(Graphics g){
+				System.out.println("GROWLER");
 				setSize(IMAGE_CANVAS_SIZE);
 				Image currentImage;
 				if(imageGrid.getSelectedImage()==null)
@@ -300,7 +301,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			//about dialog
 		}
 		else if (action.equals("Show Metadata")){
-			JOptionPane.showMessageDialog(null, imageGrid!=null&&imageGrid.getSelectedImage()!=null&&imageGrid.getSelectedImage().getMetaData()!=null?imageGrid.getSelectedImage().getMetaData():"NO METADATA");
+			JOptionPane.showMessageDialog(
+					null,
+					imageGrid!=null&&imageGrid.getSelectedImage()!=null&&imageGrid.getSelectedImage().getMetaData()!=null?
+							imageGrid.getSelectedImage().getMetaData():
+								"NO METADATA");
 		}
 	}
 	
@@ -326,31 +331,18 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public void windowDeiconified(WindowEvent e) {}
 	public void windowActivated(WindowEvent e) {}
 	public void windowDeactivated(WindowEvent e) {}
-	
-	public void mouseClicked(MouseEvent e) {}
-	public void mousePressed(MouseEvent e) {}
-	public void mouseReleased(MouseEvent e) {}
-	public void mouseEntered(MouseEvent e) {
-		Object object = e.getComponent();
-
-		if(object instanceof JLabel) {
-			JLabel label = (JLabel) object;
-
-			if(label.getIcon().toString().contains("information-icon")) {
-				if(imageGrid.getSelectedImage() == null) return;
-				label.setToolTipText(imageGrid.getSelectedImage().getMetaData());
-			}
-		}
-		
-	}
-	public void mouseExited(MouseEvent e) {}
 
 	public static List<TaggableImage> getImportedImageList() {
 		return importedImageList;
 	}
 
 	private void setImportedImageList(List<TaggableImage> importedImageList) {
-		this.importedImageList = importedImageList;
+		ApplicationWindow.importedImageList = importedImageList;
 	}
+	public void mouseClicked(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
 	
 }
