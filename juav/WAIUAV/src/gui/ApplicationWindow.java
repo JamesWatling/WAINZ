@@ -3,7 +3,6 @@ package gui;
 import images.ImageTag;
 import images.TaggableImage;
 
-import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,6 +12,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,9 +20,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,7 +52,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	
 	private static final Dimension RIGHT_PANEL_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 110);
-	private static final Dimension IMAGE_CANVAS_SIZE = new Dimension(dim.width * 3 / 5, 600);
+	private static final Dimension IMAGE_CANVAS_SIZE = new Dimension(dim.width * 3 / 5, 600); //this one will be dynamic
+	private static final Dimension IMAGE_BUTTON_PANEL_SIZE = new Dimension(dim.width * 3 / 5, 45);
 	private ImageLoader imageLoader;
 	private static final long serialVersionUID = 1L;
 	private static final Dimension leftPaneSize = new Dimension(dim.width * 1 / 5, dim.height - 110);
@@ -58,8 +64,14 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	private Canvas mainImageViewCanvas;
 	private static Font mainImageViewCanvasFont = new Font("Arial", Font.BOLD, 14);
+	private static Font defaultImageViewCanvasFont = new Font("Arial", Font.BOLD, 18);
 	
 	private JToggleButton flagToggle;
+	private JButton nextImageButton;
+	private JButton prevImageButton;
+	
+	private static BufferedImage WAI_LOGO;
+	private static final Color WAI_BLUE = new Color(0, 126, 166);
 	
 	private ImageIcon infoIcon = new ImageIcon("lib/information-icon.png");
 
@@ -73,6 +85,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		initialiseMenus();
 		initialiseWindow();
 		initialiseApplication();
+		
 
 		pack();
 		setVisible(true);
@@ -80,6 +93,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 	public void initialiseApplication(){
 		imageLoader = new ImageLoader();
+		
 	}
 
 	public void initialiseMenus(){
@@ -147,52 +161,100 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		setJMenuBar(menuBar);
 	}
 	private void initialiseWindow(){
+		try {
+			String logoPath = "../images/wai-logo.jpg";
+			WAI_LOGO = ImageIO.read(getClass().getResourceAsStream(logoPath));
+		} catch (IOException e) {
+			System.out.println("Error reading WAI Logo");
+		}
+		
 		JPanel rightPanel = new JPanel();
-
 		rightPanel.setPreferredSize(RIGHT_PANEL_SIZE);
-		rightPanel.setLayout(new BorderLayout());
+		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS)); //changed to FlowLayout jm 180912
 		
 		mainImageViewCanvas = new Canvas() {
 			private static final long serialVersionUID = 2491198060037716312L;
 
 			public void paint(Graphics g){
+				Color background;
 				setSize(IMAGE_CANVAS_SIZE);
+				setPreferredSize(IMAGE_CANVAS_SIZE);
+				setMaximumSize(IMAGE_CANVAS_SIZE);
 				Image currentImage;
-				if(imageGrid.getSelectedImage()==null)
+				if(imageGrid.getSelectedImage() == null) {
+					
+					//render the default WAINZ image jm 180912
+					background = Color.WHITE;
+					g.setColor(background);
+					g.fillRect(0, 0, getWidth(), getHeight());
+					int drawHeight = (int)(WAI_LOGO.getHeight() / 2.0);
+					int drawWidth = (int)(WAI_LOGO.getHeight() / 2.0);
+					int widthOffset = getWidth() - drawWidth;
+					int heightOffset = getHeight() - drawHeight;
+					int xPos = widthOffset / 2;
+					int yPos = heightOffset / 2;
+					
+					g.drawImage(WAI_LOGO, xPos, yPos-100, drawWidth, drawHeight, null);
+					g.setColor(WAI_BLUE);
+					g.setFont(defaultImageViewCanvasFont);
+					String prompt = "Welcome to WAI UAVTool. Select File from the Menu above to import photos.";
+					FontMetrics fm = g.getFontMetrics();
+					int strWidth = fm.stringWidth(prompt);
+					int strX = (getWidth()-strWidth)/2;
+					g.drawString(prompt, strX, yPos+drawHeight-100);
+				
 					return;
-				else {
-					currentImage = imageGrid.getSelectedImage().getImage();
 				}
 				
+				background = Color.BLACK;
+				currentImage = imageGrid.getSelectedImage().getImage();
+				
+				if (currentImage == null) return; //error
+				
 				int canvasWidth = getWidth();
-				int canvasHeight = getHeight();
+				int canvasHeight = getHeight() - 30; //leave room for label at bottom jm 180912
 				int imageWidth = currentImage.getWidth(this);
 				int imageHeight = currentImage.getHeight(this);
 				int drawWidth, drawHeight = 0;
-
-				double aspectRatio = imageWidth/imageHeight;
-				if(aspectRatio > 1){
-					// wider than it is tall, scale to fit on canvas
-					drawWidth = canvasWidth;
-					drawHeight = (int)(drawWidth/aspectRatio * 1.0);
-				} else { 
-					// taller than it is wide, height should be the same as canvasHeight
-					// and width scaled down appropriately
-					drawHeight = canvasHeight;
-					drawWidth = (int)(aspectRatio*drawHeight);
+				double aspectRatio = imageWidth / (1.0 * imageHeight);
+				
+				System.out.println("aspectRatio: " + aspectRatio);
+				
+				if (imageWidth > canvasWidth || imageHeight > canvasHeight) {
+					//image is bigger than canvas so we need to scale it 
+					if(aspectRatio > 1){
+						// wider than it is tall, scale to fit on canvas
+						drawWidth = canvasWidth;
+						drawHeight = (int)(drawWidth/aspectRatio * 1.0);
+					} else { 
+						// taller than it is wide, height should be the same as canvasHeight
+						// and width scaled down appropriately
+						drawHeight = canvasHeight;
+						drawWidth = (int)(aspectRatio*drawHeight);
+					}
+				} else {
+					drawWidth = imageWidth;
+					drawHeight = imageHeight;
 				}
 				
-				// get position required for painting to center the image jm 180912
-				int widthOffset = canvasWidth - imageWidth;
-				int heightOffset = canvasHeight - imageHeight;
+				System.out.println("drawWidth: " + drawWidth);
+				System.out.println("drawHeight: " + drawHeight);
 				
+				// get position required for painting to center the image jm 180912
+				int widthOffset = canvasWidth - drawWidth;
+				int heightOffset = canvasHeight - drawHeight;
 				int xPos = widthOffset / 2;
 				int yPos = heightOffset / 2;
+				
+				System.out.println("widthOffset: " + widthOffset);
+				System.out.println("heightOffset: " + heightOffset);
+				System.out.println("xPos: " + xPos);
+				System.out.println("yPos: " + yPos);
 				
 				// paint canvas background black, paint image jm 180912
 				g.setColor(Color.BLACK);
 				g.fillRect(0, 0, getWidth(), getHeight());
-				g.drawImage(currentImage, xPos, yPos, imageWidth, imageHeight, this);
+				g.drawImage(currentImage, xPos, yPos, drawWidth, drawHeight, this);
 				
 				// paint image filename label underneath image jm 180912
 				String filename = imageGrid.getSelectedImage().getFileName();
@@ -201,31 +263,45 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				int strWidth = fm.stringWidth(filename);
 				int strX = (canvasWidth-strWidth)/2;
 				g.setColor(Color.WHITE);				
-				g.drawString(imageGrid.getSelectedImage().getFileName(), strX, canvasHeight - 20);
+				g.drawString(imageGrid.getSelectedImage().getFileName(), strX, getHeight() - 10); //use actual canvas height
 			}
 		};
 		
-		JLabel infoLabel = new JLabel(infoIcon);
-		infoLabel.setBounds(10, 10, infoIcon.getIconWidth(), infoIcon.getIconHeight());
-		infoLabel.addMouseListener(this);
-		//rightPanel.add(infoLabel);
-
-		mainImageViewCanvas.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,RIGHT_PANEL_SIZE.height-30));
-
+		//JLabel infoLabel = new JLabel(infoIcon);
+		//infoLabel.setBounds(10, 10, infoIcon.getIconWidth(), infoIcon.getIconHeight());
+		//infoLabel.addMouseListener(this);
 		
-		JPanel flagButtons = new JPanel();
-		flagButtons.setLayout(new BorderLayout());
+		JPanel imageButtonPanel = new JPanel();
+		imageButtonPanel.setLayout(new GridLayout(1, 3)); //changed to GridLayout jm 180912
+		imageButtonPanel.setPreferredSize(IMAGE_BUTTON_PANEL_SIZE);
+		imageButtonPanel.setMaximumSize(IMAGE_BUTTON_PANEL_SIZE);
+		
+		
+		
+		//previous button
+		prevImageButton = new JButton("Previous Image");
+		prevImageButton.addActionListener(this);
+		imageButtonPanel.add(prevImageButton);
+		
+		//flag/unflag button
 		flagToggle = new JToggleButton("Flag Image");
 		flagToggle.addActionListener(this);
-		flagButtons.add(flagToggle, BorderLayout.NORTH);
-		JButton metadatabutton = new JButton("Show Metadata");
-		metadatabutton.addActionListener(this);
-		flagButtons.add(metadatabutton, BorderLayout.SOUTH);
-		flagButtons.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,50));
+		imageButtonPanel.add(flagToggle);
 		
-		rightPanel.add(flagButtons, BorderLayout.SOUTH);
-		rightPanel.add(mainImageViewCanvas, BorderLayout.CENTER);
+		//next button
+		nextImageButton = new JButton("Next Image");
+		nextImageButton.addActionListener(this);
+		imageButtonPanel.add(nextImageButton);
 		
+		
+		
+		//JButton metadatabutton = new JButton("Show Metadata");
+		//metadatabutton.addActionListener(this);
+		//imageButtonPanel.add(metadatabutton, BorderLayout.SOUTH);
+		//imageButtonPanel.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width,50));
+		
+		rightPanel.add(mainImageViewCanvas);
+		rightPanel.add(imageButtonPanel);
 		
 		//leftPanel
 		imageGrid = new ImageGridPanel(null, this);
@@ -233,13 +309,9 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JScrollPane leftPane = new JScrollPane(imageGrid);
 		leftPane.setPreferredSize(leftPaneSize);
 		
-		ToolTipManager.sharedInstance().setInitialDelay(0);
-		
-		int dismissDelay = ToolTipManager.sharedInstance().getDismissDelay();
-
-	    // Keep the tool tip showing
-	    dismissDelay = Integer.MAX_VALUE;
-	    ToolTipManager.sharedInstance().setDismissDelay(dismissDelay);
+		//debug jm 
+		//mainImageViewCanvas.setBackground(Color.BLUE);
+		//rightPanel.setBackground(Color.green);
 
 		add(leftPane);
 		add(rightPanel);
@@ -288,7 +360,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			imageGrid.getSelectedImage().setTag(ImageTag.UNTAGGED);
 			flagToggle.setText("Flag Image");
 			repaint();
-			System.out.println("unflag");
 		}
 		else if (action.equals("Preferences")) {
 			//open preferences window
