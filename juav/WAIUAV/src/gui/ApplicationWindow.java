@@ -48,7 +48,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private static Dimension dim = new Dimension(mode.getWidth(), mode.getHeight());
 	
 	private static final Dimension RIGHT_PANEL_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 110);
-	private static final Dimension IMAGE_CANVAS_SIZE = new Dimension(dim.width * 3 / 5, 600); //this one will be dynamic
+	private static final Dimension IMAGE_CANVAS_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 455); //this one will be dynamic
 	private static final Dimension IMAGE_BUTTON_PANEL_SIZE = new Dimension(dim.width * 3 / 5, 45);
 	private static final Dimension IMAGE_METADATA_PANEL_SIZE = new Dimension(dim.width * 3 / 5, 300);
 	
