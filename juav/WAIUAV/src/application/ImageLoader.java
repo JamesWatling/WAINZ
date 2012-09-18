@@ -82,7 +82,7 @@ public class ImageLoader {
                 "Yes, Add to existing",
                 "Do Nothing"};
 			int n = JOptionPane.showOptionDialog(app, "Overwrite existing images or add to set ",
-			"A Silly Question",
+			"Import Action",
 			JOptionPane.YES_NO_CANCEL_OPTION,
 			JOptionPane.QUESTION_MESSAGE,
 			null,
