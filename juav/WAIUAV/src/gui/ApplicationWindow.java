@@ -21,17 +21,14 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -70,8 +67,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	private static BufferedImage WAI_LOGO;
 	private static final Color WAI_BLUE = new Color(0, 126, 166);
-	
-	private ImageIcon infoIcon = new ImageIcon("lib/information-icon.png");
 
 	public ApplicationWindow(){
 		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
