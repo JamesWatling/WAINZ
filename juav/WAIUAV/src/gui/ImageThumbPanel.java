@@ -20,7 +20,6 @@ import javax.swing.JPanel;
  */
 public class ImageThumbPanel extends JPanel {
 	
-	private static final String flag_overlay = "flag20.png";
 	private static final long serialVersionUID = 1L;
 	private TaggableImage image;
 	private String fileName;
@@ -56,7 +55,7 @@ public class ImageThumbPanel extends JPanel {
 		setLayout(new BorderLayout());
 		
 		if(image!=null){
-			imageLabel = new JLabel(new ImageIcon(image.getImage(dim.width-10, dim.height-30)));
+			imageLabel = new JLabel(new ImageIcon(image.getImage(dim.width-10, -1)));
 			imageLabel.setPreferredSize(new Dimension(dim.width-10, dim.height-30));
 			imageLabel.setSize(new Dimension(dim.width-10, dim.height-30));
 		}
