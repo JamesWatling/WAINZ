@@ -52,7 +52,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		//are already images (on a reload)
 		removeAll();
 		
-		if(images==null){
+		if(images==null || images.isEmpty()){
 			//paint the placeholder image to fill box
 			//called via paintComponent jm 190812
 			return;
@@ -92,7 +92,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 	//jm 190912
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if (images == null) {
+		if (images == null || images.isEmpty()) {
 			//paint the placeholder image
 			Graphics2D g2d = (Graphics2D)g;
 			BufferedImage placeholder = ApplicationWindow.IMPORT_PLACEHOLDER;
@@ -101,6 +101,36 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 			g2d.setColor(new Color(153, 157, 158)); //placeholder background
 			g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
 			g2d.drawImage(placeholder, x, y, null);
+		}
+	}
+			
+	public void browse(String direction) {
+		if(selectedImage == null) return;
+		
+		for(int i=0; i<imageThumbPanels.size(); i++) {
+			ImageThumbPanel current = imageThumbPanels.get(i);
+			
+			if(current.getImage().getFileName().equals(selectedImage.getFileName())) {
+				if(direction.equals("previous") && i!=0) {
+					ImageThumbPanel previous = imageThumbPanels.get(i-1);
+					current.setSelected(false);
+					current.imageLabel().setBorder(null);
+					previous.setSelected(true);
+					setSelectedImage(previous.getImage());
+					previous.imageLabel().setBorder(BorderFactory.createLineBorder(Color.red, 3));
+				}
+				else if(direction.equals("next") && i!=images.size()-1) {
+					ImageThumbPanel next = imageThumbPanels.get(i+1);
+					current.setSelected(false);
+					current.imageLabel().setBorder(null);
+					next.setSelected(true);
+					setSelectedImage(next.getImage());
+					next.imageLabel().setBorder(BorderFactory.createLineBorder(Color.red, 3));
+				}
+				
+				canvas.repaint();
+				break;
+			}
 		}
 	}
 
