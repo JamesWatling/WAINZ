@@ -5,9 +5,12 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,10 +52,14 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		//are already images (on a reload)
 		removeAll();
 		
-		if(images!=null){
-			importedLabel = new JLabel("Imported Images: "+images.size()+" images.");
-			add(importedLabel,BorderLayout.NORTH);
+		if(images==null){
+			//paint the placeholder image to fill box
+			//called via paintComponent jm 190812
+			return;
 		}
+		
+		importedLabel = new JLabel("Imported Images: "+images.size()+" images.");
+		add(importedLabel,BorderLayout.NORTH);
 		
 		gridbox = new JPanel();
 		gridbox.setLayout(new GridLayout(0, 2));
@@ -80,6 +87,21 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		add(gridbox, BorderLayout.CENTER);
 		revalidate();
 		repaint();
+	}
+	
+	//jm 190912
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		if (images == null) {
+			//paint the placeholder image
+			Graphics2D g2d = (Graphics2D)g;
+			BufferedImage placeholder = ApplicationWindow.IMPORT_PLACEHOLDER;
+			int x = (this.getWidth() - placeholder.getWidth(null)) / 2;
+			int y = (this.getHeight() - placeholder.getHeight(null)) / 2;
+			g2d.setColor(new Color(153, 157, 158)); //placeholder background
+			g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
+			g2d.drawImage(placeholder, x, y, null);
+		}
 	}
 
 	public void mouseClicked(MouseEvent e) {

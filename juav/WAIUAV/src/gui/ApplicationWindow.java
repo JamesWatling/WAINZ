@@ -44,17 +44,21 @@ import application.ImageLoader;
 
 
 public class ApplicationWindow extends JFrame implements ActionListener, WindowListener, MouseListener {
+	
 	private static DisplayMode mode = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].getDisplayMode();
 	private static Dimension dim = new Dimension(mode.getWidth(), mode.getHeight());
+	//private static Dimension dim = new Dimension(960, 720);
 	
 	private static final Dimension RIGHT_PANEL_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 110);
 	private static final Dimension IMAGE_CANVAS_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 455); //this one will be dynamic
 	private static final Dimension IMAGE_BUTTON_PANEL_SIZE = new Dimension(dim.width * 3 / 5, 45);
+	private static final Dimension IMEX_BUTTON_PANEL_SIZE = new Dimension(dim.width * 1 / 5, 45);
 	private static final Dimension IMAGE_METADATA_PANEL_SIZE = new Dimension(dim.width * 3 / 5, 300);
+	private static final Dimension leftPaneSize = new Dimension(dim.width * 1 / 5, dim.height - 155);
 	
 	private ImageLoader imageLoader;
 	private static final long serialVersionUID = 1L;
-	private static final Dimension leftPaneSize = new Dimension(dim.width * 1 / 5, dim.height - 110);
+	
 	
 	private static List<TaggableImage> importedImageList;
 
@@ -66,11 +70,16 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	private JPanel imageMetadataPanel;
 	
+	private JButton importButton;
+	private JButton exportButton;
+	private JButton flagImageButton;
+	private JButton unflagImageButton;
 	private JButton nextImageButton;
 	private JButton prevImageButton;
 	
-	private static BufferedImage WAI_LOGO;
-	private static final Color WAI_BLUE = new Color(0, 126, 166);
+	public static BufferedImage WAI_LOGO;
+	public static BufferedImage IMPORT_PLACEHOLDER;
+	public static final Color WAI_BLUE = new Color(0, 126, 166);
 
 	public ApplicationWindow(){
 		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
@@ -155,10 +164,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		help.add(about);
 		setJMenuBar(menuBar);
 	}
+	
 	private void initialiseWindow(){
 		try {
 			String logoPath = "lib/wai-default.jpg";
+			String importPlaceholderPath = "lib/import-placeholder.jpg";
 			WAI_LOGO = ImageIO.read(new File(logoPath));
+			IMPORT_PLACEHOLDER = ImageIO.read(new File(importPlaceholderPath));
 		} catch (IOException e) {
 			System.out.println("Error reading WAI Logo");
 		}
@@ -171,32 +183,30 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			private static final long serialVersionUID = 2491198060037716312L;
 		     
 			public void paint(Graphics g){
-				Color background;
+				Color background; boolean buttonsEnabled;
 				setSize(IMAGE_CANVAS_SIZE);
 				setPreferredSize(IMAGE_CANVAS_SIZE);
 				setMaximumSize(IMAGE_CANVAS_SIZE);
 				Image currentImage;
 				if(imageGrid.getSelectedImage() == null) {
-					
 					//render the default WAINZ image jm 180912
 					background = Color.WHITE;
-					g.setColor(background);
-					g.fillRect(0, 0, getWidth(), getHeight());
-					int drawHeight = WAI_LOGO.getHeight();
-					int drawWidth = WAI_LOGO.getWidth();
-					int widthOffset = getWidth() - drawWidth;
-					int heightOffset = getHeight() - drawHeight;
-					int xPos = widthOffset / 2;
-					int yPos = heightOffset / 2;
-					
-					g.drawImage(WAI_LOGO, xPos, yPos, drawWidth, drawHeight, null);
-					return;
+					currentImage = WAI_LOGO;
+					//disable buttons
+					buttonsEnabled = false;
+				} else {
+					currentImage = imageGrid.getSelectedImage().getImage();
+					buttonsEnabled = true;
+					background = Color.BLACK;
 				}
 				
-				background = Color.BLACK;
-				currentImage = imageGrid.getSelectedImage().getImage();
+				if (currentImage == null) return; //error TODO throw an exception message here
 				
-				if (currentImage == null) return; //error
+				//enable buttons
+				flagImageButton.setEnabled(buttonsEnabled);
+				unflagImageButton.setEnabled(buttonsEnabled);
+				prevImageButton.setEnabled(buttonsEnabled);
+				nextImageButton.setEnabled(buttonsEnabled);
 				
 				int canvasWidth = getWidth();
 				int canvasHeight = getHeight() - 30; //leave room for label at bottom jm 180912
@@ -239,7 +249,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				System.out.println("yPos: " + yPos);
 				
 				// paint canvas background black, paint image jm 180912
-				g.setColor(Color.BLACK);
+				g.setColor(background);
 				g.fillRect(0, 0, getWidth(), getHeight());
 				g.drawImage(currentImage, xPos, yPos, drawWidth, drawHeight, this);
 				
@@ -260,6 +270,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		JPanel imageButtonPanel = new JPanel();
 		imageButtonPanel.setLayout(new GridLayout(1, 4)); //changed to GridLayout jm 180912
+		//imageButtonPanel.setSize(IMAGE_BUTTON_PANEL_SIZE);
 		imageButtonPanel.setPreferredSize(IMAGE_BUTTON_PANEL_SIZE);
 		imageButtonPanel.setMaximumSize(IMAGE_BUTTON_PANEL_SIZE);
 		
@@ -269,23 +280,22 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageButtonPanel.add(prevImageButton);
 		
 		//flag/unflag button
-		JButton flagButton = new JButton("Flag Image");
-		JButton unflagButton = new JButton("Unflag Image");
-		flagButton.addActionListener(this);
-		unflagButton.addActionListener(this);
-		imageButtonPanel.add(flagButton);
-		imageButtonPanel.add(unflagButton);
+		flagImageButton = new JButton("Flag Image");
+		unflagImageButton = new JButton("Unflag Image");
+		flagImageButton.addActionListener(this);
+		unflagImageButton.addActionListener(this);
+		imageButtonPanel.add(flagImageButton);
+		imageButtonPanel.add(unflagImageButton);
 		
 		//next button
 		nextImageButton = new JButton("Next Image");
 		nextImageButton.addActionListener(this);
 		imageButtonPanel.add(nextImageButton);
-	
 		
 		//meta-data pane below buttons
 		imageMetadataPanel = new JPanel();
 		imageMetadataPanel.setPreferredSize(IMAGE_METADATA_PANEL_SIZE);
-		imageMetadataPanel.setSize(IMAGE_METADATA_PANEL_SIZE);
+		imageMetadataPanel.setMaximumSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setBackground(Color.RED);
 		
 		rightPanel.add(mainImageViewCanvas);
@@ -293,16 +303,27 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		rightPanel.add(imageMetadataPanel);
 		
 		//leftPanel
-		imageGrid = new ImageGridPanel(null, this);
+		JPanel leftPanel = new JPanel();
+		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+		JPanel importExportPanel = new JPanel();
+		importExportPanel.setLayout(new GridLayout(1, 2));
+		importButton = new JButton("Import Images");
+		importButton.addActionListener(this);
+		importExportPanel.add(importButton);
+		exportButton = new JButton("Export Flagged");
+		exportButton.addActionListener(this);
+		importExportPanel.add(exportButton);
+		importExportPanel.setPreferredSize(IMEX_BUTTON_PANEL_SIZE);
+		importExportPanel.setMaximumSize(IMEX_BUTTON_PANEL_SIZE);
 		
+		imageGrid = new ImageGridPanel(null, this);
 		JScrollPane leftPane = new JScrollPane(imageGrid);
 		leftPane.setPreferredSize(leftPaneSize);
 		
-		//debug jm 
-		//mainImageViewCanvas.setBackground(Color.BLUE);
-		//rightPanel.setBackground(Color.green);
+		leftPanel.add(importExportPanel);
+		leftPanel.add(leftPane);
 
-		add(leftPane);
+		add(leftPanel);
 		add(rightPanel);
 		pack();
 		setVisible(true);
