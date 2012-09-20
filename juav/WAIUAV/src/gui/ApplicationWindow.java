@@ -298,6 +298,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageMetadataPanel.setMaximumSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setBackground(Color.RED);
 		
+		
 		rightPanel.add(mainImageViewCanvas);
 		rightPanel.add(imageButtonPanel);
 		rightPanel.add(imageMetadataPanel);
@@ -322,10 +323,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		leftPanel.add(importExportPanel);
 		leftPanel.add(leftPane);
-
+		
 		add(leftPanel);
 		add(rightPanel);
 		pack();
+		
+		System.out.println("metadata: " + imageMetadataPanel.getWidth() + ", " + imageMetadataPanel.getHeight());
 		setVisible(true);
 	}
 	
