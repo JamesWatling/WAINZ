@@ -3,6 +3,7 @@ package gui;
 import images.ImageTag;
 import images.TaggableImage;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -299,10 +300,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		String metadataPlaceholderPath = "lib/metadata-panel-default.png";
 		try {METADATA_PLACEHOLDER = ImageIO.read(new File(metadataPlaceholderPath));} catch (IOException e) {e.printStackTrace();}
 		imageMetadataPanel = new JPanel();
+		imageMetadataPanel.setLayout(new BorderLayout());
 		imageMetadataPanel.setPreferredSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setMaximumSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setBackground(new Color(153, 157, 158));
-		imageMetadataPanel.add(new JLabel(new ImageIcon(METADATA_PLACEHOLDER.getScaledInstance(IMAGE_METADATA_PANEL_SIZE.width, IMAGE_METADATA_PANEL_SIZE.height, Image.SCALE_FAST))));
+		imageMetadataPanel.add(new JLabel(new ImageIcon(METADATA_PLACEHOLDER.getScaledInstance(IMAGE_METADATA_PANEL_SIZE.width, IMAGE_METADATA_PANEL_SIZE.height, Image.SCALE_FAST))), BorderLayout.NORTH);
 		
 		rightPanel.add(mainImageViewCanvas);
 		rightPanel.add(imageButtonPanel);
