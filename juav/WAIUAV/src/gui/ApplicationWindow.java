@@ -28,8 +28,10 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -76,6 +78,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private JButton unflagImageButton;
 	private JButton nextImageButton;
 	private JButton prevImageButton;
+	private BufferedImage METADATA_PLACEHOLDER;
 	
 	public static BufferedImage WAI_LOGO;
 	public static BufferedImage IMPORT_PLACEHOLDER;
@@ -254,13 +257,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				g.drawImage(currentImage, xPos, yPos, drawWidth, drawHeight, this);
 				
 				// paint image filename label underneath image jm 180912
-				String filename = imageGrid.getSelectedImage().getFileName();
+				String filename = imageGrid==null||imageGrid.getSelectedImage()==null?"":imageGrid.getSelectedImage().getFileName();
 				g.setFont(mainImageViewCanvasFont);
 				FontMetrics fm = g.getFontMetrics();
 				int strWidth = fm.stringWidth(filename);
 				int strX = (canvasWidth-strWidth)/2;
 				g.setColor(Color.WHITE);				
-				g.drawString(imageGrid.getSelectedImage().getFileName(), strX, getHeight() - 10); //use actual canvas height
+				g.drawString(filename, strX, getHeight() - 10); //use actual canvas height
 			}
 		};
 		
@@ -293,10 +296,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageButtonPanel.add(nextImageButton);
 		
 		//meta-data pane below buttons
+		String metadataPlaceholderPath = "lib/metadata-panel-default.png";
+		try {METADATA_PLACEHOLDER = ImageIO.read(new File(metadataPlaceholderPath));} catch (IOException e) {e.printStackTrace();}
 		imageMetadataPanel = new JPanel();
 		imageMetadataPanel.setPreferredSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setMaximumSize(IMAGE_METADATA_PANEL_SIZE);
-		imageMetadataPanel.setBackground(Color.RED);
+		imageMetadataPanel.setBackground(new Color(153, 157, 158));
+		imageMetadataPanel.add(new JLabel(new ImageIcon(METADATA_PLACEHOLDER.getScaledInstance(IMAGE_METADATA_PANEL_SIZE.width, IMAGE_METADATA_PANEL_SIZE.height, Image.SCALE_FAST))));
 		
 		rightPanel.add(mainImageViewCanvas);
 		rightPanel.add(imageButtonPanel);
