@@ -29,10 +29,11 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 	private Canvas canvas;
 	private JPanel gridbox;
 	private JLabel importedLabel;
+	private ApplicationWindow window;
 	//private TaggableImage selectedImage;
 
 	public ImageGridPanel(List<TaggableImage> imageList, ApplicationWindow window) {
-		this.canvas = window.getMainCanvas();
+		this.window = window;
 		if(imageList == null || imageList.size()==0)
 			selectedImage=null;
 		else
@@ -41,6 +42,10 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		images = imageList;
 		setLayout(new BorderLayout());
 		initialise();
+	}
+	
+	public void setCanvas(Canvas c){
+		this.canvas = c;
 	}
 	
 	public void setImageList(List<TaggableImage> newImageList) {
@@ -74,6 +79,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 				itp = new ImageThumbPanel(timg, gridPanelSize);
 				imageThumbPanels.add(itp);
 				itp.addMouseListener(this);
+				itp.addMouseListener(window);
 				gridbox.add(itp);
 			}
 			if(images.size()<10){
