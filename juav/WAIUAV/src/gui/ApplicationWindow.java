@@ -316,10 +316,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JPanel importExportPanel = new JPanel();
 		importExportPanel.setLayout(new GridLayout(1, 2));
 		importButton = new JButton("Import Images");
+		importButton.setActionCommand("Import");
 		importButton.addActionListener(this);
 		importExportPanel.add(importButton);
 		exportButton = new JButton("Export Flagged");
 		exportButton.addActionListener(this);
+		exportButton.setActionCommand("Export");
 		importExportPanel.add(exportButton);
 		importExportPanel.setPreferredSize(IMEX_BUTTON_PANEL_SIZE);
 		importExportPanel.setMaximumSize(IMEX_BUTTON_PANEL_SIZE);
