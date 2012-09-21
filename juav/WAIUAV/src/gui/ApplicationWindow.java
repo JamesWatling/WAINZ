@@ -198,20 +198,28 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageButtonPanel.setMaximumSize(IMAGE_BUTTON_PANEL_SIZE);
 		
 		//previous button
-		prevImageButton = new JButton("Previous Image");
+		ImageIcon prevBtnImage = new ImageIcon("lib/prev-image-btn.png");
+		prevImageButton = new JButton(prevBtnImage);
 		prevImageButton.addActionListener(this);
+		prevImageButton.setActionCommand("Previous Image");
 		imageButtonPanel.add(prevImageButton);
 		
 		//flag/unflag button
-		flagImageButton = new JButton("Flag Image");
-		unflagImageButton = new JButton("Unflag Image");
+		ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
+		ImageIcon unflagBtnImage = new ImageIcon("lib/unflag-image-btn.png");
+		flagImageButton = new JButton(flagBtnImage);
+		unflagImageButton = new JButton(unflagBtnImage);
 		flagImageButton.addActionListener(this);
 		unflagImageButton.addActionListener(this);
+		flagImageButton.setActionCommand("Flag Image");
+		unflagImageButton.setActionCommand("Unflag Image");
 		imageButtonPanel.add(flagImageButton);
 		imageButtonPanel.add(unflagImageButton);
 		
 		//next button
-		nextImageButton = new JButton("Next Image");
+		ImageIcon nextBtnImage = new ImageIcon("lib/next-image-btn.png");
+		nextImageButton = new JButton(nextBtnImage);
+		nextImageButton.setActionCommand("Next Image");
 		nextImageButton.addActionListener(this);
 		imageButtonPanel.add(nextImageButton);
 
@@ -241,11 +249,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 		JPanel importExportPanel = new JPanel();
 		importExportPanel.setLayout(new GridLayout(1, 2));
-		importButton = new JButton("Import Images");
+		ImageIcon importBtnImage = new ImageIcon("lib/import-images-btn.png");
+		importButton = new JButton(importBtnImage);
 		importButton.setActionCommand("Import");
 		importButton.addActionListener(this);
 		importExportPanel.add(importButton);
-		exportButton = new JButton("Export Flagged");
+		ImageIcon exportBtnImage = new ImageIcon("lib/export-images-btn.png");
+		exportButton = new JButton(exportBtnImage);
 		exportButton.addActionListener(this);
 		exportButton.setActionCommand("Export");
 		importExportPanel.add(exportButton);
@@ -259,7 +269,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		add(rightPanel);
 		pack();
 		
-		System.out.println("metadata: " + imageMetadataPanel.getWidth() + ", " + imageMetadataPanel.getHeight());
 		setVisible(true);
 	}
 
