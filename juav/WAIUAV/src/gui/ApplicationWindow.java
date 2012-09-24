@@ -216,6 +216,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageButtonPanel.add(flagImageButton);
 		imageButtonPanel.add(unflagImageButton);
 		
+		
+		//auto button
+		JButton autobutton = new JButton("Auto Analyse");
+		autobutton.setEnabled(false);
+		imageButtonPanel.add(autobutton);
+		
 		//next button
 		ImageIcon nextBtnImage = new ImageIcon("lib/next-image-btn.png");
 		nextImageButton = new JButton(nextBtnImage);
