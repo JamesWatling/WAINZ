@@ -18,5 +18,6 @@
 	<classpathentry kind="lib" path="/u/students/mccannjame/git/uav/juav/WAIUAV/lib/itextpdf-5.3.3.jar"/>
 	<classpathentry kind="lib" path="/u/students/mccannjame/git/uav/juav/WAIUAV/lib/itextpdf-5.3.3-javadoc.jar"/>
 	<classpathentry kind="lib" path="/u/students/mccannjame/git/uav/juav/WAIUAV/lib/itextpdf-5.3.3-sources.jar"/>
+	<classpathentry kind="lib" path="lib/javaxt-core.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

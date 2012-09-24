@@ -85,6 +85,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private ImageCanvas mainImageViewCanvas;
 	
 	private JPanel imageMetadataPanel;
+	private JLabel metaDataLabel = new JLabel("Blank");
 	
 	private JButton importButton;
 	private JButton exportButton;
@@ -288,8 +289,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageMetadataPanel.setPreferredSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setMaximumSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setBackground(new Color(153, 157, 158));
-		imageMetadataPanel.add(new JLabel(new ImageIcon(METADATA_PLACEHOLDER.getScaledInstance(IMAGE_METADATA_PANEL_SIZE.width, IMAGE_METADATA_PANEL_SIZE.height, Image.SCALE_FAST))), BorderLayout.NORTH);
-		
+		if(imageGrid.getSelectedImage()== null)
+			imageMetadataPanel.add(new JLabel(new ImageIcon(METADATA_PLACEHOLDER.getScaledInstance(IMAGE_METADATA_PANEL_SIZE.width, IMAGE_METADATA_PANEL_SIZE.height, Image.SCALE_FAST))), BorderLayout.NORTH);
+		else
+			imageMetadataPanel.add(metaDataLabel);
 		
 		rightPanel.add(mainImageViewCanvas);
 		rightPanel.add(imageButtonPanel);
@@ -523,6 +526,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	public void mouseClicked(MouseEvent e) {
 		setButtonsEnabled(imageGrid.getSelectedImage()!=null);
+		String data = imageGrid.getSelectedImage()!=null?imageGrid.getSelectedImage().metadatastring():"EMPTY";
+		System.out.println("AAAAAA"+data);
+		metaDataLabel.setText(data);
+		imageMetadataPanel.removeAll();
+		imageMetadataPanel.add(metaDataLabel, BorderLayout.NORTH);
 	}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
