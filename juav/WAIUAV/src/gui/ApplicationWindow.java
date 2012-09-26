@@ -256,11 +256,17 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JPanel importExportPanel = new JPanel();
 		importExportPanel.setLayout(new GridLayout(1, 2));
 		ImageIcon importBtnImage = new ImageIcon("lib/import-images-btn.png");
+		Image xa = importBtnImage.getImage().getScaledInstance(leftPaneSize.width/2, leftPaneSize.height/15, java.awt.Image.SCALE_SMOOTH);
+		importBtnImage = new ImageIcon(xa);
 		importButton = new JButton(importBtnImage);
+
 		importButton.setActionCommand("Import");
 		importButton.addActionListener(this);
 		importExportPanel.add(importButton);
+		
 		ImageIcon exportBtnImage = new ImageIcon("lib/export-images-btn.png");
+		xa = exportBtnImage.getImage().getScaledInstance(leftPaneSize.width/2, leftPaneSize.height/15, java.awt.Image.SCALE_SMOOTH);
+		exportBtnImage = new ImageIcon(xa);
 		exportButton = new JButton(exportBtnImage);
 		exportButton.addActionListener(this);
 		exportButton.setActionCommand("Export");
@@ -273,8 +279,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		add(leftPanel);
 		add(rightPanel);
+		
 		pack();
 		
+
+
 		setVisible(true);
 	}
 
