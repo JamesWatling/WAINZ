@@ -20,7 +20,7 @@ import com.drew.metadata.Tag;
  */
 
 public class TaggableImage {
-	
+	private File file;
 	private BufferedImage image;
 	private String fileName;
 	private ImageTag tag;
@@ -32,6 +32,7 @@ public class TaggableImage {
 	 */
 	public TaggableImage(File f){
 		try {
+			file = f;
 			image = ImageIO.read(f);
 			tag = ImageTag.UNTAGGED;
 			fileName = f.getName();
@@ -68,4 +69,6 @@ public class TaggableImage {
 		
 		return data;
 	}
+	
+	public File getSource() { return this.file; }
 }

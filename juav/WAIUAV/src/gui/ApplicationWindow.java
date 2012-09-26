@@ -20,7 +20,11 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +32,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -305,6 +310,30 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		}
 		else if (action.equals("Export")) {
 			//export features
+			JFileChooser fc = new JFileChooser();
+			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			fc.setDialogTitle("Save images to");
+			int returnVal = fc.showSaveDialog(fc);
+			if(returnVal == JFileChooser.APPROVE_OPTION) {
+				String exportPath = fc.getSelectedFile().getPath();
+				int byteread = 0;
+				InputStream in = null;
+				OutputStream out = null;
+				try {
+					for(TaggableImage image: importedImageList) {
+						if(image.getTag() == ImageTag.INFRINGEMENT) {
+							in = new FileInputStream(image.getSource());
+							out = new FileOutputStream(new File(exportPath + "/" + image.getFileName()));
+							byte[] buffer = new byte[1024];
+							while ((byteread = in.read(buffer)) != -1) {
+								out.write(buffer, 0, byteread);
+							}
+						}
+					}
+				} catch(IOException ioe) {
+					System.out.println("Export failed: " + ioe.getMessage());
+				}
+			}
 		}
 		else if (action.equals("Quit")) {
 			//quit popup
