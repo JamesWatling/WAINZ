@@ -12,6 +12,7 @@ import java.awt.FlowLayout;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -97,6 +98,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		initialiseApplication();
 	
 		pack();
+		
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Dimension scrnsize = toolkit.getScreenSize();
+		setBounds((scrnsize.width - getWidth()) / 2, (scrnsize.height - getHeight()) / 2, getWidth(), getHeight());
+		
 		setVisible(true);
 	}
 
@@ -286,10 +292,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		add(rightPanel);
 		
 		pack();
-		
-
-
-		setVisible(true);
 	}
 
 	public Canvas getMainCanvas(){
