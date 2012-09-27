@@ -33,6 +33,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -373,6 +374,19 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		}
 		else if (action.equals("About")) {
 			//about dialog
+			Object[] option = {"Close"};
+			JOptionPane pane = new JOptionPane("<html><font size = 5>WAI UAVTool</font></html>\nVersion 1.0\n<html><br>Developed by James McCann, James Watling, Sam Etheridge, Yan Dai, Yang Yu</html>\n" +
+					"<html><br>WAI UAVTool is an automatic image classification tool</html>\n\n" + 
+					"Copyright (c) 2012 The Agrisoft Team\nLicense: GNU General Public License Version 2", 
+					JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, new ImageIcon("lib/about.jpg"), option);
+			JDialog dialog = pane.createDialog("About");
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+			if(((String)pane.getValue() != null)) {
+				if(((String)pane.getValue()).equals("Close")) {
+					dialog.dispose();
+				}
+			}
 		}
 		else if (action.equals("Show Metadata")) {
 			JOptionPane.showMessageDialog(
