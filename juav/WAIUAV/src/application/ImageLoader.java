@@ -26,7 +26,6 @@ public class ImageLoader {
 		List<TaggableImage> result = new ArrayList<TaggableImage>();
 		fileChooser.showOpenDialog(app);
 		int action = ImportImageAction(app);
-		
 		System.out.println(action);
 		
 //		if(action == -1){

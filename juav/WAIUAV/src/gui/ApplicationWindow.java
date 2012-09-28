@@ -268,7 +268,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JPanel importExportPanel = new JPanel();
 		importExportPanel.setLayout(new GridLayout(1, 2));
 		ImageIcon importBtnImage = new ImageIcon("lib/import-images-btn.png");
-		Image xa = importBtnImage.getImage().getScaledInstance(leftPaneSize.width/2, leftPaneSize.height/15, java.awt.Image.SCALE_SMOOTH);
+		Image xa = importBtnImage.getImage().getScaledInstance(leftPaneSize.width/2, leftPaneSize.height/18, java.awt.Image.SCALE_SMOOTH);
 		importBtnImage = new ImageIcon(xa);
 		importButton = new JButton(importBtnImage);
 
@@ -277,14 +277,14 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		importExportPanel.add(importButton);
 		
 		ImageIcon exportBtnImage = new ImageIcon("lib/export-images-btn.png");
-		xa = exportBtnImage.getImage().getScaledInstance(leftPaneSize.width/2, leftPaneSize.height/15, java.awt.Image.SCALE_SMOOTH);
+		xa = exportBtnImage.getImage().getScaledInstance(leftPaneSize.width/2, leftPaneSize.height/18, java.awt.Image.SCALE_SMOOTH);
 		exportBtnImage = new ImageIcon(xa);
 		exportButton = new JButton(exportBtnImage);
 		exportButton.addActionListener(this);
 		exportButton.setActionCommand("Export");
 		importExportPanel.add(exportButton);
-		importExportPanel.setPreferredSize(IMEX_BUTTON_PANEL_SIZE);
-		importExportPanel.setMaximumSize(IMEX_BUTTON_PANEL_SIZE);
+		importExportPanel.setPreferredSize(new Dimension(leftPaneSize.width, leftPaneSize.height/18));
+		importExportPanel.setMaximumSize(new Dimension(leftPaneSize.width, leftPaneSize.height/18));
 		
 		leftPanel.add(importExportPanel);
 		leftPanel.add(leftPane);
