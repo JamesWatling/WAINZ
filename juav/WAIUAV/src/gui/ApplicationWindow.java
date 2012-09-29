@@ -26,6 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +82,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private JButton unflagImageButton;
 	private JButton nextImageButton;
 	private JButton prevImageButton;
+	private JButton autobutton;
 	private BufferedImage METADATA_PLACEHOLDER;
 	
 	public static BufferedImage WAI_LOGO;
@@ -230,8 +232,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		
 		//auto button
-		JButton autobutton = new JButton("Auto Analyse");
+		autobutton = new JButton("Auto Analyse");
 		autobutton.setEnabled(false);
+		autobutton.setActionCommand("Auto Analyse");
+		autobutton.addActionListener(this);
 		imageButtonPanel.add(autobutton);
 		
 		//next button
@@ -304,6 +308,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		unflagImageButton.setEnabled(enabled);
 		prevImageButton.setEnabled(enabled);
 		nextImageButton.setEnabled(enabled);
+		autobutton.setEnabled(enabled);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -398,8 +403,17 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		else if (action.equals("Previous Image")) {
 			imageGrid.browse("previous");
 		}
-		else if(action.endsWith("Next Image")) {
+		else if(action.equals("Next Image")) {
 			imageGrid.browse("next");
+		}
+		else if(action.equals("Auto Analyse")) {
+			try {
+				PrintStream out = new PrintStream(new File("images.txt"));
+				TaggableImage image = imageGrid.getSelectedImage();
+				out.println("classification/" + image.getFileName() + " 1 0 0 " + image.getImage().getWidth() + " " + image.getImage().getHeight());
+				out.close();
+			} catch(IOException ioe) {}
+			
 		}
 	}
 
