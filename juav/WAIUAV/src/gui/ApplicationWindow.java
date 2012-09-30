@@ -208,20 +208,35 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JPanel imageButtonPanel = new JPanel();
 		imageButtonPanel.setLayout(new GridLayout(1, 4)); //changed to GridLayout jm 180912
 		//imageButtonPanel.setSize(IMAGE_BUTTON_PANEL_SIZE);
-		imageButtonPanel.setPreferredSize(IMAGE_BUTTON_PANEL_SIZE);
-		imageButtonPanel.setMaximumSize(IMAGE_BUTTON_PANEL_SIZE);
+		imageButtonPanel.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width, RIGHT_PANEL_SIZE.height/18));
+		imageButtonPanel.setMaximumSize(new Dimension(RIGHT_PANEL_SIZE.width, RIGHT_PANEL_SIZE.height/18));
 		
 		//previous button
 		ImageIcon prevBtnImage = new ImageIcon("lib/prev-image-btn.png");
+		
+		Image xa = prevBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+		prevBtnImage = new ImageIcon(xa);
+		
 		prevImageButton = new JButton(prevBtnImage);
 		prevImageButton.addActionListener(this);
 		prevImageButton.setActionCommand("Previous Image");
 		imageButtonPanel.add(prevImageButton);
 		
+		
+		
+		
 		//flag/unflag button
 		ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
 		ImageIcon unflagBtnImage = new ImageIcon("lib/unflag-image-btn.png");
+		
+		xa = flagBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+		flagBtnImage = new ImageIcon(xa);
+		
 		flagImageButton = new JButton(flagBtnImage);
+		
+		xa = unflagBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+		unflagBtnImage = new ImageIcon(xa);
+		
 		unflagImageButton = new JButton(unflagBtnImage);
 		flagImageButton.addActionListener(this);
 		unflagImageButton.addActionListener(this);
@@ -229,6 +244,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		unflagImageButton.setActionCommand("Unflag Image");
 		imageButtonPanel.add(flagImageButton);
 		imageButtonPanel.add(unflagImageButton);
+		
+		
 		
 		
 		//auto button
@@ -240,6 +257,9 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		//next button
 		ImageIcon nextBtnImage = new ImageIcon("lib/next-image-btn.png");
+		xa = nextBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+		nextBtnImage = new ImageIcon(xa);
+		
 		nextImageButton = new JButton(nextBtnImage);
 		nextImageButton.setActionCommand("Next Image");
 		nextImageButton.addActionListener(this);
@@ -272,7 +292,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JPanel importExportPanel = new JPanel();
 		importExportPanel.setLayout(new GridLayout(1, 2));
 		ImageIcon importBtnImage = new ImageIcon("lib/import-images-btn.png");
-		Image xa = importBtnImage.getImage().getScaledInstance(leftPaneSize.width/2, leftPaneSize.height/18, java.awt.Image.SCALE_SMOOTH);
+		xa = importBtnImage.getImage().getScaledInstance(leftPaneSize.width/2, leftPaneSize.height/18, java.awt.Image.SCALE_SMOOTH);
 		importBtnImage = new ImageIcon(xa);
 		importButton = new JButton(importBtnImage);
 
