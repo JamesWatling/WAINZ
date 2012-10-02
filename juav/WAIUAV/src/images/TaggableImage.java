@@ -36,9 +36,9 @@ public class TaggableImage {
 			image = ImageIO.read(f);
 			tag = ImageTag.UNTAGGED;
 			fileName = f.getName();
-			try {
+			/*try {
 				metadata = JpegMetadataReader.readMetadata(f);
-			} catch(JpegProcessingException e) {}
+			} catch(JpegProcessingException e) {}*/
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

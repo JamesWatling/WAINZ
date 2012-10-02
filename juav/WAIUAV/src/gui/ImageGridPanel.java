@@ -143,6 +143,10 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 	public void update() {
 		canvas.repaint();
 	}
+	
+	public List<ImageThumbPanel> getPanels() {
+		return this.imageThumbPanels;
+	}
 
 	public void mouseClicked(MouseEvent e) {
 		for(ImageThumbPanel i : imageThumbPanels){

@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -84,6 +85,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private JButton nextImageButton;
 	private JButton prevImageButton;
 	private JButton autobutton;
+	private JButton analyzeAllButton;
 	private BufferedImage METADATA_PLACEHOLDER;
 	
 	public static BufferedImage WAI_LOGO;
@@ -228,23 +230,27 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		//flag/unflag button
 		ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
-		ImageIcon unflagBtnImage = new ImageIcon("lib/unflag-image-btn.png");
+		//ImageIcon unflagBtnImage = new ImageIcon("lib/unflag-image-btn.png");
 		
 		xa = flagBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
 		flagBtnImage = new ImageIcon(xa);
 		
 		flagImageButton = new JButton(flagBtnImage);
 		
-		xa = unflagBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
-		unflagBtnImage = new ImageIcon(xa);
+		//xa = unflagBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+		//unflagBtnImage = new ImageIcon(xa);
 		
-		unflagImageButton = new JButton(unflagBtnImage);
+		//unflagImageButton = new JButton(unflagBtnImage);
 		flagImageButton.addActionListener(this);
-		unflagImageButton.addActionListener(this);
+		//unflagImageButton.addActionListener(this);
 		flagImageButton.setActionCommand("Flag Image");
-		unflagImageButton.setActionCommand("Unflag Image");
+		//unflagImageButton.setActionCommand("Unflag Image");
+		analyzeAllButton = new JButton("Analyze All");
+		analyzeAllButton.addActionListener(this);
+		analyzeAllButton.setActionCommand("Analyze All");
 		imageButtonPanel.add(flagImageButton);
-		imageButtonPanel.add(unflagImageButton);
+		//imageButtonPanel.add(unflagImageButton);
+		imageButtonPanel.add(analyzeAllButton);
 		
 		
 		
@@ -268,9 +274,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 		//enable buttons
 		flagImageButton.setEnabled(false);
-		unflagImageButton.setEnabled(false);
+		//unflagImageButton.setEnabled(false);
 		prevImageButton.setEnabled(false);
 		nextImageButton.setEnabled(false);
+		analyzeAllButton.setEnabled(false);
 		
 		//meta-data pane below buttons
 		String metadataPlaceholderPath = "lib/metadata-panel-default.png";
@@ -326,10 +333,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	public void setButtonsEnabled(boolean enabled){
 		flagImageButton.setEnabled(enabled);
-		unflagImageButton.setEnabled(enabled);
+		//unflagImageButton.setEnabled(enabled);
 		prevImageButton.setEnabled(enabled);
 		nextImageButton.setEnabled(enabled);
 		autobutton.setEnabled(enabled);
+		analyzeAllButton.setEnabled(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -386,11 +394,21 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			//flag currently selected image
 			imageGrid.getSelectedImage().setTag(ImageTag.INFRINGEMENT);
 			imageGrid.repaint();
+			ImageIcon unflagBtnImage = new ImageIcon("lib/unflag-image-btn.png");
+			Image img = unflagBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+			unflagBtnImage = new ImageIcon(img);
+			flagImageButton.setIcon(unflagBtnImage);
+			flagImageButton.setActionCommand("Unflag Image");
 		}
 		else if (action.equals("Unflag Image")) {
 			//unflag the selected image
 			imageGrid.getSelectedImage().setTag(ImageTag.UNTAGGED);
 			imageGrid.repaint();
+			ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
+			Image img = flagBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+			flagBtnImage = new ImageIcon(img);
+			flagImageButton.setIcon(flagBtnImage);
+			flagImageButton.setActionCommand("Flag Image");
 		}
 		else if (action.equals("Preferences")) {
 			//open preferences window
@@ -432,6 +450,19 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			imageGrid.getSelectedImage().setImage(processedImage);
 			imageGrid.update();
 			processedImage.flush();
+		}
+		else if(action.equals("Analyze All")) {
+			BufferedImage processedImage = null;
+			boolean first = true;
+			for(ImageThumbPanel itp: imageGrid.getPanels()) {
+				processedImage = new ImageClassifier().findRiverImage(itp.getImage().getSource().getPath());
+				itp.getImage().setImage(processedImage);
+				if(first) {
+					imageGrid.update();
+					first = false;
+				}
+				processedImage.flush();
+			}			
 		}
 	}
 
