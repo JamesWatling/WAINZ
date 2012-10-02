@@ -48,6 +48,7 @@ import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.ToolTipManager;
 
+import application.ImageClassifier;
 import application.ImageLoader;
 
 
@@ -427,13 +428,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			imageGrid.browse("next");
 		}
 		else if(action.equals("Auto Analyse")) {
-			try {
-				PrintStream out = new PrintStream(new File("images.txt"));
-				TaggableImage image = imageGrid.getSelectedImage();
-				out.println("classification/" + image.getFileName() + " 1 0 0 " + image.getImage().getWidth() + " " + image.getImage().getHeight());
-				out.close();
-			} catch(IOException ioe) {}
-			
+			BufferedImage processedImage = new ImageClassifier().findRiverImage(imageGrid.getSelectedImage().getSource().getPath());
+			imageGrid.getSelectedImage().setImage(processedImage);
+			imageGrid.update();
+			processedImage.flush();
 		}
 	}
 
