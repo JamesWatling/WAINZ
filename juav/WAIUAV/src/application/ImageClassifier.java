@@ -22,22 +22,28 @@ import static com.googlecode.javacv.cpp.opencv_core.cvRectangle;
 import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
 
 public class ImageClassifier {
+	// the cascade definition to be used for detection
 	private static final String CASCADE_FILE = "lib/data.xml";
 	
-	public ImageClassifier() {
-		//new JavaCvErrorCallback().redirectError();
-		//findRiverImage(fileName);	
-	}
-	
 	public BufferedImage findRiverImage(String fileName) {
-		System.out.println(fileName);
+		// load the original image
 		IplImage originalImage= cvLoadImage(fileName, 1);
+		
+		// create a new image of the same size as the original one
 		IplImage grayImage = IplImage.create(originalImage.width(), originalImage.height(), IPL_DEPTH_8U, 1);
+		
+		// convert the original image to grayscale
 		cvCvtColor(originalImage, grayImage, CV_BGR2GRAY);
+		
 		CvMemStorage storage = CvMemStorage.create();
+		
+		// instantiate a classifier cascade to be used for detection using the cascade definition
 		CvHaarClassifierCascade cascade = new CvHaarClassifierCascade(cvLoad(CASCADE_FILE));
+		
+		// detect the rivers
 		CvSeq rivers = cvHaarDetectObjects(grayImage, cascade, storage, 1.2, 1, 0);
 		
+		// iterate over the discovered rivers and draw red rectangles around them
 		for (int i = 0; i < rivers.total(); i++) {
 			CvRect r = new CvRect(cvGetSeqElem(rivers, i));
 			cvRectangle(originalImage, cvPoint(r.x(), r.y()), cvPoint(r.x() + r.width(), r.y() + r.height()), CvScalar.RED, 3, CV_AA, 0);
@@ -49,4 +55,3 @@ public class ImageClassifier {
 	}
 	
 }
-

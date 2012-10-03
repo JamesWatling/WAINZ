@@ -1,4 +1,5 @@
 package images;
+
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,9 +14,9 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 
 /**
- * Class containing an image and an associated tag
- * of the type ImageTag
- * Images can be tagged as UNTAGGED, NONINFRINGEMENT or INFRINGMENT
+ * Class containing an image and an associated tag of the type ImageTag.
+ * Images can be tagged as UNTAGGED, NONINFRINGEMENT or INFRINGMENT.
+ * 
  * @author James McCann (mccannjame), 300192420
  */
 
@@ -27,41 +28,49 @@ public class TaggableImage {
 	private Metadata metadata;
 	
 	/**
-	 * Constructs a new TaggableImage with an untagged status
+	 * Constructs a new TaggableImage with an untagged status.
 	 * @param image - image stored with this taggable
 	 */
-	public TaggableImage(File f){
+	public TaggableImage(File f) {
 		try {
 			file = f;
 			image = ImageIO.read(f);
-			tag = ImageTag.UNTAGGED;
 			fileName = f.getName();
-			/*try {
+			tag = ImageTag.UNTAGGED;
+			
+			try {
 				metadata = JpegMetadataReader.readMetadata(f);
-			} catch(JpegProcessingException e) {}*/
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			} catch(JpegProcessingException e) {
+				e.printStackTrace();
+			}
+		} catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void setTag(ImageTag newTag) { tag = newTag; }
-	public ImageTag getTag() { return tag; }
+	public File getSource() { return this.file; }
+	
 	public BufferedImage getImage() { return image; }
-	public void setImage(BufferedImage image) { this.image = image; }
-	public Image getImage(int width, int height) { return image.getScaledInstance(width, height, Image.SCALE_FAST); }
-
-	public String getFileName() {
-		return fileName;
+	
+	public Image getImage(int width, int height) { 
+		return image.getScaledInstance(width, height, Image.SCALE_FAST); 
 	}
+	
+	public void setImage(BufferedImage image) { this.image = image; }
+	
+	public ImageTag getTag() { return tag; }
+	
+	public void setTag(ImageTag newTag) { tag = newTag; }
+	
+	public String getFileName() { return fileName; }
 	
 	public String getMetaData() {
 		String data = "<html>";
 		
-		if(metadata==null)
-			return "No Metadata";
-		for (Directory directory : metadata.getDirectories()) {
-		    for (Tag tag : directory.getTags()) {
+		if(metadata == null)
+			return "No Metadata Available";
+		for(Directory directory : metadata.getDirectories()) {
+		    for(Tag tag : directory.getTags()) {
 		    	data += "<p>" + tag.toString() + "</p>";
 		    }
 		}
@@ -70,6 +79,5 @@ public class TaggableImage {
 		
 		return data;
 	}
-	
-	public File getSource() { return this.file; }
+
 }

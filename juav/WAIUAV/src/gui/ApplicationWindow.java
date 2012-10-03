@@ -22,6 +22,7 @@ import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +30,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -54,6 +56,9 @@ import application.ImageLoader;
 
 
 public class ApplicationWindow extends JFrame implements ActionListener, WindowListener, MouseListener {
+	public static boolean minimize, warning, ask; 
+	public static int lookAndFeel;
+	public static String location;
 	
 	private static DisplayMode mode = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].getDisplayMode();
 	private static Dimension dim = new Dimension(mode.getWidth(), mode.getHeight());
@@ -356,6 +361,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		}
 		else if (action.equals("Export")) {
 			//export features
+			if(!ask) {
+				
+				
+			}
 			JFileChooser fc = new JFileChooser();
 			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			fc.setDialogTitle("Save images to");
@@ -383,6 +392,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		}
 		else if (action.equals("Quit")) {
 			//quit popup
+			if(!warning) System.exit(0);
 			int n = JOptionPane.showConfirmDialog(
 				    this,
 				    "Would you like to exit now?",
@@ -412,6 +422,9 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		}
 		else if (action.equals("Preferences")) {
 			//open preferences window
+			checkSetting();
+			new PreferenceDialog(this);
+			checkSetting();
 		}
 		else if (action.equals("Manual")) {
 			//manual features
@@ -468,13 +481,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 	public void windowOpened(WindowEvent e) {}
 	public void windowClosing(WindowEvent e) {
-		//TODO Uncomment later and ovveride default action
-		///int promptOnClose = JOptionPane.showConfirmDialog(this, "Are you sure you want to close?");
-		
-		//if (promptOnClose ==0){
-			
-		System.exit(0);
-		//}
+		if(!warning) System.exit(0);
+		int n = JOptionPane.showConfirmDialog(
+			    this,
+			    "Would you like to exit now?",
+			    "Quit",
+			    JOptionPane.YES_NO_OPTION);
+		if(n == 0){System.exit(0);}
 	}
 	public void windowClosed(WindowEvent e) {
 		
@@ -498,5 +511,30 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
+	
+	public void checkSetting() {
+		Scanner sc;
+		try {
+			sc = new Scanner(new File("settings.data"));
+			String s = sc.next();
+			if(s.equals("minimize=true")) { minimize = true;}
+			else minimize = false;
+			s = sc.next();
+			if(s.equals("warning=true")) {warning = true;}
+			else warning = false;
+			lookAndFeel = sc.nextInt();
+			s = sc.next();
+			if(s.equals("ask=true")) {
+				ask = true;
+				location = null;
+			} else {
+				ask = false;
+				location = sc.next();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }
