@@ -81,7 +81,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private ImageGridPanel imageGrid;
 	
 	private ImageCanvas mainImageViewCanvas;
-	
+
 	private JPanel imageMetadataPanel;
 	private JLabel metaDataLabel = new JLabel("Blank");
 	
@@ -527,11 +527,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public void mouseClicked(MouseEvent e) {
 		setButtonsEnabled(imageGrid.getSelectedImage()!=null);
 		String data = (imageGrid.getSelectedImage()!=null?imageGrid.getSelectedImage().getMetaData():"EMPTY");
+		System.out.println(data);
 		metaDataLabel.setText(data);
 		imageMetadataPanel.removeAll();
 		imageMetadataPanel.setLayout(new BorderLayout());
 		imageMetadataPanel.setSize(IMAGE_METADATA_PANEL_SIZE);
-		metaDataLabel.setSize(IMAGE_METADATA_PANEL_SIZE);
+		metaDataLabel.setSize(2*IMAGE_METADATA_PANEL_SIZE.width/3,IMAGE_METADATA_PANEL_SIZE.height);
 		imageMetadataPanel.add(metaDataLabel, BorderLayout.WEST);
 		imageMetadataPanel.setBackground(null);
 		repaint();
