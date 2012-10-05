@@ -27,13 +27,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -85,11 +83,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private ImageCanvas mainImageViewCanvas;
 	
 	private JPanel imageMetadataPanel;
+	private JLabel metaDataLabel = new JLabel("Blank");
 	
 	private JButton importButton;
 	private JButton exportButton;
 	private JButton flagImageButton;
-	private JButton unflagImageButton;
 	private JButton nextImageButton;
 	private JButton prevImageButton;
 	private JButton autobutton;
@@ -285,13 +283,14 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			e.printStackTrace();
 		}
 		imageMetadataPanel = new JPanel();
-		imageMetadataPanel.setLayout(new BorderLayout());
 		imageMetadataPanel.setPreferredSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setMaximumSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setBackground(new Color(153, 157, 158));
-		imageMetadataPanel.add(new JLabel(new ImageIcon(METADATA_PLACEHOLDER.getScaledInstance(IMAGE_METADATA_PANEL_SIZE.width, 
-												IMAGE_METADATA_PANEL_SIZE.height, Image.SCALE_FAST))), BorderLayout.NORTH);
-		
+		if(imageGrid.getSelectedImage()== null)
+			imageMetadataPanel.add(new JLabel(new ImageIcon(METADATA_PLACEHOLDER.getScaledInstance(IMAGE_METADATA_PANEL_SIZE.width, 
+					IMAGE_METADATA_PANEL_SIZE.height, Image.SCALE_FAST))));
+		else
+			imageMetadataPanel.add(metaDataLabel);
 		
 		rightPanel.add(mainImageViewCanvas);
 		rightPanel.add(imageButtonPanel);
@@ -527,6 +526,15 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	public void mouseClicked(MouseEvent e) {
 		setButtonsEnabled(imageGrid.getSelectedImage()!=null);
+		String data = (imageGrid.getSelectedImage()!=null?imageGrid.getSelectedImage().getMetaData():"EMPTY");
+		metaDataLabel.setText(data);
+		imageMetadataPanel.removeAll();
+		imageMetadataPanel.setLayout(new BorderLayout());
+		imageMetadataPanel.setSize(IMAGE_METADATA_PANEL_SIZE);
+		metaDataLabel.setSize(IMAGE_METADATA_PANEL_SIZE);
+		imageMetadataPanel.add(metaDataLabel, BorderLayout.WEST);
+		imageMetadataPanel.setBackground(null);
+		repaint();
 	}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
@@ -553,7 +561,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				location = sc.next();
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

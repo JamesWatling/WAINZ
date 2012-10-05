@@ -18,7 +18,6 @@ public class ImageCanvas extends Canvas {
 
 	private BufferedImage WAI_LOGO;
 	private static Font mainImageViewCanvasFont = new Font("Arial", Font.BOLD, 14);
-	private static Font defaultImageViewCanvasFont = new Font("Arial", Font.BOLD, 18);
 
 	public ImageCanvas(ImageGridPanel imageGrid){
 		this.imageGrid = imageGrid;

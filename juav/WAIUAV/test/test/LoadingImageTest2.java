@@ -1,10 +1,8 @@
 package test;
 
-import static org.junit.Assert.*;
-
 import java.io.File;
 
-import org.junit.*;
+import org.junit.Test;
 
 public class LoadingImageTest2 {
 
