@@ -232,7 +232,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		Image xa = prevBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
 		prevBtnImage = new ImageIcon(xa);
 		
-		Dimension buttonDim = IMAGE_BUTTON_PANEL_SIZE;
+
 		prevImageButton = new JButton(prevBtnImage);
 		prevImageButton.addActionListener(this);
 		prevImageButton.setActionCommand("Previous Image");

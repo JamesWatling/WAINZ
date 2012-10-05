@@ -114,9 +114,4 @@ public class TaggableImage {
 		
 		return data;
 	}
-	
-	public String metadatastring(){
-		javaxt.io.Image i = new javaxt.io.Image(fileName);
-		return " "+i.getGPSCoordinate();
-	}
 }
