@@ -65,23 +65,34 @@ public class TaggableImage {
 	public String getFileName() { return fileName; }
 	
 	public String getMetaData() {
-		String data = "<html>";
+		String data = "";
+		data += "<html>\n";
 		
 		if(metadata == null)
 			return "No Metadata Available";
 		for(Directory directory : metadata.getDirectories()) {
 		    for(Tag tag : directory.getTags()) {
-		    	data += "<p>" + tag.toString() + "</p>";
+		    	if(
+		    			tag.toString().contains("GPS") &&
+		    			!tag.toString().contains("Processing Method") ||
+		    			!tag.toString().contains("Thumbnail") &&
+		    			(tag.toString().contains("Image Width") ||
+		    			tag.toString().contains("Image Height"))
+	    			)
+	    			data += 
+		    			"<p>" + 
+				    	tag.toString().split("]")[1]
+				    	+ "</p>\n"
+				    	;
 		    }
 		}
-		
-		data += "</html>";
+		data += "</html>\n";
 		
 		return data;
 	}
 	
 	public String metadatastring(){
 		javaxt.io.Image i = new javaxt.io.Image(fileName);
-		return i.getGpsTags()+"";
+		return " "+i.getGPSCoordinate();
 	}
 }

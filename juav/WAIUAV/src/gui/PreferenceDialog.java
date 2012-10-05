@@ -28,6 +28,7 @@ import javax.swing.border.TitledBorder;
  *
  */
 public class PreferenceDialog extends JDialog implements ActionListener {
+	private static final long serialVersionUID = 1L;
 	private JPanel general = new JPanel();
 	private JPanel appearance = new JPanel();
 	private JPanel export = new JPanel();
