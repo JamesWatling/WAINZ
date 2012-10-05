@@ -62,13 +62,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	private static DisplayMode mode = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].getDisplayMode();
 	private static Dimension dim = new Dimension(mode.getWidth(), mode.getHeight());
-	//private static Dimension dim = new Dimension(960, 720);
+	//private static Dimension dim = new Dimension(1024, 768);
 	
 	private static final Dimension RIGHT_PANEL_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 110);
-	private static final Dimension IMAGE_CANVAS_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 455); //this one will be dynamic
-	private static final Dimension IMAGE_BUTTON_PANEL_SIZE = new Dimension(dim.width * 3 / 5, 45);
-	private static final Dimension IMEX_BUTTON_PANEL_SIZE = new Dimension(dim.width * 1 / 5, 45);
-	private static final Dimension IMAGE_METADATA_PANEL_SIZE = new Dimension(dim.width * 3 / 5, 300);
+	private static final Dimension IMAGE_CANVAS_SIZE = new Dimension(dim.width * 3 / 5, (2*(dim.height - 110))/3);
+	private static final Dimension IMAGE_BUTTON_PANEL_SIZE = new Dimension(dim.width * 3 / 5, (dim.height - 110)/23);
+	private static final Dimension IMEX_BUTTON_PANEL_SIZE = new Dimension(dim.width * 1 / 5, (dim.height - 110)/23);
+	private static final Dimension IMAGE_METADATA_PANEL_SIZE = new Dimension(dim.width * 3 / 5, (dim.height-155)/3);
 	private static final Dimension leftPaneSize = new Dimension(dim.width * 1 / 5, dim.height - 155);
 	
 	private ImageLoader imageLoader;
@@ -107,7 +107,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		initialiseMenus();
 		initialiseWindow();
 		initialiseApplication();
-	
+	    setTitle("WAINZ UAVTool");
 		pack();
 		
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -231,8 +231,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageButtonPanel.add(prevImageButton);
 		
 		
-		
-		
 		//flag/unflag button
 		ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
 		//ImageIcon unflagBtnImage = new ImageIcon("lib/unflag-image-btn.png");
@@ -256,9 +254,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageButtonPanel.add(flagImageButton);
 		//imageButtonPanel.add(unflagImageButton);
 		imageButtonPanel.add(analyzeAllButton);
-		
-		
-		
 		
 		//auto button
 		autobutton = new JButton("Auto Analyse");
@@ -286,7 +281,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		//meta-data pane below buttons
 		String metadataPlaceholderPath = "lib/metadata-panel-default.png";
-		try {METADATA_PLACEHOLDER = ImageIO.read(new File(metadataPlaceholderPath));} catch (IOException e) {e.printStackTrace();}
+		try {
+			METADATA_PLACEHOLDER = ImageIO.read(new File(metadataPlaceholderPath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		imageMetadataPanel = new JPanel();
 		imageMetadataPanel.setLayout(new BorderLayout());
 		imageMetadataPanel.setPreferredSize(IMAGE_METADATA_PANEL_SIZE);
