@@ -62,7 +62,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	private static DisplayMode mode = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].getDisplayMode();
 	private static Dimension dim = new Dimension(mode.getWidth(), mode.getHeight());
-	//private static Dimension dim = new Dimension(640, 480);
+	//private static Dimension dim = new Dimension(1024, 768);
 	
 	private static final Dimension RIGHT_PANEL_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 110);
 	private static final Dimension IMAGE_BUTTON_PANEL_SIZE = new Dimension(dim.width * 3 / 5, (RIGHT_PANEL_SIZE.height)/21);
@@ -243,8 +243,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		//flag/unflag button
 		ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
-		//ImageIcon unflagBtnImage = new ImageIcon("lib/unflag-image-btn.png");
-		
 		xa = flagBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
 		flagBtnImage = new ImageIcon(xa);
 		
@@ -259,7 +257,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		//imageButtonPanel.add(unflagImageButton);
 		
 		//auto button
-		autobutton = new JButton("Auto Analyse");
+		ImageIcon autoButtonImage = new ImageIcon("lib/auto-analyse-btn-gold.png");
+		xa = autoButtonImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
+		autoButtonImage = new ImageIcon(xa);
+		autobutton = new JButton(autoButtonImage);
 		autobutton.setEnabled(false);
 		autobutton.setActionCommand("Auto Analyse");
 		autobutton.addActionListener(this);
@@ -288,7 +289,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageMetadataPanel.setPreferredSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setMaximumSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setBackground(new Color(153, 157, 158));
-		imageMetadataPanel.add(new JLabel(new ImageIcon(METADATA_PLACEHOLDER.getScaledInstance(IMAGE_METADATA_PANEL_SIZE.width, IMAGE_METADATA_PANEL_SIZE.height, Image.SCALE_FAST))), BorderLayout.NORTH);
+		imageMetadataPanel.add(new JLabel(new ImageIcon(METADATA_PLACEHOLDER.getScaledInstance(IMAGE_METADATA_PANEL_SIZE.width, 
+												IMAGE_METADATA_PANEL_SIZE.height, Image.SCALE_FAST))), BorderLayout.NORTH);
 		
 		
 		rightPanel.add(mainImageViewCanvas);
@@ -322,7 +324,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		//importExportPanel.setMaximumSize(new Dimension(leftPaneSize.width, leftPaneSize.height/18));
 		
 		JPanel analyseAllPanel = new JPanel();
-		analyzeAllButton = new JButton("Analyze All");
+		ImageIcon analyseAllButtonImage = new ImageIcon("lib/analyse-all-btn.png");
+		xa = analyseAllButtonImage.getImage().getScaledInstance(ANALYSE_ALL_BUTTON_SIZE.width, ANALYSE_ALL_BUTTON_SIZE.height, java.awt.Image.SCALE_SMOOTH);
+		analyseAllButtonImage = new ImageIcon(xa);
+		analyzeAllButton = new JButton(analyseAllButtonImage);
 		analyzeAllButton.addActionListener(this);
 		analyzeAllButton.setActionCommand("Analyze All");
 		analyzeAllButton.setPreferredSize(ANALYSE_ALL_BUTTON_SIZE);
@@ -344,9 +349,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		add(rightPanel);
 		
 		pack();
-		System.out.println("supposed height: " + IMAGE_BUTTON_PANEL_SIZE.height);
-		System.out.println("actual height: " + imageButtonPanel.getHeight());
-		System.out.println("button height: " + autobutton.getHeight());
 	}
 
 	public Canvas getMainCanvas(){
@@ -355,11 +357,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	public void setButtonsEnabled(boolean enabled){
 		flagImageButton.setEnabled(enabled);
-		//unflagImageButton.setEnabled(enabled);
 		prevImageButton.setEnabled(enabled);
 		nextImageButton.setEnabled(enabled);
 		autobutton.setEnabled(enabled);
-		analyzeAllButton.setEnabled(true);
+		//analyzeAllButton.setEnabled(enabled); not controlled here jm 051012
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -374,6 +375,9 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			imageGrid.initialise();
 			imageGrid.repaint();
 			mainImageViewCanvas.repaint();
+			if (!getImportedImageList().isEmpty()) {
+				analyzeAllButton.setEnabled(true);
+			}
 			repaint();
 		}
 		else if (action.equals("Export")) {
@@ -422,7 +426,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			imageGrid.getSelectedImage().setTag(ImageTag.INFRINGEMENT);
 			imageGrid.repaint();
 			ImageIcon unflagBtnImage = new ImageIcon("lib/unflag-image-btn.png");
-			Image img = unflagBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+			Image img = unflagBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
 			unflagBtnImage = new ImageIcon(img);
 			flagImageButton.setIcon(unflagBtnImage);
 			flagImageButton.setActionCommand("Unflag Image");
@@ -432,7 +436,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			imageGrid.getSelectedImage().setTag(ImageTag.UNTAGGED);
 			imageGrid.repaint();
 			ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
-			Image img = flagBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+			Image img = flagBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
 			flagBtnImage = new ImageIcon(img);
 			flagImageButton.setIcon(flagBtnImage);
 			flagImageButton.setActionCommand("Flag Image");

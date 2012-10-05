@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -102,11 +104,12 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 			//paint the placeholder image
 			Graphics2D g2d = (Graphics2D)g;
 			BufferedImage placeholder = ApplicationWindow.IMPORT_PLACEHOLDER;
-			int x = (this.getWidth() - placeholder.getWidth(null)) / 2;
-			int y = (this.getHeight() - placeholder.getHeight(null)) / 2;
+			Image scaledPlaceholder = placeholder.getScaledInstance(this.getWidth(), placeholder.getHeight(null), Image.SCALE_SMOOTH);
+			int x = (this.getWidth() - scaledPlaceholder.getWidth(null)) / 2;
+			int y = (this.getHeight() - scaledPlaceholder.getHeight(null)) / 2;
 			g2d.setColor(new Color(153, 157, 158)); //placeholder background
 			g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
-			g2d.drawImage(placeholder, x, y, null);
+			g2d.drawImage(scaledPlaceholder, x, y, null);
 		}
 	}
 			
