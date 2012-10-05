@@ -62,14 +62,17 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	private static DisplayMode mode = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].getDisplayMode();
 	private static Dimension dim = new Dimension(mode.getWidth(), mode.getHeight());
-	//private static Dimension dim = new Dimension(1024, 768);
+	//private static Dimension dim = new Dimension(640, 480);
 	
 	private static final Dimension RIGHT_PANEL_SIZE = new Dimension(dim.width * 3 / 5, dim.height - 110);
-	private static final Dimension IMAGE_CANVAS_SIZE = new Dimension(dim.width * 3 / 5, (2*(dim.height - 110))/3);
-	private static final Dimension IMAGE_BUTTON_PANEL_SIZE = new Dimension(dim.width * 3 / 5, (dim.height - 110)/23);
-	private static final Dimension IMEX_BUTTON_PANEL_SIZE = new Dimension(dim.width * 1 / 5, (dim.height - 110)/23);
-	private static final Dimension IMAGE_METADATA_PANEL_SIZE = new Dimension(dim.width * 3 / 5, (dim.height-155)/3);
-	private static final Dimension leftPaneSize = new Dimension(dim.width * 1 / 5, dim.height - 155);
+	private static final Dimension IMAGE_BUTTON_PANEL_SIZE = new Dimension(dim.width * 3 / 5, (RIGHT_PANEL_SIZE.height)/21);
+	private static final Dimension IMAGE_METADATA_PANEL_SIZE = new Dimension(dim.width * 3 / 5, (RIGHT_PANEL_SIZE.height)/3);
+	private static final Dimension IMAGE_CANVAS_SIZE = new Dimension(dim.width * 3 / 5, (RIGHT_PANEL_SIZE.height
+																						 -IMAGE_BUTTON_PANEL_SIZE.height
+																						 -IMAGE_METADATA_PANEL_SIZE.height));
+	private static final Dimension IMEX_BUTTON_PANEL_SIZE = new Dimension(dim.width * 1 / 5, (dim.height)/23);
+	private static final Dimension leftPaneSize = new Dimension(dim.width * 1 / 5, dim.height - 110 - 2*(dim.height/23));
+	private static final Dimension ANALYSE_ALL_BUTTON_SIZE = new Dimension(dim.width * 1 / 5, dim.height / 23);
 	
 	private ImageLoader imageLoader;
 	private static final long serialVersionUID = 1L;
@@ -122,6 +125,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 
 	public void initialiseMenus(){
+		System.out.println("button width/height:  " + IMAGE_BUTTON_PANEL_SIZE.width/4 + ", " + IMAGE_BUTTON_PANEL_SIZE.height);
 		JMenuBar menuBar = new JMenuBar();
 		JMenu file = new JMenu("File");
 		menuBar.add(file);
@@ -197,6 +201,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageGrid = new ImageGridPanel(null, this);
 		JScrollPane leftPane = new JScrollPane(imageGrid);
 		leftPane.setPreferredSize(leftPaneSize);
+		leftPane.setMaximumSize(leftPaneSize);
 
 		mainImageViewCanvas = new ImageCanvas(imageGrid);
 		mainImageViewCanvas.setSize(IMAGE_CANVAS_SIZE);
@@ -215,16 +220,21 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		JPanel imageButtonPanel = new JPanel();
 		imageButtonPanel.setLayout(new GridLayout(1, 4)); //changed to GridLayout jm 180912
-		//imageButtonPanel.setSize(IMAGE_BUTTON_PANEL_SIZE);
-		imageButtonPanel.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width, RIGHT_PANEL_SIZE.height/18));
-		imageButtonPanel.setMaximumSize(new Dimension(RIGHT_PANEL_SIZE.width, RIGHT_PANEL_SIZE.height/18));
+		imageButtonPanel.setSize(IMAGE_BUTTON_PANEL_SIZE);
+		imageButtonPanel.setPreferredSize(IMAGE_BUTTON_PANEL_SIZE);
+		imageButtonPanel.setMaximumSize(IMAGE_BUTTON_PANEL_SIZE);
+		
+		//imageButtonPanel.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width, RIGHT_PANEL_SIZE.height/18));
+		//imageButtonPanel.setMaximumSize(new Dimension(RIGHT_PANEL_SIZE.width, RIGHT_PANEL_SIZE.height/18));
 		
 		//previous button
 		ImageIcon prevBtnImage = new ImageIcon("lib/prev-image-btn.png");
 		
-		Image xa = prevBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+		//Image xa = prevBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+		Image xa = prevBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
 		prevBtnImage = new ImageIcon(xa);
 		
+		Dimension buttonDim = IMAGE_BUTTON_PANEL_SIZE;
 		prevImageButton = new JButton(prevBtnImage);
 		prevImageButton.addActionListener(this);
 		prevImageButton.setActionCommand("Previous Image");
@@ -235,25 +245,18 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
 		//ImageIcon unflagBtnImage = new ImageIcon("lib/unflag-image-btn.png");
 		
-		xa = flagBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+		xa = flagBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
 		flagBtnImage = new ImageIcon(xa);
 		
 		flagImageButton = new JButton(flagBtnImage);
-		
-		//xa = unflagBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
-		//unflagBtnImage = new ImageIcon(xa);
 		
 		//unflagImageButton = new JButton(unflagBtnImage);
 		flagImageButton.addActionListener(this);
 		//unflagImageButton.addActionListener(this);
 		flagImageButton.setActionCommand("Flag Image");
 		//unflagImageButton.setActionCommand("Unflag Image");
-		analyzeAllButton = new JButton("Analyze All");
-		analyzeAllButton.addActionListener(this);
-		analyzeAllButton.setActionCommand("Analyze All");
 		imageButtonPanel.add(flagImageButton);
 		//imageButtonPanel.add(unflagImageButton);
-		imageButtonPanel.add(analyzeAllButton);
 		
 		//auto button
 		autobutton = new JButton("Auto Analyse");
@@ -264,7 +267,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		//next button
 		ImageIcon nextBtnImage = new ImageIcon("lib/next-image-btn.png");
-		xa = nextBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
+		xa = nextBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
 		nextBtnImage = new ImageIcon(xa);
 		
 		nextImageButton = new JButton(nextBtnImage);
@@ -272,12 +275,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		nextImageButton.addActionListener(this);
 		imageButtonPanel.add(nextImageButton);
 
-		//enable buttons
-		flagImageButton.setEnabled(false);
-		//unflagImageButton.setEnabled(false);
-		prevImageButton.setEnabled(false);
-		nextImageButton.setEnabled(false);
-		analyzeAllButton.setEnabled(false);
 		
 		//meta-data pane below buttons
 		String metadataPlaceholderPath = "lib/metadata-panel-default.png";
@@ -304,7 +301,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JPanel importExportPanel = new JPanel();
 		importExportPanel.setLayout(new GridLayout(1, 2));
 		ImageIcon importBtnImage = new ImageIcon("lib/import-images-btn.png");
-		xa = importBtnImage.getImage().getScaledInstance(leftPaneSize.width/2, leftPaneSize.height/18, java.awt.Image.SCALE_SMOOTH);
+		xa = importBtnImage.getImage().getScaledInstance(IMEX_BUTTON_PANEL_SIZE.width/2, IMEX_BUTTON_PANEL_SIZE.height, java.awt.Image.SCALE_SMOOTH);
 		importBtnImage = new ImageIcon(xa);
 		importButton = new JButton(importBtnImage);
 
@@ -313,22 +310,43 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		importExportPanel.add(importButton);
 		
 		ImageIcon exportBtnImage = new ImageIcon("lib/export-images-btn.png");
-		xa = exportBtnImage.getImage().getScaledInstance(leftPaneSize.width/2, leftPaneSize.height/18, java.awt.Image.SCALE_SMOOTH);
+		xa = exportBtnImage.getImage().getScaledInstance(IMEX_BUTTON_PANEL_SIZE.width/2, IMEX_BUTTON_PANEL_SIZE.height, java.awt.Image.SCALE_SMOOTH);
 		exportBtnImage = new ImageIcon(xa);
 		exportButton = new JButton(exportBtnImage);
 		exportButton.addActionListener(this);
 		exportButton.setActionCommand("Export");
 		importExportPanel.add(exportButton);
-		importExportPanel.setPreferredSize(new Dimension(leftPaneSize.width, leftPaneSize.height/18));
-		importExportPanel.setMaximumSize(new Dimension(leftPaneSize.width, leftPaneSize.height/18));
+		importExportPanel.setPreferredSize(IMEX_BUTTON_PANEL_SIZE);
+		importExportPanel.setMaximumSize(IMEX_BUTTON_PANEL_SIZE);		
+		//importExportPanel.setPreferredSize(new Dimension(leftPaneSize.width, leftPaneSize.height/18));
+		//importExportPanel.setMaximumSize(new Dimension(leftPaneSize.width, leftPaneSize.height/18));
+		
+		JPanel analyseAllPanel = new JPanel();
+		analyzeAllButton = new JButton("Analyze All");
+		analyzeAllButton.addActionListener(this);
+		analyzeAllButton.setActionCommand("Analyze All");
+		analyzeAllButton.setPreferredSize(ANALYSE_ALL_BUTTON_SIZE);
+		analyzeAllButton.setMaximumSize(ANALYSE_ALL_BUTTON_SIZE);
+		analyseAllPanel.add(analyzeAllButton);
 		
 		leftPanel.add(importExportPanel);
 		leftPanel.add(leftPane);
+		leftPanel.add(analyseAllPanel);
+		
+		//enable buttons
+		flagImageButton.setEnabled(false);
+		prevImageButton.setEnabled(false);
+		nextImageButton.setEnabled(false);
+		analyzeAllButton.setEnabled(false);
+				
 		
 		add(leftPanel);
 		add(rightPanel);
 		
 		pack();
+		System.out.println("supposed height: " + IMAGE_BUTTON_PANEL_SIZE.height);
+		System.out.println("actual height: " + imageButtonPanel.getHeight());
+		System.out.println("button height: " + autobutton.getHeight());
 	}
 
 	public Canvas getMainCanvas(){
