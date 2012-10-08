@@ -485,6 +485,9 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			processedImage.flush();
 		}
 		else if(action.equals("Analyze All")) {
+			boolean completed = false;
+			ProgressWindow t = new ProgressWindow(completed);  
+	        new Thread(t).start();
 			BufferedImage processedImage = null;
 			boolean first = true;
 			for(ImageThumbPanel itp: imageGrid.getPanels()) {
@@ -495,7 +498,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 					first = false;
 				}
 				processedImage.flush();
-			}			
+			}
+			completed = true;
 		}
 	}
 
