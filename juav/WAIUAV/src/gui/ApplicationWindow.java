@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -84,7 +85,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private ImageCanvas mainImageViewCanvas;
 
 	private JPanel imageMetadataPanel;
-	private JLabel metaDataLabel = new JLabel("Blank");
+	private JLabel metaDataLabel = new JLabel(" <p>Blank</p>");
 	
 	private JButton importButton;
 	private JButton exportButton;
@@ -557,9 +558,11 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		System.out.println(data);
 		metaDataLabel.setText(data);
 		imageMetadataPanel.removeAll();
+		imageMetadataPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		imageMetadataPanel.setLayout(new BorderLayout());
 		imageMetadataPanel.setSize(IMAGE_METADATA_PANEL_SIZE);
 		metaDataLabel.setSize(2*IMAGE_METADATA_PANEL_SIZE.width/3,IMAGE_METADATA_PANEL_SIZE.height);
+		metaDataLabel.setVerticalAlignment(JLabel.TOP);
 		imageMetadataPanel.add(metaDataLabel, BorderLayout.WEST);
 		imageMetadataPanel.setBackground(null);
 		repaint();
