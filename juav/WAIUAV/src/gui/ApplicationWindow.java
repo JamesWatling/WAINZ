@@ -51,6 +51,7 @@ import javax.swing.ToolTipManager;
 
 import application.ImageClassifier;
 import application.ImageLoader;
+import application.ImagePdfExporter;
 
 
 public class ApplicationWindow extends JFrame implements ActionListener, WindowListener, MouseListener {
@@ -127,8 +128,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		JMenuBar menuBar = new JMenuBar();
 		JMenu file = new JMenu("File");
 		menuBar.add(file);
-		JMenuItem importItem = new JMenuItem("Import");
-		JMenuItem exportItem = new JMenuItem("Export");
+		JMenuItem importItem = new JMenuItem("Import Images");
+		importItem.setActionCommand("Import");
+		JMenuItem exportItem = new JMenuItem("Export Images");
+		exportItem.setActionCommand("Export");
 		JMenuItem quitItem = new JMenuItem("Quit");
 		importItem.addActionListener(this);
 		exportItem.addActionListener(this);
@@ -137,19 +140,21 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		file.add(exportItem);
 		file.add(quitItem);
 
-		JMenu option = new JMenu("Option");
+		JMenu option = new JMenu("Image");
 		menuBar.add(option);
 
 		JMenuItem flagItem = new JMenuItem("Flag Image");
 		JMenuItem unflagItem = new JMenuItem("Unflag Image");
+		JMenuItem pdfReportItem = new JMenuItem("PDF Report");
 		JMenuItem preferencesItem = new JMenuItem("Preferences");
 		flagItem.addActionListener(this);
 		unflagItem.addActionListener(this);
 		preferencesItem.addActionListener(this);
-		
+		pdfReportItem.addActionListener(this);
 				
 		option.add(flagItem);
 		option.add(unflagItem);
+		option.add(pdfReportItem);
 		option.add(preferencesItem);
 
 		JMenu help = new JMenu("Help");
@@ -496,6 +501,24 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				}
 				processedImage.flush();
 			}			
+		}
+		else if (action.equals("PDF Report")){ //jm 081012
+			TaggableImage selectedImage = imageGrid.getSelectedImage();
+			if (selectedImage==null) {
+				JOptionPane.showMessageDialog(this, "Please select an Image to export!", "ERROR", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			//get export location
+			String exportPath = "";
+			JFileChooser fc = new JFileChooser();
+			fc.setDialogTitle("Choose save location for PDF");
+			int returnVal = fc.showSaveDialog(fc);
+			if(returnVal == JFileChooser.APPROVE_OPTION) {
+				exportPath = fc.getSelectedFile().getPath();
+			}
+			String description = "";
+			description = JOptionPane.showInputDialog("Enter a short description of this image to append to the report");
+			ImagePdfExporter export = new ImagePdfExporter(exportPath, selectedImage, description);
 		}
 	}
 

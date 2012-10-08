@@ -1,5 +1,7 @@
 package application;
 
+import images.TaggableImage;
+
 import java.awt.Image;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,7 +20,7 @@ public class ImagePdfExporter {
 	 * Setup the document to be exported, add some default
 	 * content/metadata
 	 */
-	public ImagePdfExporter(String filename, Image img, String description) {
+	public ImagePdfExporter(String filename, TaggableImage img, String description) {
 		document = new Document();
 		try {
 			PdfWriter.getInstance(document, new FileOutputStream(filename));
@@ -39,10 +41,21 @@ public class ImagePdfExporter {
 		document.addCreator("WAINZ UAVTool");
 	}
 	
-	public void addReportImage(Image img) throws DocumentException {
+	public void addDocumentHeader() throws DocumentException {
+		try {
+			com.itextpdf.text.Image waiLogo = 
+				com.itextpdf.text.Image.getInstance("lib/wai-pdf-header-logo.png");
+			waiLogo.setAbsolutePosition(25f, 25f);
+			document.add(waiLogo);
+		} catch (IOException e) {
+			throw new DocumentException();
+		}
+	}
+	
+	public void addReportImage(TaggableImage img) throws DocumentException {
 		try {
 			com.itextpdf.text.Image docImg = 
-				com.itextpdf.text.Image.getInstance(img, null);
+				com.itextpdf.text.Image.getInstance(img.getImage(), null);
 			document.add(docImg);
 		} catch (IOException e) {
 			throw new DocumentException();
@@ -61,5 +74,14 @@ public class ImagePdfExporter {
 		for (int i = 0; i < number; i++) {
 			paragraph.add(new Paragraph(" "));
 		}
+	}
+	
+	/**
+	 * Generates a PDF with static data
+	 * To be used for testing and layout changes
+	 */
+	public static void main(String[] args) {
+		String filename = System.getProperty("user.home") + "/wainz-pdf-export.pdf";
+		
 	}
 }
