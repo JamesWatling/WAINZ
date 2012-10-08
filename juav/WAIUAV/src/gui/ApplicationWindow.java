@@ -27,6 +27,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Proxy;
+import java.net.MalformedURLException;
+import java.net.Proxy.Type;
+import java.net.Socket;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -565,7 +571,20 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		metaDataLabel.setVerticalAlignment(JLabel.TOP);
 		imageMetadataPanel.add(metaDataLabel, BorderLayout.WEST);
 		imageMetadataPanel.setBackground(null);
-		repaint();
+		
+	    try {
+			URLConnection con = new URL("http://maps.google.com/maps/api/staticmap?center=Wellington,NZ&zoom=5&size=512x512&maptype=roadmap&sensor=false&markers=||-41.918629,%20173.143616").openConnection();
+			InputStream is = con.getInputStream();
+			byte bytes[] = new byte[con.getContentLength()];
+			is.read(bytes);
+			is.close();
+			Toolkit tk = getToolkit();
+			Image map = tk.createImage(bytes);
+			tk.prepareImage(map, -1, -1, null);
+			imageMetadataPanel.add(new JLabel(new ImageIcon(map)),BorderLayout.EAST);
+		} catch (MalformedURLException e1) {e1.printStackTrace();} catch (IOException e1) {e1.printStackTrace();}
+		
+	    repaint();
 	}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
