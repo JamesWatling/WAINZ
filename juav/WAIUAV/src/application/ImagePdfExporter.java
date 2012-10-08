@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -20,6 +22,9 @@ public class ImagePdfExporter {
 	private static PdfWriter writer;
 	private Document document;
 	private Font h1 = new Font(Font.FontFamily.HELVETICA, 36, Font.BOLD);
+	
+	private final int incidentImageWidth = 450;
+	private final int incidentImageHeight = 337; //4:3 aspect ratio
 
 	/**
 	 * Setup the document to be exported, add some default
@@ -32,7 +37,7 @@ public class ImagePdfExporter {
 			document.open();
 			addMetaData();
 			addDocumentHeader();
-			//addReportImage(img);
+			addReportImage(img);
 			//addImageDescription(description);
 			document.close();
 		} catch (DocumentException e) {
@@ -56,7 +61,7 @@ public class ImagePdfExporter {
 			
 			//Incident Report Header
 			Paragraph header = new Paragraph("Incident Report", h1);
-			
+					
 			document.add(waiLogo);
 			absText("Incident Report", 30, true, 200, 760);
 		} catch (IOException e) {
@@ -68,6 +73,24 @@ public class ImagePdfExporter {
 		try {
 			com.itextpdf.text.Image docImg = 
 				com.itextpdf.text.Image.getInstance(img.getImage(), null);
+			
+			//scale the image down the the appropriate sizes
+			float imageWidth = docImg.getWidth();
+			float imageHeight = docImg.getHeight();
+			float drawWidthPercent, drawHeightPercent = 0;
+			double aspectRatio = imageWidth / (1.0 * imageHeight);
+			
+			//image is bigger than max size so we need to scale it
+			if (aspectRatio > 1 && imageWidth > incidentImageWidth) { 	 
+				drawWidthPercent = incidentImageWidth / imageWidth;
+				System.out.println("draw width percent: " + drawWidthPercent);
+				docImg.scalePercent(drawWidthPercent * 100);
+			} else if (imageHeight > incidentImageHeight) { 
+				drawHeightPercent = incidentImageHeight / imageHeight;
+				System.out.println("draw height percent: " + drawHeightPercent);
+				docImg.scalePercent(imageHeight * 100);
+			}
+			
 			document.add(docImg);
 		} catch (IOException e) {
 			throw new DocumentException();
