@@ -38,7 +38,7 @@ public class ImagePdfExporter {
 			addMetaData();
 			addDocumentHeader();
 			addReportImage(img);
-			//addImageDescription(description);
+			addImageDescription(description);
 			document.close();
 		} catch (DocumentException e) {
 			System.out.println("Error generating PDF Document");
@@ -83,13 +83,13 @@ public class ImagePdfExporter {
 			//image is bigger than max size so we need to scale it
 			if (aspectRatio > 1 && imageWidth > incidentImageWidth) { 	 
 				drawWidthPercent = incidentImageWidth / imageWidth;
-				System.out.println("draw width percent: " + drawWidthPercent);
 				docImg.scalePercent(drawWidthPercent * 100);
 			} else if (imageHeight > incidentImageHeight) { 
 				drawHeightPercent = incidentImageHeight / imageHeight;
-				System.out.println("draw height percent: " + drawHeightPercent);
 				docImg.scalePercent(imageHeight * 100);
 			}
+			
+			docImg.setAbsolutePosition(75f, 350f);
 			
 			document.add(docImg);
 		} catch (IOException e) {
@@ -99,7 +99,8 @@ public class ImagePdfExporter {
 	
 	public void addImageDescription(String description) throws DocumentException {
 		Paragraph imageDesc = new Paragraph();
-		addEmptyLine(imageDesc, 1);
+		addEmptyLine(imageDesc, 26);
+		imageDesc.add("Description of Incident: ");
 		imageDesc.add(description);
 		document.add(imageDesc);
 	}
