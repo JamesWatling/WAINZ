@@ -4,6 +4,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -67,32 +69,49 @@ public class TaggableImage {
 	public String getMetaData() {
 		String data = "";
 		data += "<html>\n";
+		data += "<table>\n";
 		
 		if(metadata == null)
 			return "No Metadata Available";
+		List<String> gpsData = new ArrayList<String>();
+		List<String> generalData = new ArrayList<String>();
+		
 		for(Directory directory : metadata.getDirectories()) {
 		    for(Tag tag : directory.getTags()) {
 		    	if(
 		    			tag.toString().contains("GPS") &&
-		    			!tag.toString().contains("Processing Method") ||
-		    			!tag.toString().contains("Thumbnail") &&
+		    			!tag.toString().contains("Processing Method"))
+		    		gpsData.add(tag.toString().split("]")[1]);
+		    	else if(
+		    			!(tag.toString().contains("Thumbnail") ||
+		    			tag.toString().contains("Exif"))&&
 		    			(tag.toString().contains("Image Width") ||
 		    			tag.toString().contains("Image Height"))
 	    			)
-	    			data += 
-		    			"<p>" + 
-				    	tag.toString().split("]")[1]
-				    	+ "</p>\n"
-				    	;
+		    		generalData.add(tag.toString().split("]")[1]);
 		    }
 		}
+		for(int i = 0;i< ((generalData.size()>gpsData.size())?generalData.size():gpsData.size());i++){
+    		if(generalData.size()>gpsData.size()){
+	    		if(i<gpsData.size())
+	    			data+=
+	    				"<tr><td>"+ gpsData.get(i)+"</td><td>"+generalData.get(i)+"</td></tr>";
+	    		else
+	    			data+=
+	    				"<tr><td>"+"</td><td>"+generalData.get(i)+"</td></tr>";
+    		}
+    		else {
+    			if(i<generalData.size())
+	    			data+=
+	    				"<tr><td>"+ gpsData.get(i)+"</td><td>"+generalData.get(i)+"</td></tr>";
+	    		else
+	    			data+=
+	    				"<tr><td>"+ gpsData.get(i)+"</td><td>"+"</td></tr>";
+    		}
+    	}
+		data += "</table>\n";
 		data += "</html>\n";
 		
 		return data;
-	}
-	
-	public String metadatastring(){
-		javaxt.io.Image i = new javaxt.io.Image(fileName);
-		return " "+i.getGPSCoordinate();
 	}
 }
