@@ -20,6 +20,8 @@ import static com.googlecode.javacv.cpp.opencv_core.cvPoint;
 import static com.googlecode.javacv.cpp.opencv_core.CV_AA;
 import static com.googlecode.javacv.cpp.opencv_core.cvRectangle;
 import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
+import static com.googlecode.javacv.cpp.opencv_objdetect.*;
+import static com.googlecode.javacv.cpp.opencv_core.cvGet2D;
 
 public class ImageClassifier {
 	// the cascade definition to be used for detection
@@ -41,12 +43,19 @@ public class ImageClassifier {
 		CvHaarClassifierCascade cascade = new CvHaarClassifierCascade(cvLoad(CASCADE_FILE));
 		
 		// detect the rivers
-		CvSeq rivers = cvHaarDetectObjects(grayImage, cascade, storage, 1.2, 1, 0);
+		CvSeq rivers = cvHaarDetectObjects(grayImage, cascade, storage, 1.1, 1, CV_HAAR_DO_CANNY_PRUNING);
 		
 		// iterate over the discovered rivers and draw red rectangles around them
 		for (int i = 0; i < rivers.total(); i++) {
 			CvRect r = new CvRect(cvGetSeqElem(rivers, i));
-			cvRectangle(originalImage, cvPoint(r.x(), r.y()), cvPoint(r.x() + r.width(), r.y() + r.height()), CvScalar.RED, 3, CV_AA, 0);
+			double blue = cvGet2D(originalImage, r.y(), r.x()).blue();
+			double green = cvGet2D(originalImage, r.y(), r.x()).green();
+			double red = cvGet2D(originalImage, r.y(), r.x()).red();
+			System.out.println(blue + " " + green + " " + red);
+			
+			if(red >= 85 && red <= 140 && green >= 100 && green <= 140 && blue >=105 && blue <= 145) {
+				cvRectangle(originalImage, cvPoint(r.x(), r.y()), cvPoint(r.x() + r.width(), r.y() + r.height()), CvScalar.RED, 3, CV_AA, 0);
+			}
         }
 		
         cvClearMemStorage(storage);
