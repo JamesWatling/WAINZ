@@ -95,18 +95,18 @@ public class TaggableImage {
     		if(generalData.size()>gpsData.size()){
 	    		if(i<gpsData.size())
 	    			data+=
-	    				"<tr><td>"+ gpsData.get(i)+"</td><td>"+generalData.get(i)+"</td></tr>";
+	    				"<tr><td>" + gpsData.get(i) + "</td><td>"+generalData.get(i) + "</td></tr>";
 	    		else
 	    			data+=
-	    				"<tr><td>"+"</td><td>"+generalData.get(i)+"</td></tr>";
+	    				"<tr><td>" + "</td><td>"+generalData.get(i) + "</td></tr>";
     		}
     		else {
     			if(i<generalData.size())
 	    			data+=
-	    				"<tr><td>"+ gpsData.get(i)+"</td><td>"+generalData.get(i)+"</td></tr>";
+	    				"<tr><td>" + gpsData.get(i) + "</td><td>" + generalData.get(i) + "</td></tr>";
 	    		else
 	    			data+=
-	    				"<tr><td>"+ gpsData.get(i)+"</td><td>"+"</td></tr>";
+	    				"<tr><td>" + gpsData.get(i) + "</td><td>" + "</td></tr>";
     		}
     	}
 		data += "</table>\n";

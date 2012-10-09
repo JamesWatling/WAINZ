@@ -27,6 +27,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Proxy;
+import java.net.MalformedURLException;
+import java.net.Proxy.Type;
+import java.net.Socket;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -406,9 +412,27 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		else if (action.equals("Export")) {
 			//export features
 			if(!ask) {
-				
-				
+				String exportPath = location;
+				int byteread = 0;
+				InputStream in = null;
+				OutputStream out = null;
+				try {
+					for(TaggableImage image: importedImageList) {
+						if(image.getTag() == ImageTag.INFRINGEMENT) {
+							in = new FileInputStream(image.getSource());
+							out = new FileOutputStream(new File(exportPath + "/" + image.getFileName()));
+							byte[] buffer = new byte[1024];
+							while ((byteread = in.read(buffer)) != -1) {
+								out.write(buffer, 0, byteread);
+							}
+						}
+					}
+				} catch(IOException ioe) {
+					System.out.println("Export failed: " + ioe.getMessage());
+				}
+				return;
 			}
+				
 			JFileChooser fc = new JFileChooser();
 			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			fc.setDialogTitle("Save images to");
@@ -501,9 +525,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			processedImage.flush();
 		}
 		else if(action.equals("Analyze All")) {
-			boolean completed = false;
-			ProgressWindow t = new ProgressWindow(completed);  
-	        new Thread(t).start();
 			BufferedImage processedImage = null;
 			boolean first = true;
 			for(ImageThumbPanel itp: imageGrid.getPanels()) {
@@ -515,7 +536,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				}
 				processedImage.flush();
 			}
-			completed = true;
 		}
 		else if (action.equals("PDF Report")){ //jm 081012
 			TaggableImage selectedImage = imageGrid.getSelectedImage();
@@ -574,7 +594,51 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		metaDataLabel.setVerticalAlignment(JLabel.TOP);
 		imageMetadataPanel.add(metaDataLabel, BorderLayout.WEST);
 		imageMetadataPanel.setBackground(null);
-		repaint();
+		
+		System.out.println(metaDataLabel.getText());
+		String latitudeS = metaDataLabel.getText().split("GPS Latitude - ", 2)[1].split("</td>", 2)[0];
+		System.out.println("lat"+latitudeS);
+		
+		String longitudeS = metaDataLabel.getText().split("GPS Longitude - ")[1].split("</td>",2)[0];
+		System.out.println("long"+longitudeS);
+		
+		Double latitudeNum1 = Double.parseDouble(latitudeS.split("�", 2)[0]);
+		Double latitudeNum2 = Double.parseDouble(latitudeS.split("� ", 2)[1].split("'", 2)[0]);
+		Double latitudeNum3 = Double.parseDouble(latitudeS.split("' ", 2)[1].split("\"", 2)[0]);
+		
+		Double longitudeNum1 = Double.parseDouble(longitudeS.split("�", 2)[0]);
+		Double longitudeNum2 = Double.parseDouble(longitudeS.split("� ", 2)[1].split("'", 2)[0]);
+		Double longitudeNum3 = Double.parseDouble(longitudeS.split("' ", 2)[1].split("\"", 2)[0]);
+		
+		Double latitude; 
+		Double longitude;
+		
+		if(latitudeNum1>=0)
+			latitude = latitudeNum1+latitudeNum2/60+latitudeNum3/3600;
+		else 
+			latitude = latitudeNum1-latitudeNum2/60-latitudeNum3/3600;
+		
+		if(longitudeNum1>=0)
+			longitude= longitudeNum1+longitudeNum2/60+longitudeNum3/3600;
+		else
+			longitude= longitudeNum1-longitudeNum2/60-longitudeNum3/3600;
+		
+	    try {
+			URLConnection con = new URL("http://maps.google.com/maps/api/staticmap?" +
+					"center=Wellington,NZ&zoom=5&size="
+					+IMAGE_METADATA_PANEL_SIZE.width/3+"x"+
+					IMAGE_METADATA_PANEL_SIZE.height+
+					"&maptype=roadmap&sensor=false&" +
+					"markers=||"+latitude+",%20"+longitude).openConnection();
+			InputStream is = con.getInputStream();
+			byte bytes[] = new byte[con.getContentLength()];
+			Toolkit tk = getToolkit();
+			BufferedImage map = ImageIO.read(is);
+			tk.prepareImage(map, -1, -1, null);
+			imageMetadataPanel.add(new JLabel(new ImageIcon(map)),BorderLayout.EAST);
+		} catch (MalformedURLException e1) {e1.printStackTrace();} catch (IOException e1) {e1.printStackTrace();}
+		
+	    repaint();
 	}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
@@ -585,15 +649,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		Scanner sc;
 		try {
 			sc = new Scanner(new File("settings.data"));
-			String s = sc.next();
-			if(s.equals("minimize=true")) { minimize = true;}
+			if(sc.next().equals("minimize=true")) { minimize = true;}
 			else minimize = false;
-			s = sc.next();
-			if(s.equals("warning=true")) {warning = true;}
+			if(sc.next().equals("warning=true")) {warning = true;}
 			else warning = false;
 			lookAndFeel = sc.nextInt();
-			s = sc.next();
-			if(s.equals("ask=true")) {
+			if(sc.next().equals("ask=true")) {
 				ask = true;
 				location = null;
 			} else {
