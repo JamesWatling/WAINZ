@@ -16,6 +16,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -37,9 +38,9 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 	
 	private JCheckBox checkbox1 = new JCheckBox("Minimize window when I click Close button");
 	private JCheckBox checkbox2 = new JCheckBox("Warn me before quitting");
-	private JRadioButton radiobutton1 = new JRadioButton("Default");
-	private JRadioButton radiobutton2 = new JRadioButton("Look and feel 2");
-	private JRadioButton radiobutton3 = new JRadioButton("Look and feel 3");
+	private JCheckBox proxyCheckbox = new JCheckBox("Use Proxy");
+	private JTextField proxyUrlField = new JTextField();
+	private JTextField proxyPortField = new JTextField();
 	private JRadioButton radiobutton4 = new JRadioButton("Save images to");
 	private JTextField textfield = new JTextField();
 	private JButton button = new JButton("Browse");
@@ -62,23 +63,21 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 		if(ApplicationWindow.warning) checkbox2.setSelected(true);
 		general.setBounds(10, 10, 400, 90);
 		
-		title = BorderFactory.createTitledBorder(loweredetched, "Appearance");
+		title = BorderFactory.createTitledBorder(loweredetched, "Proxy - for map");
 		title.setTitleJustification(TitledBorder.LEFT);
 		appearance.setBorder(title);
 		appearance.setLayout(new BoxLayout(appearance, BoxLayout.Y_AXIS));
-		appearance.add(radiobutton1);
+		appearance.add(proxyCheckbox);
 		appearance.add(Box.createVerticalStrut(10));
-		appearance.add(radiobutton2);
+		appearance.add(new JLabel("Http Proxy URL"));
+		appearance.add(proxyUrlField);
 		appearance.add(Box.createVerticalStrut(10));
-		appearance.add(radiobutton3);
-		ButtonGroup group1 = new ButtonGroup(); 
-		group1.add(radiobutton1);
-		if(ApplicationWindow.lookAndFeel == 1) radiobutton1.setSelected(true);
-		group1.add(radiobutton2);
-		if(ApplicationWindow.lookAndFeel == 2) radiobutton2.setSelected(true);
-		group1.add(radiobutton3);
-		if(ApplicationWindow.lookAndFeel == 3) radiobutton3.setSelected(true);
-		appearance.setBounds(10, 110, 400, 120);
+		appearance.add(new JLabel("Http Proxy Port"));
+		appearance.add(proxyPortField);
+		if(ApplicationWindow.useProxy == true) proxyCheckbox.setSelected(true);
+		proxyUrlField.setText(ApplicationWindow.proxyUrl);
+		proxyPortField.setText(ApplicationWindow.proxyPort+"");
+		appearance.setBounds(10, 110, 400, 150);
 		
 		title = BorderFactory.createTitledBorder(loweredetched, "Export");
 		title.setTitleJustification(TitledBorder.LEFT);
@@ -102,11 +101,11 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 		ButtonGroup group2 = new ButtonGroup(); 
 		group2.add(radiobutton4);
 		group2.add(radiobutton5);
-		export.setBounds(10, 240, 400, 85);
+		export.setBounds(10, 260, 400, 85);
 		
-		apply.setBounds(328, 335, 80, 20);
+		apply.setBounds(328, 355, 80, 20);
 		apply.addActionListener(this);
-		cancel.setBounds(240, 335, 80, 20);
+		cancel.setBounds(240, 355, 80, 20);
 		cancel.addActionListener(this);
 		
 		add(general);
@@ -133,10 +132,11 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 				else out.println("minimize=false");
 				if(checkbox2.isSelected()) out.println("warning=true");
 				else out.println("warning=false");
-				if(radiobutton1.isSelected()) out.println("1");
-				else if(radiobutton2.isSelected()) out.println("2");
-				else if(radiobutton3.isSelected()) out.println("3");
-				if(radiobutton4.isSelected()) out.println("ask=fasle " + textfield.getText());
+				if(proxyCheckbox.isSelected()) out.println("proxy=true");
+				else out.println("proxy=false");
+				out.println("proxyUrl="+proxyUrlField.getText());
+				out.println("proxyPort="+proxyPortField.getText());
+				if(radiobutton4.isSelected()) out.println("ask=false " + textfield.getText());
 				else if(radiobutton5.isSelected()) out.println("ask=true");
 				out.close();
 				dispose();

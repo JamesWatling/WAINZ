@@ -1,4 +1,6 @@
 minimize=false
 warning=false
-1
-ask=fasle /u/students/yuyang2/Desktop
+proxy=false
+proxyUrl=www-cache.ecs.vuw.ac.nz
+proxyPort=8080
+ask=false /u/students/yuyang2/Desktop
