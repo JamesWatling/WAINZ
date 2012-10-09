@@ -20,12 +20,11 @@ import static com.googlecode.javacv.cpp.opencv_core.cvPoint;
 import static com.googlecode.javacv.cpp.opencv_core.CV_AA;
 import static com.googlecode.javacv.cpp.opencv_core.cvRectangle;
 import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
-import static com.googlecode.javacv.cpp.opencv_objdetect.*;
 import static com.googlecode.javacv.cpp.opencv_core.cvGet2D;
 
 public class ImageClassifier {
 	// the cascade definition to be used for detection
-	private static final String CASCADE_FILE = "lib/data.xml";
+	private static final String CASCADE_FILE = "lib/data1.xml";
 	
 	public BufferedImage findRiverImage(String fileName) {
 		// load the original image
@@ -43,7 +42,7 @@ public class ImageClassifier {
 		CvHaarClassifierCascade cascade = new CvHaarClassifierCascade(cvLoad(CASCADE_FILE));
 		
 		// detect the rivers
-		CvSeq rivers = cvHaarDetectObjects(grayImage, cascade, storage, 1.1, 1, CV_HAAR_DO_CANNY_PRUNING);
+		CvSeq rivers = cvHaarDetectObjects(grayImage, cascade, storage, 1.2, 1, 0);
 		
 		// iterate over the discovered rivers and draw red rectangles around them
 		for (int i = 0; i < rivers.total(); i++) {

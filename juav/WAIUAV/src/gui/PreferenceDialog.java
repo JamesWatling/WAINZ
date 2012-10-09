@@ -36,8 +36,8 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 	private JButton cancel = new JButton("Cancel");
 	
 	private JCheckBox checkbox1 = new JCheckBox("Minimize window when I click Close button");
-	private JCheckBox checkbox2 = new JCheckBox("Warn me before quit");
-	private JRadioButton radiobutton1 = new JRadioButton("Look and feel 1");
+	private JCheckBox checkbox2 = new JCheckBox("Warn me before quitting");
+	private JRadioButton radiobutton1 = new JRadioButton("Default");
 	private JRadioButton radiobutton2 = new JRadioButton("Look and feel 2");
 	private JRadioButton radiobutton3 = new JRadioButton("Look and feel 3");
 	private JRadioButton radiobutton4 = new JRadioButton("Save images to");
@@ -138,9 +138,9 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 				else if(radiobutton3.isSelected()) out.println("3");
 				if(radiobutton4.isSelected()) out.println("ask=fasle " + textfield.getText());
 				else if(radiobutton5.isSelected()) out.println("ask=true");
+				out.close();
 				dispose();
 			} catch (FileNotFoundException ex) {
-				// TODO Auto-generated catch block
 				ex.printStackTrace();
 			}
 		} else if(action.equals("Cancel")) {
@@ -148,7 +148,7 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 		} else {
 			JFileChooser fc = new JFileChooser();
 			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			fc.setDialogTitle("Select the path");
+			fc.setDialogTitle("Choose export folder");
 			int returnVal = fc.showSaveDialog(fc);
 			if(returnVal == JFileChooser.APPROVE_OPTION) {
 				textfield.setText(fc.getSelectedFile().getPath());

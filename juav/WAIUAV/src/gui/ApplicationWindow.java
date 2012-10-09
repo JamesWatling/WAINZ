@@ -394,9 +394,27 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		else if (action.equals("Export")) {
 			//export features
 			if(!ask) {
-				
-				
+				String exportPath = location;
+				int byteread = 0;
+				InputStream in = null;
+				OutputStream out = null;
+				try {
+					for(TaggableImage image: importedImageList) {
+						if(image.getTag() == ImageTag.INFRINGEMENT) {
+							in = new FileInputStream(image.getSource());
+							out = new FileOutputStream(new File(exportPath + "/" + image.getFileName()));
+							byte[] buffer = new byte[1024];
+							while ((byteread = in.read(buffer)) != -1) {
+								out.write(buffer, 0, byteread);
+							}
+						}
+					}
+				} catch(IOException ioe) {
+					System.out.println("Export failed: " + ioe.getMessage());
+				}
+				return;
 			}
+				
 			JFileChooser fc = new JFileChooser();
 			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			fc.setDialogTitle("Save images to");
@@ -497,9 +515,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			processedImage.flush();
 		}
 		else if(action.equals("Analyze All")) {
-			boolean completed = false;
-			ProgressWindow t = new ProgressWindow(completed);  
-	        new Thread(t).start();
 			BufferedImage processedImage = null;
 			boolean first = true;
 			for(ImageThumbPanel itp: imageGrid.getPanels()) {
@@ -511,7 +526,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				}
 				processedImage.flush();
 			}
-			completed = true;
 		}
 		else if (action.equals("PDF Report")){ //jm 081012
 			TaggableImage selectedImage = imageGrid.getSelectedImage();
@@ -579,12 +593,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		String longitudeS = metaDataLabel.getText().split("GPS Longitude - ")[1].split("</td>",2)[0];
 		System.out.println("long"+longitudeS);
 		
-		Double latitudeNum1 = Double.parseDouble(latitudeS.split("¡", 2)[0]);
-		Double latitudeNum2 = Double.parseDouble(latitudeS.split("¡ ", 2)[1].split("'", 2)[0]);
+		Double latitudeNum1 = Double.parseDouble(latitudeS.split("ï¿½", 2)[0]);
+		Double latitudeNum2 = Double.parseDouble(latitudeS.split("ï¿½ ", 2)[1].split("'", 2)[0]);
 		Double latitudeNum3 = Double.parseDouble(latitudeS.split("' ", 2)[1].split("\"", 2)[0]);
 		
-		Double longitudeNum1 = Double.parseDouble(longitudeS.split("¡", 2)[0]);
-		Double longitudeNum2 = Double.parseDouble(longitudeS.split("¡ ", 2)[1].split("'", 2)[0]);
+		Double longitudeNum1 = Double.parseDouble(longitudeS.split("ï¿½", 2)[0]);
+		Double longitudeNum2 = Double.parseDouble(longitudeS.split("ï¿½ ", 2)[1].split("'", 2)[0]);
 		Double longitudeNum3 = Double.parseDouble(longitudeS.split("' ", 2)[1].split("\"", 2)[0]);
 		
 		Double latitude; 
@@ -626,15 +640,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		Scanner sc;
 		try {
 			sc = new Scanner(new File("settings.data"));
-			String s = sc.next();
-			if(s.equals("minimize=true")) { minimize = true;}
+			if(sc.next().equals("minimize=true")) { minimize = true;}
 			else minimize = false;
-			s = sc.next();
-			if(s.equals("warning=true")) {warning = true;}
+			if(sc.next().equals("warning=true")) {warning = true;}
 			else warning = false;
 			lookAndFeel = sc.nextInt();
-			s = sc.next();
-			if(s.equals("ask=true")) {
+			if(sc.next().equals("ask=true")) {
 				ask = true;
 				location = null;
 			} else {

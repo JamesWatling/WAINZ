@@ -1,6 +1,5 @@
 package gui;
 
-
 public class Main {
 	/**
 	 * @param args
