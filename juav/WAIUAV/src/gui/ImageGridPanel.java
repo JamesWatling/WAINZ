@@ -1,4 +1,5 @@
 package gui;
+import images.ImageTag;
 import images.TaggableImage;
 
 import java.awt.BorderLayout;
@@ -135,7 +136,6 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 					setSelectedImage(next.getImage());
 					next.imageLabel().setBorder(BorderFactory.createLineBorder(Color.red, 3));
 				}
-				
 				canvas.repaint();
 				break;
 			}
@@ -159,7 +159,9 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		clickedThumb.setSelected(true);
 		clickedThumb.imageLabel().setBorder(BorderFactory.createLineBorder(Color.red, 3));
 		setSelectedImage(clickedThumb.getImage());
+		window.toggleFlagButton(selectedImage.getTag()==ImageTag.UNTAGGED);
 		canvas.repaint();
+		
 	}
 	private void setSelectedImage(TaggableImage image) {selectedImage = image;}
 	public TaggableImage getSelectedImage(){return selectedImage;}

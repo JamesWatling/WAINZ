@@ -367,6 +367,24 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		autobutton.setEnabled(enabled);
 		//analyzeAllButton.setEnabled(enabled); not controlled here jm 051012
 	}
+	
+	public void toggleFlagButton(boolean flag) {
+		if (flag) {
+			//set to flag
+			ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
+			Image img = flagBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
+			flagBtnImage = new ImageIcon(img);
+			flagImageButton.setIcon(flagBtnImage);
+			flagImageButton.setActionCommand("Flag Image");
+		} else {
+			//set to unflag
+			ImageIcon unflagBtnImage = new ImageIcon("lib/unflag-image-btn.png");
+			Image img = unflagBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
+			unflagBtnImage = new ImageIcon(img);
+			flagImageButton.setIcon(unflagBtnImage);
+			flagImageButton.setActionCommand("Unflag Image");
+		}
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
@@ -430,21 +448,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			//flag currently selected image
 			imageGrid.getSelectedImage().setTag(ImageTag.INFRINGEMENT);
 			imageGrid.repaint();
-			ImageIcon unflagBtnImage = new ImageIcon("lib/unflag-image-btn.png");
-			Image img = unflagBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
-			unflagBtnImage = new ImageIcon(img);
-			flagImageButton.setIcon(unflagBtnImage);
-			flagImageButton.setActionCommand("Unflag Image");
+			toggleFlagButton(false);
 		}
 		else if (action.equals("Unflag Image")) {
 			//unflag the selected image
 			imageGrid.getSelectedImage().setTag(ImageTag.UNTAGGED);
 			imageGrid.repaint();
-			ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
-			Image img = flagBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
-			flagBtnImage = new ImageIcon(img);
-			flagImageButton.setIcon(flagBtnImage);
-			flagImageButton.setActionCommand("Flag Image");
+			toggleFlagButton(true);
 		}
 		else if (action.equals("Preferences")) {
 			//open preferences window
@@ -537,9 +547,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			    JOptionPane.YES_NO_OPTION);
 		if(n == 0){System.exit(0);}
 	}
-	public void windowClosed(WindowEvent e) {
-		
-	}
+	
+	public void windowClosed(WindowEvent e) {}	
 	public void windowIconified(WindowEvent e) {}
 	public void windowDeiconified(WindowEvent e) {}
 	public void windowActivated(WindowEvent e) {}
