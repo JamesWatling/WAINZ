@@ -581,6 +581,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private void setImportedImageList(List<TaggableImage> importedImageList) {
 		ApplicationWindow.importedImageList = importedImageList;
 	}
+	
+	/**
+	 * This listener is added to each imageThumbPanel
+	 */
 	public void mouseClicked(MouseEvent e) {
 		setButtonsEnabled(imageGrid.getSelectedImage()!=null);
 		String data = (imageGrid.getSelectedImage()!=null?imageGrid.getSelectedImage().getMetaData():"EMPTY");
