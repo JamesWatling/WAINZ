@@ -624,6 +624,14 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 					IMAGE_METADATA_PANEL_SIZE.height+
 					"&maptype=roadmap&sensor=false&" +
 					"markers=||"+latitude+",%20"+longitude).openConnection();
+			else
+				con = new URL("http://maps.google.com/maps/api/staticmap?" +
+						"center="+latitude+",%20"+longitude +
+						"&zoom=7&size="
+						+IMAGE_METADATA_PANEL_SIZE.width/3+"x"+
+						IMAGE_METADATA_PANEL_SIZE.height+
+						"&maptype=roadmap&sensor=false&" +
+						"markers=||"+latitude+",%20"+longitude).openConnection();
 			InputStream is = con.getInputStream();
 			byte bytes[] = new byte[con.getContentLength()];
 			Toolkit tk = getToolkit();
