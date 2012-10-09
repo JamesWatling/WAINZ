@@ -27,10 +27,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Proxy;
-import java.net.MalformedURLException;
-import java.net.Proxy.Type;
-import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -55,6 +51,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.ToolTipManager;
+import javax.swing.border.EtchedBorder;
 
 import application.ImageClassifier;
 import application.ImageLoader;
@@ -63,7 +60,9 @@ import application.ImagePdfExporter;
 
 public class ApplicationWindow extends JFrame implements ActionListener, WindowListener, MouseListener {
 	public static boolean minimize, warning, ask; 
-	public static int lookAndFeel;
+	public static int proxyPort;
+	public static String proxyUrl;
+	public static boolean useProxy;
 	public static String location;
 	
 	private static DisplayMode mode = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].getDisplayMode();
@@ -107,6 +106,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public static final Color WAI_BLUE = new Color(0, 126, 166);
 
 	public ApplicationWindow(){
+		checkSetting();
 		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
 		ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
 		setImportedImageList(new ArrayList<TaggableImage>());
@@ -582,7 +582,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		System.out.println(data);
 		metaDataLabel.setText(data);
 		imageMetadataPanel.removeAll();
-		imageMetadataPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		imageMetadataPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		imageMetadataPanel.setLayout(new BorderLayout());
 		imageMetadataPanel.setSize(IMAGE_METADATA_PANEL_SIZE);
 		metaDataLabel.setSize(2*IMAGE_METADATA_PANEL_SIZE.width/3,IMAGE_METADATA_PANEL_SIZE.height);
@@ -590,37 +590,36 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageMetadataPanel.add(metaDataLabel, BorderLayout.WEST);
 		imageMetadataPanel.setBackground(null);
 		
-		System.out.println(metaDataLabel.getText());
-		String latitudeS = metaDataLabel.getText().split("GPS Latitude - ", 2)[1].split("</td>", 2)[0];
-		System.out.println("lat"+latitudeS);
-		
-		String longitudeS = metaDataLabel.getText().split("GPS Longitude - ")[1].split("</td>",2)[0];
-		System.out.println("long"+longitudeS);
-		
-		Double latitudeNum1 = Double.parseDouble(latitudeS.split("", 2)[0]);
-		Double latitudeNum2 = Double.parseDouble(latitudeS.split(" ", 2)[1].split("'", 2)[0]);
-		Double latitudeNum3 = Double.parseDouble(latitudeS.split("' ", 2)[1].split("\"", 2)[0]);
-		
-		Double longitudeNum1 = Double.parseDouble(longitudeS.split("", 2)[0]);
-		Double longitudeNum2 = Double.parseDouble(longitudeS.split("", 2)[1].split("'", 2)[0]);
-		Double longitudeNum3 = Double.parseDouble(longitudeS.split("' ", 2)[1].split("\"", 2)[0]);
-		
-		Double latitude; 
-		Double longitude;
-		
-		if(latitudeNum1>=0)
-			latitude = latitudeNum1+latitudeNum2/60+latitudeNum3/3600;
-		else 
-			latitude = latitudeNum1-latitudeNum2/60-latitudeNum3/3600;
-		
-		if(longitudeNum1>=0)
-			longitude= longitudeNum1+longitudeNum2/60+longitudeNum3/3600;
-		else
-			longitude= longitudeNum1-longitudeNum2/60-longitudeNum3/3600;
-		
 	    try {
-			URLConnection con = new URL("http://maps.google.com/maps/api/staticmap?" +
-					"center=Wellington,NZ&zoom=5&size="
+			String latitudeS = metaDataLabel.getText().split("GPS Latitude - ", 2)[1].split("</td>", 2)[0];
+			String longitudeS = metaDataLabel.getText().split("GPS Longitude - ")[1].split("</td>",2)[0];
+			
+			Double latitudeNum1 = Double.parseDouble(latitudeS.split((char) 0x00B0+"", 2)[0]);
+			Double latitudeNum2 = Double.parseDouble(latitudeS.split((char) 0x00B0+"", 2)[1].split("' ", 2)[0]);
+			Double latitudeNum3 = Double.parseDouble(latitudeS.split("' ", 2)[1].split("\"", 2)[0]);
+			
+			Double longitudeNum1 = Double.parseDouble(longitudeS.split((char) 0x00B0+"", 2)[0]);
+			Double longitudeNum2 = Double.parseDouble(longitudeS.split((char) 0x00B0+"", 2)[1].split("' ", 2)[0]);
+			Double longitudeNum3 = Double.parseDouble(longitudeS.split("' ", 2)[1].split("\"", 2)[0]);
+			
+			Double latitude; 
+			Double longitude;
+			
+			if(latitudeNum1>=0)
+				latitude = latitudeNum1+latitudeNum2/60+latitudeNum3/3600;
+			else 
+				latitude = latitudeNum1-latitudeNum2/60-latitudeNum3/3600;
+			
+			if(longitudeNum1>=0)
+				longitude= longitudeNum1+longitudeNum2/60+longitudeNum3/3600;
+			else
+				longitude= longitudeNum1-longitudeNum2/60-longitudeNum3/3600;
+			
+			URLConnection con = null;
+			if(useProxy)
+				con = new URL("http",proxyUrl,proxyPort,"http://maps.google.com/maps/api/staticmap?" +
+					"center="+latitude+",%20"+longitude +
+					"&zoom=7&size="
 					+IMAGE_METADATA_PANEL_SIZE.width/3+"x"+
 					IMAGE_METADATA_PANEL_SIZE.height+
 					"&maptype=roadmap&sensor=false&" +
@@ -631,7 +630,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			BufferedImage map = ImageIO.read(is);
 			tk.prepareImage(map, -1, -1, null);
 			imageMetadataPanel.add(new JLabel(new ImageIcon(map)),BorderLayout.EAST);
-		} catch (MalformedURLException e1) {e1.printStackTrace();} catch (IOException e1) {e1.printStackTrace();}
+		}
+	    catch (Exception e1) {
+	    	e1.printStackTrace();
+	    	JLabel errorLabel = new JLabel("<html><p>No Internet connection</p><p>Or no image metadata.</p></html>");
+	    	errorLabel.setVerticalAlignment(JLabel.TOP);
+			imageMetadataPanel.add(errorLabel,BorderLayout.EAST);
+		}
 		
 	    repaint();
 	}
@@ -663,7 +668,14 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			else minimize = false;
 			if(sc.next().equals("warning=true")) {warning = true;}
 			else warning = false;
-			lookAndFeel = sc.nextInt();
+			if(sc.next().equals("proxy=true"))
+				useProxy=true;
+			else useProxy=false;
+			String a=sc.nextLine();
+			a=sc.nextLine();
+			System.out.println(a);
+			proxyUrl=a.split("=", 2)[1];
+			proxyPort=Integer.parseInt(sc.nextLine().split("=",2)[1]);
 			if(sc.next().equals("ask=true")) {
 				ask = true;
 				location = null;
