@@ -2,13 +2,12 @@ package application;
 
 import images.TaggableImage;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -25,6 +24,8 @@ public class ImagePdfExporter {
 	
 	private final int incidentImageWidth = 450;
 	private final int incidentImageHeight = 337; //4:3 aspect ratio
+	private int imageTop;
+	private float imageRenderedHeight;
 
 	/**
 	 * Setup the document to be exported, add some default
@@ -40,11 +41,16 @@ public class ImagePdfExporter {
 			addReportImage(img);
 			addImageDescription(description);
 			document.close();
+			
+			File pdf = new File(filename);
+			Desktop.getDesktop().open(pdf);
 		} catch (DocumentException e) {
 			System.out.println("Error generating PDF Document");
 		} catch (FileNotFoundException e) {
 			System.out.println("Error creating PDF file");
-		}	
+		} catch (IOException e) {
+			System.out.println("Error loading PDF to view");
+		}
 	}
 
 	public void addMetaData() {
@@ -80,16 +86,34 @@ public class ImagePdfExporter {
 			float drawWidthPercent, drawHeightPercent = 0;
 			double aspectRatio = imageWidth / (1.0 * imageHeight);
 			
-			//image is bigger than max size so we need to scale it
+			System.out.println("width, height: " + imageWidth + ", " + imageHeight);
+			System.out.println(aspectRatio);
+			
+			//check image is bigger than max size so we need to scale it
 			if (aspectRatio > 1 && imageWidth > incidentImageWidth) { 	 
 				drawWidthPercent = incidentImageWidth / imageWidth;
 				docImg.scalePercent(drawWidthPercent * 100);
+				//double check the height
+				//if (docImg.getScaledHeight() > incidentImageHeight) {
+				//	drawHeightPercent = incidentImageHeight / docImg.getScaledHeight();
+				//	docImg.scalePercent(drawHeightPercent * 100);
+				//}
 			} else if (imageHeight > incidentImageHeight) { 
 				drawHeightPercent = incidentImageHeight / imageHeight;
-				docImg.scalePercent(imageHeight * 100);
+				docImg.scalePercent(drawHeightPercent * 100);
+				//double check the width
+				if (docImg.getScaledWidth() > incidentImageWidth) {
+					drawWidthPercent = incidentImageWidth / docImg.getScaledWidth();
+					docImg.scalePercent(drawWidthPercent * 100);
+				}
 			}
 			
-			docImg.setAbsolutePosition(75f, 350f);
+			imageRenderedHeight = docImg.getScaledHeight();
+			float imageRenderedWidth = docImg.getScaledWidth();
+			//now want to center the horizontally and vertically on the doc
+			int docWidth = 595; //at 72 dpi
+			float drawX = (docWidth - imageRenderedWidth)/2.0f;			
+			docImg.setAbsolutePosition(drawX, 350f);
 			
 			document.add(docImg);
 		} catch (IOException e) {
@@ -105,7 +129,6 @@ public class ImagePdfExporter {
 		document.add(imageDesc);
 	}
 	
-
 	private static void addEmptyLine(Paragraph paragraph, int number) {
 		for (int i = 0; i < number; i++) {
 			paragraph.add(new Paragraph(" "));
