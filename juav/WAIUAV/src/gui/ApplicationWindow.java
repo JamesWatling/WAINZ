@@ -618,7 +618,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			URLConnection con = null;
 			if(useProxy)
 				con = new URL("http",proxyUrl,proxyPort,"http://maps.google.com/maps/api/staticmap?" +
-					"center=Wellington,NZ&zoom=5&size="
+					"center="+latitude+",%20"+longitude +
+					"&zoom=7&size="
 					+IMAGE_METADATA_PANEL_SIZE.width/3+"x"+
 					IMAGE_METADATA_PANEL_SIZE.height+
 					"&maptype=roadmap&sensor=false&" +
