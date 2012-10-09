@@ -1,6 +1,6 @@
 minimize=false
 warning=false
-proxy=false
+proxy=true
 proxyUrl=www-cache.ecs.vuw.ac.nz
 proxyPort=8080
 ask=false /u/students/yuyang2/Desktop
