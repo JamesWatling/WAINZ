@@ -398,16 +398,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		//System.out.println(action); //jm 070912
 
 		if (action.equals("Import")) {
-			//import features
-			setImportedImageList(imageLoader.importImages(this));
-			imageGrid.setImageList(getImportedImageList());
-			imageGrid.initialise();
-			imageGrid.repaint();
-			mainImageViewCanvas.repaint();
-			if (!getImportedImageList().isEmpty()) {
-				analyzeAllButton.setEnabled(true);
-			}
-			repaint();
+			importImageSet();
 		}
 		else if (action.equals("Export")) {
 			//export features
@@ -644,6 +635,19 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 	    repaint();
 	}
+	
+	public void importImageSet() {
+		setImportedImageList(imageLoader.importImages(this));
+		imageGrid.setImageList(getImportedImageList());
+		imageGrid.initialise();
+		imageGrid.repaint();
+		mainImageViewCanvas.repaint();
+		if (!getImportedImageList().isEmpty()) {
+			analyzeAllButton.setEnabled(true);
+		}
+		repaint();
+	}
+	
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
