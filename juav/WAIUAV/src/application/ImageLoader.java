@@ -24,17 +24,17 @@ public class ImageLoader {
 
 	public List<TaggableImage> importImages(ApplicationWindow app){
 		List<TaggableImage> result = new ArrayList<TaggableImage>();
-		fileChooser.showOpenDialog(app);
+		int i = fileChooser.showOpenDialog(app);
+		if (i == JFileChooser.CANCEL_OPTION) { return null; } 
 		int action = ImportImageAction(app);
-
-		if (action ==0){ //Overwrite Existing Images
+		
+		if (action == 0){ //Overwrite Existing Images
 			selectedImageFiles = fileChooser.getSelectedFiles();
 			for (File file: selectedImageFiles) {
 				result.add(new TaggableImage(file));
 			}
-
 			return result;
-		} else{ // Merge Images
+		} else if (action == 1){ // Merge Images
 			//moved here to add the existing images first jm 091012
 			for (TaggableImage file: ApplicationWindow.getImportedImageList()) {
 				result.add((file));
@@ -44,8 +44,10 @@ public class ImageLoader {
 				result.add(new TaggableImage(file));
 			}
 			return result;
+		} else { 
+			//cancelled return existing
+			return null;
 		}
-
 	}
 	
 	// for testing
@@ -74,7 +76,6 @@ public class ImageLoader {
 				options,
 				options[2]);
 		return n;
-
 	}
 
 	public class ImageFileFilter extends FileFilter{

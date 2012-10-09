@@ -641,7 +641,9 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	
 	public void importImageSet() {
-		setImportedImageList(imageLoader.importImages(this));
+		List<TaggableImage> importSet = imageLoader.importImages(this);
+		if (importSet == null) return;
+		setImportedImageList(importSet);
 		imageGrid.setImageList(getImportedImageList());
 		imageGrid.initialise();
 		imageGrid.repaint();
