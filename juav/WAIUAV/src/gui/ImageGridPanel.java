@@ -115,11 +115,10 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 			
 	public void browse(String direction) {
 		if(selectedImage == null) return;
-		
 		for(int i=0; i<imageThumbPanels.size(); i++) {
 			ImageThumbPanel current = imageThumbPanels.get(i);
 			
-			if(current.getImage().getFileName().equals(selectedImage.getFileName())) {
+			if(current.getImage().equals(selectedImage)) {
 				if(direction.equals("previous") && i!=0) {
 					ImageThumbPanel previous = imageThumbPanels.get(i-1);
 					current.setSelected(false);
@@ -127,8 +126,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 					previous.setSelected(true);
 					setSelectedImage(previous.getImage());
 					previous.imageLabel().setBorder(BorderFactory.createLineBorder(Color.red, 3));
-				}
-				else if(direction.equals("next") && i!=images.size()-1) {
+				} else if(direction.equals("next") && i!=images.size()-1) {
 					ImageThumbPanel next = imageThumbPanels.get(i+1);
 					current.setSelected(false);
 					current.imageLabel().setBorder(null);

@@ -581,6 +581,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private void setImportedImageList(List<TaggableImage> importedImageList) {
 		ApplicationWindow.importedImageList = importedImageList;
 	}
+	
+	/**
+	 * This listener is added to each imageThumbPanel
+	 */
 	public void mouseClicked(MouseEvent e) {
 		setButtonsEnabled(imageGrid.getSelectedImage()!=null);
 		String data = (imageGrid.getSelectedImage()!=null?imageGrid.getSelectedImage().getMetaData():"EMPTY");
@@ -602,12 +606,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		String longitudeS = metaDataLabel.getText().split("GPS Longitude - ")[1].split("</td>",2)[0];
 		System.out.println("long"+longitudeS);
 		
-		Double latitudeNum1 = Double.parseDouble(latitudeS.split("�", 2)[0]);
-		Double latitudeNum2 = Double.parseDouble(latitudeS.split("� ", 2)[1].split("'", 2)[0]);
+		Double latitudeNum1 = Double.parseDouble(latitudeS.split("", 2)[0]);
+		Double latitudeNum2 = Double.parseDouble(latitudeS.split(" ", 2)[1].split("'", 2)[0]);
 		Double latitudeNum3 = Double.parseDouble(latitudeS.split("' ", 2)[1].split("\"", 2)[0]);
 		
-		Double longitudeNum1 = Double.parseDouble(longitudeS.split("�", 2)[0]);
-		Double longitudeNum2 = Double.parseDouble(longitudeS.split("� ", 2)[1].split("'", 2)[0]);
+		Double longitudeNum1 = Double.parseDouble(longitudeS.split("", 2)[0]);
+		Double longitudeNum2 = Double.parseDouble(longitudeS.split("", 2)[1].split("'", 2)[0]);
 		Double longitudeNum3 = Double.parseDouble(longitudeS.split("' ", 2)[1].split("\"", 2)[0]);
 		
 		Double latitude; 
