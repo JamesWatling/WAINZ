@@ -62,6 +62,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		if(images==null || images.isEmpty()){
 			//paint the placeholder image to fill box
 			//called via paintComponent jm 190812
+			repaint();
 			return;
 		}
 		
@@ -78,7 +79,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		if(images != null){
 			imageThumbPanels.clear();
 			for(TaggableImage timg: images){
-				itp = new ImageThumbPanel(timg, gridPanelSize);
+				itp = new ImageThumbPanel(timg, gridPanelSize, this);
 				imageThumbPanels.add(itp);
 				itp.addMouseListener(this);
 				itp.addMouseListener(window);
@@ -86,7 +87,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 			}
 			if(images.size()<10){
 				for(int i = images.size();i<10;i++){
-					itp = new ImageThumbPanel(null, gridPanelSize);
+					itp = new ImageThumbPanel(null, gridPanelSize, this);
 					imageThumbPanels.add(itp);
 					gridbox.add(itp);
 				}
@@ -114,6 +115,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 	}
 			
 	public void browse(String direction) {
+		System.out.println("browsing: " + direction);
 		if(selectedImage == null) return;
 		for(int i=0; i<imageThumbPanels.size(); i++) {
 			ImageThumbPanel current = imageThumbPanels.get(i);
@@ -168,4 +170,19 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
+
+	public void removeImage(ImageThumbPanel imagePanel) {
+		if (imagePanel.getImage() == selectedImage) {
+			selectedImage = null;
+		}
+		if (imageThumbPanels.size() == 1) {
+			//last image
+			imageThumbPanels.clear();
+			images.clear();
+			initialise();
+		}
+		imageThumbPanels.remove(imagePanel);
+		images.remove(imagePanel.getImage());
+		initialise();
+	}
 }

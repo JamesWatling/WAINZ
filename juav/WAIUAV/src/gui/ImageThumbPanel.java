@@ -7,9 +7,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -18,18 +21,22 @@ import javax.swing.JPanel;
  * @author mccannjame
  * jm 080912
  */
-public class ImageThumbPanel extends JPanel {
+public class ImageThumbPanel extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
+	
+	private ImageGridPanel parent;
 	private TaggableImage image;
 	private String fileName;
 	private boolean selected;
 	JLabel imageLabel = new JLabel();
 	JLabel flagLabel;
+	JLabel deleteLabel;
 	
-	public ImageThumbPanel(TaggableImage ti, Dimension dim) {
+	public ImageThumbPanel(TaggableImage ti, Dimension dim, ImageGridPanel parent) {
 		image = ti; // new ImageThumbnail(ti, new Dimension(dim.width-10, dim.height-20));
 		//tag = ti.getTag();
 		if(ti != null) fileName = ti.getFileName();
+		this.parent = parent;
 		initLayout(dim);
 	}
 
@@ -65,6 +72,11 @@ public class ImageThumbPanel extends JPanel {
 		labelPanel.add(nameLabel);
 		flagLabel = new JLabel(new ImageIcon("lib/flag20.png"));
 		labelPanel.add(flagLabel);
+		if (image!=null) {
+			deleteLabel = new JLabel(new ImageIcon("lib/delete-btn-img.png"));
+			labelPanel.add(deleteLabel);
+			deleteLabel.addMouseListener(this);
+		}
 		flagLabel.setVisible(image==null?false:image.getTag()==ImageTag.INFRINGEMENT);
 		add(labelPanel, BorderLayout.SOUTH);
 	}
@@ -73,5 +85,16 @@ public class ImageThumbPanel extends JPanel {
 		flagLabel.setVisible(image==null?false:image.getTag()==ImageTag.INFRINGEMENT);
 		super.paint(g);
 	}
+
+	public void mouseClicked(MouseEvent e) {
+		int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove the image " + image.getFileName() + "?");
+		if (confirm==JOptionPane.OK_OPTION) { 
+			parent.removeImage(this);
+		}
+	}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
 	
 }

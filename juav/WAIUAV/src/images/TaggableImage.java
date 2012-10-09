@@ -43,7 +43,7 @@ public class TaggableImage {
 			try {
 				metadata = JpegMetadataReader.readMetadata(f);
 			} catch(JpegProcessingException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		} catch(IOException e) {
 			e.printStackTrace();
