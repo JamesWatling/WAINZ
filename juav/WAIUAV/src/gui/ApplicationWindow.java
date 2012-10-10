@@ -592,7 +592,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			else useProxy=false;
 			String s = sc.nextLine();
 			s = sc.nextLine();
-			System.out.println(s);
 			proxyUrl = s.split("=", 2)[1];
 			proxyPort = Integer.parseInt(sc.nextLine().split("=",2)[1]);
 			if(sc.next().equals("ask=true")) {
