@@ -210,6 +210,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		}
 		imageThumbPanels.remove(imagePanel);
 		images.remove(imagePanel.getImage());
+		window.reloadPanels();
 		initialise(null);
 	}
 
