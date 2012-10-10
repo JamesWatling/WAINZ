@@ -1,12 +1,19 @@
 package test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 
 import org.junit.Test;
 
-public class LoadingImageTest2 {
 
-    @Test
+
+public class LoadingImageTests {
+
+	
+	
+   @Test
     public void testAddtoExistingImage(){
     	gui.ApplicationWindow appw = new gui.ApplicationWindow();
     	application.ImageLoader imageLoader = new application.ImageLoader();
@@ -20,4 +27,18 @@ public class LoadingImageTest2 {
     	System.out.println(imageLoader.importImages(appw));
     	
     }
+	   
+	   
+    @Test
+    public void testImportNullImage() {
+    	application.ImageLoader imageLoader = new application.ImageLoader();    	
+    	gui.ApplicationWindow appw = new gui.ApplicationWindow();    	
+    	assertEquals(imageLoader.ImportImageAction(appw), 0);
+    	try{
+    		imageLoader.importImages(appw);
+    	}catch(Exception e){
+    		assertTrue(true);
+    	}
+    }
+	
 }

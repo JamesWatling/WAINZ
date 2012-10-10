@@ -73,10 +73,19 @@ public class ImageClassifier {
         cvClearMemStorage(storage);
 
 		return originalImage.getBufferedImage();
-		}catch(UnsatisfiedLinkError e){
+		}catch(UnsatisfiedLinkError e)
+		{
 			JOptionPane.showConfirmDialog(
 				    null,
 				    "Opencv is not properly installed!",
+				    "Error",
+				    JOptionPane.YES_OPTION);
+		}
+		catch(NoClassDefFoundError e)
+		{
+			JOptionPane.showConfirmDialog(
+				    null,
+				    "There is a file permission problem!",
 				    "Error",
 				    JOptionPane.YES_OPTION);
 		}
