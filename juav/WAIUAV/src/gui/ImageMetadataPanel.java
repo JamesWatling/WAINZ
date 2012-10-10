@@ -127,17 +127,21 @@ public class ImageMetadataPanel extends JPanel {
 			mapLabel = new JLabel(new ImageIcon(map));
 			mapLabel.setBounds(2*size.width/3, 0, size.width/3, size.height);
 			add(mapLabel,BorderLayout.EAST);
+			
 		} catch (IOException e1) {
 			JLabel errorLabel = new JLabel("<html><p>No Internet connection</p></html>");
 			errorLabel.setVerticalAlignment(JLabel.TOP);
+			errorLabel.setBounds(2*size.width/3, 0, size.width/3, size.height);
 			add(errorLabel,BorderLayout.EAST);
 			ApplicationWindow.noConnection = true;
 		} catch (NullPointerException e1) {
 			JLabel errorLabel = new JLabel("<html><p>No Internet connection</p></html>");
+			errorLabel.setBounds(2*size.width/3, 0, size.width/3, size.height);
 			errorLabel.setVerticalAlignment(JLabel.TOP);
 			add(errorLabel,BorderLayout.EAST);
 		} catch (Exception e1){
 			JLabel errorLabel = new JLabel("<html><p>No Internet connection </p><p>or no valid metadata</p></html>");
+			errorLabel.setBounds(2*size.width/3, 0, size.width/3, size.height);
 			errorLabel.setVerticalAlignment(JLabel.TOP);
 			add(errorLabel,BorderLayout.EAST);
 		}
