@@ -88,7 +88,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private ImageGridPanel imageGrid;
 	private ImageCanvas mainImageViewCanvas;
 	private JPanel rightPanel;
-	private JPanel imageMetadataPanel;
+	private ImageMetadataPanel imageMetadataPanel;
 	private JLabel metaDataLabel = new JLabel(" <p>Blank</p>");
 	private ProgressWindow pw;
 	
@@ -212,7 +212,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			System.out.println("Error reading WAI Logo");
 		}
 		
-		
 		// initializes the image thumbnail panel of the window
 		imageGrid = new ImageGridPanel(null, this);
 		JScrollPane leftPane = new JScrollPane(imageGrid);
@@ -275,22 +274,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		nextImageButton.addActionListener(this);
 		imageButtonPanel.add(nextImageButton);
 		
-		// meta-data pane below buttons
-		String metadataPlaceholderPath = "lib/metadata-panel-default.png";
-		try {
-			METADATA_PLACEHOLDER = ImageIO.read(new File(metadataPlaceholderPath));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		imageMetadataPanel = new JPanel();
-		imageMetadataPanel.setPreferredSize(IMAGE_METADATA_PANEL_SIZE);
-		imageMetadataPanel.setMaximumSize(IMAGE_METADATA_PANEL_SIZE);
-		imageMetadataPanel.setBackground(new Color(153, 157, 158));
-		if(imageGrid.getSelectedImage() ==  null)
-			imageMetadataPanel.add(new JLabel(new ImageIcon(METADATA_PLACEHOLDER.getScaledInstance(IMAGE_METADATA_PANEL_SIZE.width, 
-					IMAGE_METADATA_PANEL_SIZE.height, Image.SCALE_FAST))));
-		else
-			imageMetadataPanel.add(metaDataLabel);
+		//image metadata panel
+		imageMetadataPanel = new ImageMetadataPanel(this, IMAGE_METADATA_PANEL_SIZE);
 		
 		// adds all inner panels to the right panel
 		rightPanel.add(mainImageViewCanvas);
@@ -588,86 +573,9 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	 */
 	public void mouseClicked(MouseEvent e) {
 		setButtonsStatus(imageGrid.getSelectedImage()!=null);
-		String data = (imageGrid.getSelectedImage()!=null?imageGrid.getSelectedImage().getMetaData():"EMPTY");
-		System.out.println(data);
-		metaDataLabel.setText(data);
-		imageMetadataPanel.removeAll();
-		imageMetadataPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
-		imageMetadataPanel.setLayout(new BorderLayout());
-		imageMetadataPanel.setSize(IMAGE_METADATA_PANEL_SIZE);
-		metaDataLabel.setSize(2*IMAGE_METADATA_PANEL_SIZE.width/3,IMAGE_METADATA_PANEL_SIZE.height);
-		metaDataLabel.setVerticalAlignment(JLabel.TOP);
-		imageMetadataPanel.add(metaDataLabel, BorderLayout.WEST);
-		imageMetadataPanel.setBackground(null);
-		
-	    
-			try {
-				String latitudeS = metaDataLabel.getText().split("GPS Latitude - ", 2)[1].split("</td>", 2)[0];
-				String longitudeS = metaDataLabel.getText().split("GPS Longitude - ")[1].split("</td>",2)[0];
-				
-				Double latitudeNum1 = Double.parseDouble(latitudeS.split((char) 0x00B0+"", 2)[0]);
-				Double latitudeNum2 = Double.parseDouble(latitudeS.split((char) 0x00B0+"", 2)[1].split("' ", 2)[0]);
-				Double latitudeNum3 = Double.parseDouble(latitudeS.split("' ", 2)[1].split("\"", 2)[0]);
-				
-				Double longitudeNum1 = Double.parseDouble(longitudeS.split((char) 0x00B0+"", 2)[0]);
-				Double longitudeNum2 = Double.parseDouble(longitudeS.split((char) 0x00B0+"", 2)[1].split("' ", 2)[0]);
-				Double longitudeNum3 = Double.parseDouble(longitudeS.split("' ", 2)[1].split("\"", 2)[0]);
-				
-				Double latitude; 
-				Double longitude;
-				
-				if(latitudeNum1>=0)
-					latitude = latitudeNum1+latitudeNum2/60+latitudeNum3/3600;
-				else 
-					latitude = latitudeNum1-latitudeNum2/60-latitudeNum3/3600;
-				
-				if(longitudeNum1>=0)
-					longitude= longitudeNum1+longitudeNum2/60+longitudeNum3/3600;
-				else
-					longitude= longitudeNum1-longitudeNum2/60-longitudeNum3/3600;
-				
-				URLConnection con = null;
-				if(noConnection );
-				else if(useProxy)
-					con = new URL("http",proxyUrl,proxyPort,"http://maps.google.com/maps/api/staticmap?" +
-						"center="+latitude+",%20"+longitude +
-						"&zoom=7&size="
-						+IMAGE_METADATA_PANEL_SIZE.width/3+"x"+
-						IMAGE_METADATA_PANEL_SIZE.height+
-						"&maptype=roadmap&sensor=false&" +
-						"markers=||"+latitude+",%20"+longitude).openConnection();
-				else
-					con = new URL("http://maps.google.com/maps/api/staticmap?" +
-							"center="+latitude+",%20"+longitude +
-							"&zoom=7&size="
-							+IMAGE_METADATA_PANEL_SIZE.width/3+"x"+
-							IMAGE_METADATA_PANEL_SIZE.height+
-							"&maptype=roadmap&sensor=false&" +
-							"markers=||"+latitude+",%20"+longitude).openConnection();
-				InputStream is = con.getInputStream();
-				byte bytes[] = new byte[con.getContentLength()];
-				Toolkit tk = getToolkit();
-				BufferedImage map = ImageIO.read(is);
-				tk.prepareImage(map, -1, -1, null);
-				imageMetadataPanel.add(new JLabel(new ImageIcon(map)),BorderLayout.EAST);
-			} catch (IOException e1) {
-		    	//e1.printStackTrace();
-		    	JLabel errorLabel = new JLabel("<html><p>No Internet connection</p></html>");
-		    	errorLabel.setVerticalAlignment(JLabel.TOP);
-				imageMetadataPanel.add(errorLabel,BorderLayout.EAST);
-				noConnection = true;
-			} catch (NullPointerException e1) {
-		    	//e1.printStackTrace();
-		    	JLabel errorLabel = new JLabel("<html><p>No Internet connection</p></html>");
-		    	errorLabel.setVerticalAlignment(JLabel.TOP);
-				imageMetadataPanel.add(errorLabel,BorderLayout.EAST);
-			} catch (Exception e1){
-				//e1.printStackTrace();
-		    	JLabel errorLabel = new JLabel("<html><p>No Internet connection </p><p>or no valid metadata</p></html>");
-		    	errorLabel.setVerticalAlignment(JLabel.TOP);
-				imageMetadataPanel.add(errorLabel,BorderLayout.EAST);
-			}
-		
+		String data = (imageGrid.getSelectedImage()!=null?imageGrid.getSelectedImage().getMetaData():null);
+		imageMetadataPanel.setMetaDataLabelText(data);
+		imageMetadataPanel.repaint();
 	    repaint();
 	}
 	
