@@ -103,7 +103,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 				itp.addMouseListener(this);
 				itp.addMouseListener(window);
 				gridbox.add(itp);
-				pw.setValue((progress + 1) * interval);
+				if (pw!=null) pw.setValue((progress + 1) * interval);
 				progress++;
 			}
 			if(images.size() < 10) {

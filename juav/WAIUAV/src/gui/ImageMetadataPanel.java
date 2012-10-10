@@ -59,6 +59,7 @@ public class ImageMetadataPanel extends JPanel {
 			//draw image metadata
 			System.out.println("Gooder");
 			addMetadata();
+			addLocationMap();
 		}
 	}
 	
@@ -75,11 +76,10 @@ public class ImageMetadataPanel extends JPanel {
 		metaDataLabel.setSize(2*size.width/3, size.height);
 		metaDataLabel.setVerticalAlignment(JLabel.TOP);
 		System.out.println(metaDataLabel);
-		constructLocationMap();
 		add(metaDataLabel, BorderLayout.WEST);
 	}
 
-	public void constructLocationMap() {
+	public void addLocationMap() {
 		try {
 			String latitudeS = metaDataLabel.getText().split("GPS Latitude - ", 2)[1].split("</td>", 2)[0];
 			String longitudeS = metaDataLabel.getText().split("GPS Longitude - ")[1].split("</td>",2)[0];
