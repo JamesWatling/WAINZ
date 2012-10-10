@@ -2,6 +2,8 @@ package application;
 
 import java.awt.image.BufferedImage;
 
+import javax.swing.JOptionPane;
+
 import com.googlecode.javacv.cpp.opencv_core.CvMemStorage;
 import com.googlecode.javacv.cpp.opencv_core.CvRect;
 import com.googlecode.javacv.cpp.opencv_core.CvScalar;
@@ -21,12 +23,24 @@ import static com.googlecode.javacv.cpp.opencv_core.CV_AA;
 import static com.googlecode.javacv.cpp.opencv_core.cvRectangle;
 import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
 import static com.googlecode.javacv.cpp.opencv_core.cvGet2D;
-
+/**
+ * The class is used for the image processing. 
+ * THe data.xml is the classifier trained by opencv. 
+ * @author AgriSoft
+ *
+ */
 public class ImageClassifier {
 	// the cascade definition to be used for detection
 	private static final String CASCADE_FILE = "lib/data.xml";
 	
+	/**
+	 * The method will read in a picture and return the a new one with classified rectangle
+	 * on. If the opencv throws exception, the method will catch that and pop up a window
+	 * @param fileName - the input image for the image processing
+	 * @return BufferedImage - the processed image by opencv classifier
+	 */
 	public BufferedImage findRiverImage(String fileName) {
+		try{
 		// load the original image
 		IplImage originalImage= cvLoadImage(fileName, 1);
 		
@@ -59,6 +73,14 @@ public class ImageClassifier {
         cvClearMemStorage(storage);
 
 		return originalImage.getBufferedImage();
+		}catch(UnsatisfiedLinkError e){
+			JOptionPane.showConfirmDialog(
+				    null,
+				    "Opencv is not properly installed!",
+				    "Error",
+				    JOptionPane.YES_OPTION);
+		}
+		return null;
 	}
 	
 }
