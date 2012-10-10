@@ -102,7 +102,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	private BufferedImage METADATA_PLACEHOLDER;
 
-	private boolean noConnection = false;
+	public static boolean noConnection = false;
 	public static BufferedImage WAI_LOGO;
 	public static BufferedImage IMPORT_PLACEHOLDER;
 	public static final Color WAI_BLUE = new Color(0, 126, 166);
@@ -574,6 +574,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public void mouseClicked(MouseEvent e) {
 		setButtonsStatus(imageGrid.getSelectedImage()!=null);
 		String data = (imageGrid.getSelectedImage()!=null?imageGrid.getSelectedImage().getMetaData():null);
+		imageMetadataPanel.setCurrentImage(imageGrid.getSelectedImage());
 		imageMetadataPanel.setMetaDataLabelText(data);
 		imageMetadataPanel.repaint();
 	    repaint();
