@@ -4,7 +4,6 @@ import images.TaggableImage;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -27,6 +26,7 @@ public class ImageMetadataPanel extends JPanel {
 	private Dimension size;
 	private TaggableImage currentImage;
 	private JLabel metaDataLabel;
+	private JLabel mapLabel;
 
 	private static BufferedImage PLACEHOLDER_IMAGE;
 	private static JLabel placeHolderLabel;
@@ -51,13 +51,12 @@ public class ImageMetadataPanel extends JPanel {
 		removeAll();
 		setPreferredSize(size);
 		setMaximumSize(size);
+		setLayout(new BorderLayout());
 		if(currentImage ==  null || metaDataLabel.getText().equals("")) {
 			//draw the placeholder
-			System.out.println("Growler");
 			addPlaceholder();
 		} else {
 			//draw image metadata
-			System.out.println("Gooder");
 			addMetadata();
 			addLocationMap();
 		}
@@ -66,7 +65,6 @@ public class ImageMetadataPanel extends JPanel {
 	public void addPlaceholder() {
 		placeHolderLabel = new JLabel(new ImageIcon(PLACEHOLDER_IMAGE.getScaledInstance(size.width, 
 				size.height, Image.SCALE_FAST)));
-		System.out.println(placeHolderLabel);
 		placeHolderLabel.setSize(size);
 		add(placeHolderLabel);
 	}
@@ -75,7 +73,6 @@ public class ImageMetadataPanel extends JPanel {
 		setBackground(null);
 		metaDataLabel.setSize(2*size.width/3, size.height);
 		metaDataLabel.setVerticalAlignment(JLabel.TOP);
-		System.out.println(metaDataLabel);
 		add(metaDataLabel, BorderLayout.WEST);
 	}
 
@@ -127,20 +124,19 @@ public class ImageMetadataPanel extends JPanel {
 			Toolkit tk = getToolkit();
 			BufferedImage map = ImageIO.read(is);
 			tk.prepareImage(map, -1, -1, null);
-			add(new JLabel(new ImageIcon(map)),BorderLayout.EAST);
+			mapLabel = new JLabel(new ImageIcon(map));
+			mapLabel.setBounds(2*size.width/3, 0, size.width/3, size.height);
+			add(mapLabel,BorderLayout.EAST);
 		} catch (IOException e1) {
-			//e1.printStackTrace();
 			JLabel errorLabel = new JLabel("<html><p>No Internet connection</p></html>");
 			errorLabel.setVerticalAlignment(JLabel.TOP);
 			add(errorLabel,BorderLayout.EAST);
 			ApplicationWindow.noConnection = true;
 		} catch (NullPointerException e1) {
-			//e1.printStackTrace();
 			JLabel errorLabel = new JLabel("<html><p>No Internet connection</p></html>");
 			errorLabel.setVerticalAlignment(JLabel.TOP);
 			add(errorLabel,BorderLayout.EAST);
 		} catch (Exception e1){
-			//e1.printStackTrace();
 			JLabel errorLabel = new JLabel("<html><p>No Internet connection </p><p>or no valid metadata</p></html>");
 			errorLabel.setVerticalAlignment(JLabel.TOP);
 			add(errorLabel,BorderLayout.EAST);
