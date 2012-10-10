@@ -49,7 +49,9 @@ import application.ImageLoader;
 import application.ImagePdfExporter;
 
 /**
- * This class presents the main window of the application.
+ *  This class presents the main window of the application.
+ * @author AgriSoft
+ *
  */
 public class ApplicationWindow extends JFrame implements ActionListener, WindowListener, MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -323,7 +325,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	/**
 	 * Changes the status of all buttons according to the specification.
-	 * @param enabled
+	 * @param enabled - boolean
 	 */
 	private void setButtonsStatus(boolean enabled) {
 		prevImageButton.setEnabled(enabled);
@@ -334,7 +336,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	
 	/**
 	 * Changes the image of flag/unflag button according to the specification.
-	 * @param flag
+	 * @param flag - boolean
 	 */
 	public void toggleFlagButton(boolean flag) {
 		if(flag) {
@@ -573,7 +575,9 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
-	
+	/**
+	 * Check the Setting for the preferenee panel
+	 */
 	public void checkSetting() {
 		noConnection = false;
 		Scanner sc;

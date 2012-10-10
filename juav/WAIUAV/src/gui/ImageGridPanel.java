@@ -21,6 +21,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * ImageGridPanel is the left handside panel for displaying all input images.
+ * @author AgriSoft
+ *
+ */
 public class ImageGridPanel extends JPanel implements MouseListener{
 	private static final long serialVersionUID = 1L;
 	private static final Dimension gridPanelSize = new Dimension(100, 100);
@@ -32,6 +37,11 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 	private JLabel importedLabel;
 	private ApplicationWindow window;
 
+	/**
+	 * Constructor for the imageGridPanel
+	 * @param imageList - List<TaggableImage>
+	 * @param window - ApplicationWindow
+	 */
 	public ImageGridPanel(List<TaggableImage> imageList, ApplicationWindow window) {
 		this.window = window;
 		if(imageList == null || imageList.size() == 0)
@@ -44,14 +54,26 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		initialise(null);
 	}
 	
+	/**
+	 * Set the canvas for the panel for drawing the flags
+	 * @param c - Canvas
+	 */
 	public void setCanvas(Canvas c) {
 		this.canvas = c;
 	}
 	
+	/**
+	 * Set the list of images from the user input
+	 * @param newImageList - List<TaggableImage> 
+	 */
 	public void setImageList(List<TaggableImage> newImageList) {
 		images = newImageList;
 	}
 
+	/**
+	 * Initialize the panel
+	 * @param pw -ProgressWindow 
+	 */
 	public void initialise(ProgressWindow pw) {
 		// trash the existing contents of the image panel if there
 		// are already images (on a reload)
@@ -97,6 +119,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		repaint();
 	}
 	
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (images == null || images.isEmpty()) {
@@ -112,6 +135,10 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		}
 	}
 		
+	/**
+	 * Browse the images on the panel by direction.  
+	 * @param direction - String
+	 */
 	public void browse(String direction) {
 		if(selectedImage == null) return;
 		
@@ -141,18 +168,36 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		}
 	}
 	
+	/**
+	 * Update the canvas
+	 */
 	public void update() {
 		canvas.repaint();
 	}
 	
+	/**
+	 * get the imageThumbPanels panel
+	 * @return List<ImageThumbPanel>
+	 */
 	public List<ImageThumbPanel> getPanels() {
 		return imageThumbPanels;
 	}
-	
+	/**
+	 * Set the focus on the selected image
+	 * @param image - TaggableImage
+	 */
 	private void setSelectedImage(TaggableImage image) {selectedImage = image;}
 	
+	/**
+	 * get the selected image by the user
+	 * @return TaggableImage
+	 */
 	public TaggableImage getSelectedImage(){return selectedImage;}
 	
+	/**
+	 * Remove the selected image
+	 * @param imagePanel - ImagethumbPanel
+	 */
 	public void removeImage(ImageThumbPanel imagePanel) {
 		if (imagePanel.getImage() == selectedImage) {
 			selectedImage = null;
@@ -168,6 +213,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		initialise(null);
 	}
 
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		for(ImageThumbPanel i : imageThumbPanels){
 			i.setSelected(false);

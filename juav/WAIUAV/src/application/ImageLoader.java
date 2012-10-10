@@ -10,17 +10,30 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
-
+/**
+ * The imageLoader class is used to load the image adn show the fileChooser
+ * @author AgriSoft
+ *
+ */
 public class ImageLoader {
 	private JFileChooser fileChooser;
 	private File[] selectedImageFiles;
 
+	/**
+	 * Constructor of the imageLoader class
+	 */
 	public ImageLoader() {
 		fileChooser = new JFileChooser();
 		fileChooser.setFileFilter(new ImageFileFilter());
 		fileChooser.setMultiSelectionEnabled(true);
 	}
 
+	/**
+	 * Import a list of images by the user, then return the list
+	 *  of images from the user input
+	 * @param app - ApplicaitonWindow
+	 * @return List<TaggableImage> - the list of images input
+	 */
 	public List<TaggableImage> importImages(ApplicationWindow app) {
 		List<TaggableImage> result = new ArrayList<TaggableImage>();
 		int i = fileChooser.showOpenDialog(app);
@@ -49,6 +62,12 @@ public class ImageLoader {
 		}
 	}
 
+	/**
+	 * Will pop up a dialog to ask the user whether 
+	 * to overwriting 0 or add to existing one 1.
+	 * @param app - ApplicationWindow
+	 * @return Integer - overwriting or no select image 0, add to existing one 1, cancel 2 
+	 */
 	public int ImportImageAction(ApplicationWindow app) {		
 		if(selectedImageFiles == null || selectedImageFiles.length == 0){
 			return 0; //will overwrite existing image set (which will be empty)
@@ -64,9 +83,15 @@ public class ImageLoader {
 		return n;
 	}
 
+	/**
+	 * The class is used to control the images' format. only jpg, png, gif and bmp allowed
+	 * @author AgriSoft
+	 *
+	 */
 	public class ImageFileFilter extends FileFilter {
 		private final String[] okFileExtensions = new String[] {"jpg", "png", "gif", "bmp"};
-
+		
+		@Override
 		public boolean accept(File file)
 		{
 			for (String extension : okFileExtensions)

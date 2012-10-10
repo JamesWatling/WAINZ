@@ -12,6 +12,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * The canvas class aims for the right hand side image display. And update the image state
+ * @author YAN
+ *
+ */
 public class ImageCanvas extends Canvas {
 	private static final long serialVersionUID = 2491198060037716312L;
     private ImageGridPanel imageGrid;
@@ -19,6 +24,10 @@ public class ImageCanvas extends Canvas {
 	private BufferedImage WAI_LOGO;
 	private static Font mainImageViewCanvasFont = new Font("Arial", Font.BOLD, 14);
 
+	/**
+	 * Constructor for the imageCanvas class
+	 * @param imageGrid - ImageGridPanel
+	 */
 	public ImageCanvas(ImageGridPanel imageGrid){
 		this.imageGrid = imageGrid;
 		String logoPath = "lib/wai-default.jpg";
@@ -26,7 +35,8 @@ public class ImageCanvas extends Canvas {
 			WAI_LOGO = ImageIO.read(new File(logoPath));
 		} catch (IOException e) {e.printStackTrace();}
 	}
-
+	
+	@Override
 	public void paint(Graphics g) {
 		Color background;
 		Image currentImage;

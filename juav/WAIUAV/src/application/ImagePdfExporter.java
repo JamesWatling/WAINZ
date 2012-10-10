@@ -15,6 +15,10 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
 
+/**
+ * The class is used to generate the proper formatted report as PDF version
+ * @author AgriSoft
+ */
 public class ImagePdfExporter {
 	
 	private static PdfWriter writer;
@@ -23,9 +27,12 @@ public class ImagePdfExporter {
 	private final int incidentImageWidth = 450;
 	private final int incidentImageHeight = 337; //4:3 aspect ratio
 
+
 	/**
-	 * Setup the document to be exported, add some default
-	 * content/metadata
+	 * Setup the document to be exported, add some default content or metadata
+	 * @param filename - the PDF document name
+	 * @param img - the image need to be put into the document
+	 * @param description - the description need for the image
 	 */
 	public ImagePdfExporter(String filename, TaggableImage img, String description) {
 		document = new Document();
@@ -49,11 +56,18 @@ public class ImagePdfExporter {
 		}
 	}
 
+	/**
+	 * Write the author and Creator
+	 */
 	public void addMetaData() {
 		document.addAuthor("Water Action Initiative New Zealand");
 		document.addCreator("WAINZ UAVTool");
 	}
 	
+	/**
+	 * Add a header to the Document
+	 * @throws DocumentException
+	 */
 	public void addDocumentHeader() throws DocumentException {
 		try {
 			com.itextpdf.text.Image waiLogo = 
@@ -68,6 +82,11 @@ public class ImagePdfExporter {
 		}
 	}
 	
+	/**
+	 * Add the image into the report with proper format 
+	 * @param img - the TaggableImage need for the report
+	 * @throws DocumentException
+	 */
 	public void addReportImage(TaggableImage img) throws DocumentException {
 		try {
 			com.itextpdf.text.Image docImg = 
@@ -113,6 +132,11 @@ public class ImagePdfExporter {
 		}
 	}
 	
+	/**
+	 * Add a specific description to the image
+	 * @param description - String
+	 * @throws DocumentException
+	 */
 	public void addImageDescription(String description) throws DocumentException {
 		Paragraph imageDesc = new Paragraph();
 		addEmptyLine(imageDesc, 26);
