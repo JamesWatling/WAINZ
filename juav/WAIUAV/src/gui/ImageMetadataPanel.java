@@ -3,7 +3,6 @@ package gui;
 import images.TaggableImage;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -23,8 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
 public class ImageMetadataPanel extends JPanel {
-
-	private ApplicationWindow parent;
+	
+	private static final long serialVersionUID = 1L;
 	private Dimension size;
 	private TaggableImage currentImage;
 	private JLabel metaDataLabel;
@@ -32,8 +31,7 @@ public class ImageMetadataPanel extends JPanel {
 	private static BufferedImage PLACEHOLDER_IMAGE;
 	private static JLabel placeHolderLabel;
 
-	public ImageMetadataPanel(ApplicationWindow parent, Dimension size) {
-		this.parent = parent;
+	public ImageMetadataPanel(Dimension size) {
 		this.size = size;
 		loadPlaceholder();
 		initialise();
@@ -107,9 +105,9 @@ public class ImageMetadataPanel extends JPanel {
 				longitude= longitudeNum1-longitudeNum2/60-longitudeNum3/3600;
 
 			URLConnection con = null;
-			if(parent.noConnection);
-			else if(parent.useProxy)
-				con = new URL("http",parent.proxyUrl,parent.proxyPort,"http://maps.google.com/maps/api/staticmap?" +
+			if(ApplicationWindow.noConnection);
+			else if(ApplicationWindow.useProxy)
+				con = new URL("http",ApplicationWindow.proxyUrl,ApplicationWindow.proxyPort,"http://maps.google.com/maps/api/staticmap?" +
 						"center="+latitude+",%20"+longitude +
 						"&zoom=7&size="
 						+size.width/3+"x"+
@@ -125,7 +123,6 @@ public class ImageMetadataPanel extends JPanel {
 						"&maptype=roadmap&sensor=false&" +
 						"markers=||"+latitude+",%20"+longitude).openConnection();
 			InputStream is = con.getInputStream();
-			byte bytes[] = new byte[con.getContentLength()];
 			Toolkit tk = getToolkit();
 			BufferedImage map = ImageIO.read(is);
 			tk.prepareImage(map, -1, -1, null);
@@ -135,7 +132,7 @@ public class ImageMetadataPanel extends JPanel {
 			JLabel errorLabel = new JLabel("<html><p>No Internet connection</p></html>");
 			errorLabel.setVerticalAlignment(JLabel.TOP);
 			add(errorLabel,BorderLayout.EAST);
-			parent.noConnection = true;
+			ApplicationWindow.noConnection = true;
 		} catch (NullPointerException e1) {
 			//e1.printStackTrace();
 			JLabel errorLabel = new JLabel("<html><p>No Internet connection</p></html>");

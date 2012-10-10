@@ -3,7 +3,6 @@ package gui;
 import images.ImageTag;
 import images.TaggableImage;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
@@ -26,22 +25,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -49,7 +43,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
-import javax.swing.border.EtchedBorder;
 
 import application.ImageClassifier;
 import application.ImageLoader;
@@ -89,7 +82,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private ImageCanvas mainImageViewCanvas;
 	private JPanel rightPanel;
 	private ImageMetadataPanel imageMetadataPanel;
-	private JLabel metaDataLabel = new JLabel(" <p>Blank</p>");
 	private ProgressWindow pw;
 	
 	private JButton importButton;
@@ -99,8 +91,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private JButton prevImageButton;
 	private JButton autobutton;
 	private JButton analyzeAllButton;
-	
-	private BufferedImage METADATA_PLACEHOLDER;
 
 	public static boolean noConnection = false;
 	public static BufferedImage WAI_LOGO;
@@ -275,7 +265,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageButtonPanel.add(nextImageButton);
 		
 		//image metadata panel
-		imageMetadataPanel = new ImageMetadataPanel(this, IMAGE_METADATA_PANEL_SIZE);
+		imageMetadataPanel = new ImageMetadataPanel(IMAGE_METADATA_PANEL_SIZE);
 		
 		// adds all inner panels to the right panel
 		rightPanel.add(mainImageViewCanvas);
@@ -539,7 +529,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			}
 			String description = "";
 			description = JOptionPane.showInputDialog("Enter a short description of this image to append to the report");
-			ImagePdfExporter export = new ImagePdfExporter(exportPath, selectedImage, description);
+			new ImagePdfExporter(exportPath, selectedImage, description);
 		}
 	}
 	

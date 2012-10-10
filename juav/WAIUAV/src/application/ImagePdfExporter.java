@@ -10,7 +10,6 @@ import java.io.IOException;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
@@ -20,12 +19,9 @@ public class ImagePdfExporter {
 	
 	private static PdfWriter writer;
 	private Document document;
-	private Font h1 = new Font(Font.FontFamily.HELVETICA, 36, Font.BOLD);
 	
 	private final int incidentImageWidth = 450;
 	private final int incidentImageHeight = 337; //4:3 aspect ratio
-	private int imageTop;
-	private float imageRenderedHeight;
 
 	/**
 	 * Setup the document to be exported, add some default
@@ -64,9 +60,6 @@ public class ImagePdfExporter {
 				com.itextpdf.text.Image.getInstance("lib/wai-pdf-header-logo.png");
 			waiLogo.scalePercent(25);
 			waiLogo.setAbsolutePosition(25f, 760f); //from lower left
-			
-			//Incident Report Header
-			Paragraph header = new Paragraph("Incident Report", h1);
 					
 			document.add(waiLogo);
 			absText("Incident Report", 30, true, 200, 760);
@@ -108,7 +101,6 @@ public class ImagePdfExporter {
 				}
 			}
 			
-			imageRenderedHeight = docImg.getScaledHeight();
 			float imageRenderedWidth = docImg.getScaledWidth();
 			//now want to center the horizontally and vertically on the doc
 			int docWidth = 595; //at 72 dpi
@@ -165,7 +157,7 @@ public class ImagePdfExporter {
 		img = new TaggableImage(file);
 		String description = "WAINZ UAVTool - report for sample UAV captured image.";
 		if (img!=null) {
-			ImagePdfExporter export = new ImagePdfExporter(filename, img, description);
+			new ImagePdfExporter(filename, img, description);
 		}
 		System.exit(0);
 	}

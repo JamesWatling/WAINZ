@@ -1,7 +1,6 @@
 package application;
 
 import gui.ApplicationWindow;
-import gui.ProgressWindow;
 import images.TaggableImage;
 
 import java.io.File;
