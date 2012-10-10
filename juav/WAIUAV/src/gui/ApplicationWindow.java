@@ -420,6 +420,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 							}
 						}
 					}
+					JOptionPane.showMessageDialog(this, "Flagged Images have been exported successfully");
 				} catch(IOException ioe) {
 					System.out.println("Export failed: " + ioe.getMessage());
 				}
@@ -447,6 +448,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 							}
 						}
 					}
+					JOptionPane.showMessageDialog(this, "Flagged Images have been exported successfully");
 				} catch(IOException ioe) {
 					System.out.println("Export failed: " + ioe.getMessage());
 				}
