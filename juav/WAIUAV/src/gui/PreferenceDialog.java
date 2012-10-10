@@ -24,8 +24,10 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+
 /**
  * This class is used to display preferences information of the application.
+ * @author Yang Yu
  *
  */
 public class PreferenceDialog extends JDialog implements ActionListener {
@@ -46,6 +48,10 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 	private JButton button = new JButton("Browse");
 	private JRadioButton radiobutton5 = new JRadioButton("Always ask me where to save images");
 	
+	/**
+	 * Constructor for the preference dialog
+	 * @param parent - JFrame
+	 */
 	public PreferenceDialog(JFrame parent) {
 		super(parent, "Preferences", true);
 		
@@ -127,6 +133,7 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 		setVisible(true);
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
 		

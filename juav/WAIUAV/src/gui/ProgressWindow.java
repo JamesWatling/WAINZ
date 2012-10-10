@@ -16,6 +16,11 @@ public class ProgressWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JProgressBar progressBar;
 	
+	/**
+	 * Constructor for the ProgressWindow
+	 * @param panel - JPanel
+	 * @param type - Integer
+	 */
 	public ProgressWindow(JPanel panel, int type) {
 		progressBar = new JProgressBar();
 		progressBar.setStringPainted(true);
@@ -37,6 +42,10 @@ public class ProgressWindow extends JDialog {
 		setVisible(true);
 	}
 	
+	/**
+	 * Control the bar progress
+	 * @param progress - Integer
+	 */
 	public void setValue(int progress) {
 		progressBar.setValue(progress);
 	}
