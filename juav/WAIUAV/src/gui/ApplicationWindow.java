@@ -4,6 +4,7 @@ import images.ImageTag;
 import images.TaggableImage;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 import java.awt.FlowLayout;
@@ -111,7 +112,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		initialiseWindow();
 		imageLoader = new ImageLoader();
 		setImportedImageList(new ArrayList<TaggableImage>());
-	    
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		pack();
 		
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -461,7 +462,17 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			checkSetting();
 		}
 		else if (action.equals("Manual")) {
-			//manual features
+			//Opens the user manual using the default pdf viewer.
+			if (Desktop.isDesktopSupported()) {
+			    try {
+			        File manual = new File("lib/manual.pdf");
+			        Desktop.getDesktop().open(manual);
+			    } catch (IOException ex) {
+			        System.out.println("no application registered for PDFs");
+			        JOptionPane prompt = new JOptionPane("No Pdf viewer available");
+			        prompt.setVisible(true);
+			    }
+			}
 		}
 		else if (action.equals("About")) {
 			Object[] option = {"Close"};
@@ -536,12 +547,15 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	
 	public void windowClosing(WindowEvent e) {
-		if(!warning) System.exit(0);
+		if(!warning){
+			System.exit(0);
+		}
 		int n = JOptionPane.showConfirmDialog(
 			    this,
 			    "Would you like to exit now?",
 			    "Quit",
 			    JOptionPane.YES_NO_OPTION);
+		System.out.println(n);
 		if(n == 0){System.exit(0);}
 	}
 	
