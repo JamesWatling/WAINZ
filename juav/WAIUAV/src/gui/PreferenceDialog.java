@@ -63,20 +63,25 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 		if(ApplicationWindow.warning) checkbox2.setSelected(true);
 		general.setBounds(10, 10, 400, 90);
 		
-		title = BorderFactory.createTitledBorder(loweredetched, "Proxy - for map");
+		title = BorderFactory.createTitledBorder(loweredetched, "Proxy settings for map");
 		title.setTitleJustification(TitledBorder.LEFT);
 		appearance.setBorder(title);
-		appearance.setLayout(new BoxLayout(appearance, BoxLayout.Y_AXIS));
+		appearance.setLayout(null);
+		proxyCheckbox.setBounds(5, 20, 100, 20);
 		appearance.add(proxyCheckbox);
-		appearance.add(Box.createVerticalStrut(10));
-		appearance.add(new JLabel("Http Proxy URL"));
+		JLabel label = new JLabel("Http Proxy URL");
+		label.setBounds(10, 50, 100, 20);
+		appearance.add(label);
+		proxyUrlField.setBounds(10, 70, 300, 20);
 		appearance.add(proxyUrlField);
-		appearance.add(Box.createVerticalStrut(10));
-		appearance.add(new JLabel("Http Proxy Port"));
+		label = new JLabel("Http Proxy Port");
+		label.setBounds(10, 95, 100, 20);
+		appearance.add(label);
+		proxyPortField.setBounds(10, 115, 300, 20);
 		appearance.add(proxyPortField);
 		if(ApplicationWindow.useProxy == true) proxyCheckbox.setSelected(true);
 		proxyUrlField.setText(ApplicationWindow.proxyUrl);
-		proxyPortField.setText(ApplicationWindow.proxyPort+"");
+		proxyPortField.setText(ApplicationWindow.proxyPort + "");
 		appearance.setBounds(10, 110, 400, 150);
 		
 		title = BorderFactory.createTitledBorder(loweredetched, "Export");
@@ -115,7 +120,7 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 		add(cancel);
 		
 		setResizable(false);
-		setPreferredSize(new Dimension(420, 400));
+		setPreferredSize(new Dimension(420, 390));
 		pack();
 		setLocationRelativeTo(parent);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
