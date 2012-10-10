@@ -53,9 +53,11 @@ public class ImageMetadataPanel extends JPanel {
 		setMaximumSize(size);
 		if(currentImage ==  null || metaDataLabel.getText().equals("")) {
 			//draw the placeholder
+			System.out.println("Growler");
 			addPlaceholder();
 		} else {
 			//draw image metadata
+			System.out.println("Gooder");
 			addMetadata();
 		}
 		super.paintComponent(g);
@@ -65,12 +67,12 @@ public class ImageMetadataPanel extends JPanel {
 		placeHolderLabel = new JLabel(new ImageIcon(PLACEHOLDER_IMAGE.getScaledInstance(size.width, 
 				size.height, Image.SCALE_FAST)));
 		System.out.println(placeHolderLabel);
+		placeHolderLabel.setSize(size);
 		add(placeHolderLabel);
 	}
 	
 	public void addMetadata() {
 		setBackground(null);
-		metaDataLabel = new JLabel();
 		metaDataLabel.setSize(2*size.width/3, size.height);
 		metaDataLabel.setVerticalAlignment(JLabel.TOP);
 		System.out.println(metaDataLabel);
