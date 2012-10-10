@@ -31,7 +31,12 @@ public class ImageThumbPanel extends JPanel implements MouseListener {
 	JLabel imageLabel = new JLabel();
 	JLabel flagLabel;
 	JLabel deleteLabel;
-	
+	/**
+	 * Constructor for the ImageThumbPanel
+	 * @param ti - TaggableImage 
+	 * @param dim - Dimension
+	 * @param parent - ImageGridPanel
+	 */
 	public ImageThumbPanel(TaggableImage ti, Dimension dim, ImageGridPanel parent) {
 		image = ti; // new ImageThumbnail(ti, new Dimension(dim.width-10, dim.height-20));
 		//tag = ti.getTag();
@@ -40,17 +45,33 @@ public class ImageThumbPanel extends JPanel implements MouseListener {
 		initLayout(dim);
 	}
 
+	@Override
 	public String toString() {
 		return "ImageThumbPanel [fileName=" + fileName + ", selected="
 				+ selected + "]";
 	}
 	
+	/**
+	 * Get the image
+	 * @return TaggableImage
+	 */
 	public TaggableImage getImage() { return image; }
 	
+	/**
+	 * Set the select 
+	 * @param selected - boolean
+	 */
 	public void setSelected(boolean selected) { this.selected = selected; }
 	
+	/**
+	 * Get the image label
+	 * @return JLabel
+	 */
 	public JLabel imageLabel(){ return imageLabel; } 
-	
+	/**
+	 * Initialize the panel
+	 * @param dim - dimension
+	 */
 	public void initLayout(Dimension dim) {
 		setPreferredSize(dim);
 		setSize(dim);
@@ -81,11 +102,12 @@ public class ImageThumbPanel extends JPanel implements MouseListener {
 		add(labelPanel, BorderLayout.SOUTH);
 	}
 
+	@Override
 	public void paint(Graphics g) {
 		flagLabel.setVisible(image==null?false:image.getTag()==ImageTag.INFRINGEMENT);
 		super.paint(g);
 	}
-
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove the image " + image.getFileName() + "?");
 		if (confirm==JOptionPane.OK_OPTION) { 
