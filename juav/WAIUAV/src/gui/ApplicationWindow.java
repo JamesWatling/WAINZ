@@ -564,11 +564,16 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	 * This listener is added to each imageThumbPanel.
 	 */
 	public void mouseClicked(MouseEvent e) {
+		reloadPanels();
+	}
+	
+	public void reloadPanels() {
 		setButtonsStatus(imageGrid.getSelectedImage()!=null);
 		String data = (imageGrid.getSelectedImage()!=null?imageGrid.getSelectedImage().getMetaData():null);
 		imageMetadataPanel.setCurrentImage(imageGrid.getSelectedImage());
 		imageMetadataPanel.setMetaDataLabelText(data);
 		imageMetadataPanel.reload();
+		mainImageViewCanvas.repaint();
 	    repaint();
 	}
 	
