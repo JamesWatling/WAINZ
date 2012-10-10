@@ -521,18 +521,14 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 					int interval = 100/importedImageList.size() + 1;
 					int progress = 1;
 					BufferedImage processedImage = null;
-					boolean first = true;
 					for(ImageThumbPanel itp: imageGrid.getPanels()) {
 						if(itp.getImage() == null) break;
 						processedImage = new ImageClassifier().findRiverImage(itp.getImage().getSource().getPath());
 						itp.getImage().setImage(processedImage);
-						if(first) {
-							imageGrid.update();
-							first = false;
-						}
 						processedImage.flush();
 						pw.setValue((progress++) * interval);
 					}
+					imageGrid.update();
 					pw.dispose();
 				}
 			}).start();

@@ -21,12 +21,13 @@ public class ImageCanvas extends Canvas {
 
 	public ImageCanvas(ImageGridPanel imageGrid){
 		this.imageGrid = imageGrid;
-
 		String logoPath = "lib/wai-default.jpg";
-		try {WAI_LOGO = ImageIO.read(new File(logoPath));} catch (IOException e) {e.printStackTrace();}
+		try {
+			WAI_LOGO = ImageIO.read(new File(logoPath));
+		} catch (IOException e) {e.printStackTrace();}
 	}
 
-	public void paint(Graphics g){
+	public void paint(Graphics g) {
 		Color background;
 		Image currentImage;
 		if(imageGrid.getSelectedImage() == null) {
@@ -38,20 +39,17 @@ public class ImageCanvas extends Canvas {
 			background = Color.BLACK;
 		}
 		
-		if (currentImage == null) return; //error TODO throw an exception message here
-		
+		if (currentImage == null) return; // error
 		
 		int canvasWidth = getWidth();
-		int canvasHeight = getHeight() - 30; //leave room for label at bottom jm 180912
+		int canvasHeight = getHeight() - 30; // leave room for label at bottom jm 180912
 		int imageWidth = currentImage.getWidth(this);
 		int imageHeight = currentImage.getHeight(this);
 		int drawWidth, drawHeight = 0;
 		double aspectRatio = imageWidth / (1.0 * imageHeight);
 		
-		System.out.println("aspectRatio: " + aspectRatio);
-		
 		if (imageWidth > canvasWidth || imageHeight > canvasHeight) {
-			//image is bigger than canvas so we need to scale it 
+			// image is bigger than canvas so we need to scale it 
 			if(aspectRatio > 1){
 				// wider than it is tall, scale to fit on canvas
 				drawWidth = canvasWidth;
@@ -67,19 +65,11 @@ public class ImageCanvas extends Canvas {
 			drawHeight = imageHeight;
 		}
 		
-		System.out.println("drawWidth: " + drawWidth);
-		System.out.println("drawHeight: " + drawHeight);
-		
 		// get position required for painting to center the image jm 180912
 		int widthOffset = canvasWidth - drawWidth;
 		int heightOffset = canvasHeight - drawHeight;
 		int xPos = widthOffset / 2;
 		int yPos = heightOffset / 2;
-		
-		System.out.println("widthOffset: " + widthOffset);
-		System.out.println("heightOffset: " + heightOffset);
-		System.out.println("xPos: " + xPos);
-		System.out.println("yPos: " + yPos);
 		
 		// paint canvas background black, paint image jm 180912
 		g.setColor(background);
@@ -93,6 +83,6 @@ public class ImageCanvas extends Canvas {
 		int strWidth = fm.stringWidth(filename);
 		int strX = (canvasWidth-strWidth)/2;
 		g.setColor(Color.WHITE);				
-		g.drawString(filename, strX, getHeight() - 10); //use actual canvas height
+		g.drawString(filename, strX, getHeight() - 10); // use actual canvas height
 	}
 }

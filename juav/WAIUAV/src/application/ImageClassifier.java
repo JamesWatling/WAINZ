@@ -24,7 +24,7 @@ import static com.googlecode.javacv.cpp.opencv_core.cvGet2D;
 
 public class ImageClassifier {
 	// the cascade definition to be used for detection
-	private static final String CASCADE_FILE = "lib/data1.xml";
+	private static final String CASCADE_FILE = "lib/data.xml";
 	
 	public BufferedImage findRiverImage(String fileName) {
 		// load the original image
