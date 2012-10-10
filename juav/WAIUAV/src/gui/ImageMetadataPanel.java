@@ -4,8 +4,11 @@ import images.TaggableImage;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +19,7 @@ import java.net.URLConnection;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
@@ -27,6 +31,8 @@ public class ImageMetadataPanel extends JPanel {
 	private TaggableImage currentImage;
 	private JLabel metaDataLabel;
 	private JLabel mapLabel;
+	private JPanel zoomButtonPanel;
+	private int zoomLevel = 7;
 
 	private static BufferedImage PLACEHOLDER_IMAGE;
 	private static JLabel placeHolderLabel;
@@ -77,6 +83,18 @@ public class ImageMetadataPanel extends JPanel {
 	}
 
 	public void addLocationMap() {
+
+		int zoomButtonsHeight = 30;
+		
+		int mapWidth = size.width/3;
+		int mapHeight= size.height-zoomButtonsHeight;
+		int mapXOffset = 2*size.width/3;
+		int mapYOffset = 0;
+		
+		int zoomButtonsWidth = mapWidth;
+		int zoomButtonsXOffset = mapXOffset;
+		int zoomButtonsYOffset = mapHeight;
+		
 		try {
 			String latitudeS = metaDataLabel.getText().split("GPS Latitude - ", 2)[1].split("</td>", 2)[0];
 			String longitudeS = metaDataLabel.getText().split("GPS Longitude - ")[1].split("</td>",2)[0];
@@ -107,17 +125,17 @@ public class ImageMetadataPanel extends JPanel {
 			else if(ApplicationWindow.useProxy)
 				con = new URL("http",ApplicationWindow.proxyUrl,ApplicationWindow.proxyPort,"http://maps.google.com/maps/api/staticmap?" +
 						"center="+latitude+",%20"+longitude +
-						"&zoom=7&size="
-						+size.width/3+"x"+
-						size.height+
+						"&zoom="+zoomLevel+"&size="
+						+mapWidth+"x"+
+						mapHeight+
 						"&maptype=roadmap&sensor=false&" +
 						"markers=||"+latitude+",%20"+longitude).openConnection();
 			else
 				con = new URL("http://maps.google.com/maps/api/staticmap?" +
 						"center="+latitude+",%20"+longitude +
-						"&zoom=7&size="
-						+size.width/3+"x"+
-						size.height+
+						"&zoom="+zoomLevel+"&size="
+						+mapWidth+"x"+
+						mapHeight+
 						"&maptype=roadmap&sensor=false&" +
 						"markers=||"+latitude+",%20"+longitude).openConnection();
 			InputStream is = con.getInputStream();
@@ -125,8 +143,24 @@ public class ImageMetadataPanel extends JPanel {
 			BufferedImage map = ImageIO.read(is);
 			tk.prepareImage(map, -1, -1, null);
 			mapLabel = new JLabel(new ImageIcon(map));
-			mapLabel.setBounds(2*size.width/3, 0, size.width/3, size.height);
+			mapLabel.setBounds(mapXOffset, mapYOffset, mapWidth, mapHeight);
 			add(mapLabel,BorderLayout.EAST);
+			
+			//zoomButtons
+			ZoomListener zl = new ZoomListener(this);
+			JButton zoomIn = new JButton("+");
+			zoomIn.setBounds(zoomButtonsWidth/2, 0, zoomButtonsWidth/2, zoomButtonsHeight);
+			JButton zoomOut = new JButton("-");
+			zoomOut.setBounds(0, 0, zoomButtonsWidth/2, zoomButtonsHeight);
+			zoomIn.addActionListener(zl);
+			zoomOut.addActionListener(zl);
+			zoomButtonPanel = new JPanel();
+			zoomButtonPanel.setLayout(new FlowLayout());
+			zoomButtonPanel.add(zoomOut);
+			zoomButtonPanel.add(zoomIn);
+			zoomButtonPanel.setBounds(zoomButtonsXOffset, zoomButtonsYOffset, zoomButtonsWidth, zoomButtonsHeight);
+			add(zoomButtonPanel);
+			
 			
 		} catch (IOException e1) {
 			JLabel errorLabel = new JLabel("<html><p>No Internet connection</p></html>");
@@ -146,12 +180,35 @@ public class ImageMetadataPanel extends JPanel {
 			add(errorLabel,BorderLayout.EAST);
 		}
 	}
+	
+	public void zoomIn(){
+		zoomLevel ++;
+		reload();
+	}
+	public void zoomOut(){
+		zoomLevel--;
+		reload();
+	}
 
 	public static void loadPlaceholder() {
 		String metadataPlaceholderPath = "lib/metadata-panel-default.png";
 		try {
 			PLACEHOLDER_IMAGE = ImageIO.read(new File(metadataPlaceholderPath));
 		} catch (IOException e) { e.printStackTrace(); }
+	}
+	
+	private class ZoomListener implements ActionListener{
+		private ImageMetadataPanel panel;
+		public ZoomListener(ImageMetadataPanel panel){
+			this.panel = panel;
+		}
+		public void actionPerformed(ActionEvent e) {
+			String action = e.getActionCommand();
+			if(action.equals("+"))
+				panel.zoomIn();
+			else
+				panel.zoomOut();
+		}
 	}
 
 }
