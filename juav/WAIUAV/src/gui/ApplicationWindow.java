@@ -195,7 +195,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	
 	/**
-	 * Sets up the panels and buttons for the applicaton window.
+	 * Sets up the panels and buttons for the application window.
 	 */
 	private void initialiseWindow() {
 		try {
@@ -596,7 +596,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 	/**
-	 * Check the Setting for the preferenee panel
+	 * Check the Setting for the preference panel
 	 */
 	public void checkSetting() {
 		noConnection = false;
