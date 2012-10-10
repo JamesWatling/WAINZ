@@ -44,10 +44,10 @@ public class ImageMetadataPanel extends JPanel {
 	public void initialise() {
 		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		setLayout(new BorderLayout());
-		repaint();
+		reload();
 	}
-
-	public void paintComponent(Graphics g) {
+	
+	public void reload() {
 		removeAll();
 		setPreferredSize(size);
 		setMaximumSize(size);
@@ -60,7 +60,6 @@ public class ImageMetadataPanel extends JPanel {
 			System.out.println("Gooder");
 			addMetadata();
 		}
-		super.paintComponent(g);
 	}
 	
 	public void addPlaceholder() {

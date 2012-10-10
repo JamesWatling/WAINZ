@@ -568,6 +568,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		String data = (imageGrid.getSelectedImage()!=null?imageGrid.getSelectedImage().getMetaData():null);
 		imageMetadataPanel.setCurrentImage(imageGrid.getSelectedImage());
 		imageMetadataPanel.setMetaDataLabelText(data);
+		imageMetadataPanel.reload();
 	    repaint();
 	}
 	

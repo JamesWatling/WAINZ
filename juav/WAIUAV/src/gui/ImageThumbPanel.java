@@ -51,16 +51,7 @@ public class ImageThumbPanel extends JPanel implements MouseListener {
 				+ selected + "]";
 	}
 	
-	/**
-	 * Get the image
-	 * @return TaggableImage
-	 */
 	public TaggableImage getImage() { return image; }
-	
-	/**
-	 * Set the select 
-	 * @param selected - boolean
-	 */
 	public void setSelected(boolean selected) { this.selected = selected; }
 	
 	/**
@@ -68,6 +59,7 @@ public class ImageThumbPanel extends JPanel implements MouseListener {
 	 * @return JLabel
 	 */
 	public JLabel imageLabel(){ return imageLabel; } 
+	
 	/**
 	 * Initialize the panel
 	 * @param dim - dimension
