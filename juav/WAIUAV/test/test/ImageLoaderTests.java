@@ -9,7 +9,7 @@ import org.junit.Test;
 
 
 
-public class LoadingImageTests {
+public class ImageLoaderTests {
 
 	
 	

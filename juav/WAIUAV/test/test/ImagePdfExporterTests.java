@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import images.TaggableImage;
 import org.junit.Test;
 
-public class PdfOpenerTests {
+public class ImagePdfExporterTests {
 
 
     @Test
