@@ -4,7 +4,6 @@ import images.ImageTag;
 import images.TaggableImage;
 
 import java.awt.BorderLayout;
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
@@ -47,19 +46,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
-import javax.swing.ToolTipManager;
 import javax.swing.border.EtchedBorder;
 
 import application.ImageClassifier;
 import application.ImageLoader;
 import application.ImagePdfExporter;
 
-
+/**
+ * This class presents the main window of the application.
+ */
 public class ApplicationWindow extends JFrame implements ActionListener, WindowListener, MouseListener {
-	public static boolean minimize, warning, ask; 
+	private static final long serialVersionUID = 1L;
+	
+	public static boolean minimize, warning, ask;
 	public static int proxyPort;
 	public static String proxyUrl;
 	public static boolean useProxy;
@@ -80,17 +81,15 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private static final Dimension ANALYSE_ALL_BUTTON_SIZE = new Dimension(dim.width * 1 / 5, dim.height / 23);
 	
 	private ImageLoader imageLoader;
-	private static final long serialVersionUID = 1L;
-	
 	
 	private static List<TaggableImage> importedImageList;
 
 	private ImageGridPanel imageGrid;
-	
 	private ImageCanvas mainImageViewCanvas;
-
+	private JPanel rightPanel;
 	private JPanel imageMetadataPanel;
 	private JLabel metaDataLabel = new JLabel(" <p>Blank</p>");
+	private ProgressWindow pw;
 	
 	private JButton importButton;
 	private JButton exportButton;
@@ -99,24 +98,25 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	private JButton prevImageButton;
 	private JButton autobutton;
 	private JButton analyzeAllButton;
-	private BufferedImage METADATA_PLACEHOLDER;
 	
+	private BufferedImage METADATA_PLACEHOLDER;
 	public static BufferedImage WAI_LOGO;
 	public static BufferedImage IMPORT_PLACEHOLDER;
 	public static final Color WAI_BLUE = new Color(0, 126, 166);
 
-	public ApplicationWindow(){
-		checkSetting();
-		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
-		ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
-		setImportedImageList(new ArrayList<TaggableImage>());
+	/**
+	 * Constructs a new application window.
+	 */
+	public ApplicationWindow() {
+		setTitle("WAINZ UAVTool");
 		setLayout(new FlowLayout());
 		setResizable(false);
 		addWindowListener(this);
 		initialiseMenus();
 		initialiseWindow();
-		initialiseApplication();
-	    setTitle("WAINZ UAVTool");
+		imageLoader = new ImageLoader();
+		setImportedImageList(new ArrayList<TaggableImage>());
+	    
 		pack();
 		
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -124,15 +124,15 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		setBounds((scrnsize.width - getWidth()) / 2, (scrnsize.height - getHeight()) / 2, getWidth(), getHeight());
 		
 		setVisible(true);
+		checkSetting();
 	}
 
-	public void initialiseApplication(){
-		imageLoader = new ImageLoader();
-	}
-
-	public void initialiseMenus(){
-		System.out.println("button width/height:  " + IMAGE_BUTTON_PANEL_SIZE.width/4 + ", " + IMAGE_BUTTON_PANEL_SIZE.height);
+	/**
+	 * Sets up the menus and menu items for the application window.
+	 */
+	private void initialiseMenus() {
 		JMenuBar menuBar = new JMenuBar();
+		
 		JMenu file = new JMenu("File");
 		menuBar.add(file);
 		JMenuItem importItem = new JMenuItem("Import Images");
@@ -149,7 +149,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 		JMenu option = new JMenu("Image");
 		menuBar.add(option);
-
 		JMenuItem flagItem = new JMenuItem("Flag Image");
 		JMenuItem unflagItem = new JMenuItem("Unflag Image");
 		JMenuItem pdfReportItem = new JMenuItem("PDF Report");
@@ -158,7 +157,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		unflagItem.addActionListener(this);
 		preferencesItem.addActionListener(this);
 		pdfReportItem.addActionListener(this);
-				
 		option.add(flagItem);
 		option.add(unflagItem);
 		option.add(pdfReportItem);
@@ -166,19 +164,12 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 
 		JMenu help = new JMenu("Help");
 		menuBar.add(help);
-
 		JMenuItem about = new JMenuItem("About");
 		JMenuItem manual = new JMenuItem("Manual");
 		about.addActionListener(this);
 		manual.addActionListener(this);
-			
-		//Setting shortcuts and Mnemonics for Options Menu
-		flagItem.setMnemonic('F');
-		flagItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.Event.CTRL_MASK));
-		unflagItem.setMnemonic('U');
-		unflagItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.Event.CTRL_MASK));
-		preferencesItem.setMnemonic('P');
-		preferencesItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.Event.CTRL_MASK));
+		help.add(manual);
+		help.add(about);
 		
 		//Setting shortcuts and Mnemonics for File Menu
 		importItem.setMnemonic('I');
@@ -188,19 +179,29 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		quitItem.setMnemonic('W');
 		quitItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.Event.CTRL_MASK));
 		
+		//Setting shortcuts and Mnemonics for Options Menu
+		flagItem.setMnemonic('F');
+		flagItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.Event.CTRL_MASK));
+		unflagItem.setMnemonic('U');
+		unflagItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.Event.CTRL_MASK));
+		pdfReportItem.setMnemonic('R');
+		pdfReportItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.Event.CTRL_MASK));
+		preferencesItem.setMnemonic('P');
+		preferencesItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.Event.CTRL_MASK));
+		
 		//Setting shortcuts and Mnemonics for Help Menu
-		about.setMnemonic('A');
-		about.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.Event.CTRL_MASK));
 		manual.setMnemonic('M');
 		manual.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.Event.CTRL_MASK));
-			
-				
-		help.add(manual);
-		help.add(about);
+		about.setMnemonic('A');
+		about.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.Event.CTRL_MASK));
+		
 		setJMenuBar(menuBar);
 	}
 	
-	private void initialiseWindow(){
+	/**
+	 * Sets up the panels and buttons for the applicaton window.
+	 */
+	private void initialiseWindow() {
 		try {
 			String importPlaceholderPath = "lib/import-placeholder.jpg";
 			IMPORT_PLACEHOLDER = ImageIO.read(new File(importPlaceholderPath));
@@ -208,6 +209,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			System.out.println("Error reading WAI Logo");
 		}
 		
+		
+		// initializes the image thumbnail panel of the window
 		imageGrid = new ImageGridPanel(null, this);
 		JScrollPane leftPane = new JScrollPane(imageGrid);
 		leftPane.setPreferredSize(leftPaneSize);
@@ -220,53 +223,37 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		
 		imageGrid.setCanvas(mainImageViewCanvas);
 		
-		JPanel rightPanel = new JPanel();
+		// sets up the size and layout of the right panel
+		rightPanel = new JPanel();
 		rightPanel.setPreferredSize(RIGHT_PANEL_SIZE);
-		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS)); //changed to FlowLayout jm 180912
+		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 		
-		//JLabel infoLabel = new JLabel(infoIcon);
-		//infoLabel.setBounds(10, 10, infoIcon.getIconWidth(), infoIcon.getIconHeight());
-		//infoLabel.addMouseListener(this);
-		
+		// sets up all buttons on the right panel of the window
 		JPanel imageButtonPanel = new JPanel();
-		imageButtonPanel.setLayout(new GridLayout(1, 4)); //changed to GridLayout jm 180912
+		imageButtonPanel.setLayout(new GridLayout(1, 4));
 		imageButtonPanel.setSize(IMAGE_BUTTON_PANEL_SIZE);
 		imageButtonPanel.setPreferredSize(IMAGE_BUTTON_PANEL_SIZE);
 		imageButtonPanel.setMaximumSize(IMAGE_BUTTON_PANEL_SIZE);
 		
-		//imageButtonPanel.setPreferredSize(new Dimension(RIGHT_PANEL_SIZE.width, RIGHT_PANEL_SIZE.height/18));
-		//imageButtonPanel.setMaximumSize(new Dimension(RIGHT_PANEL_SIZE.width, RIGHT_PANEL_SIZE.height/18));
-		
-		//previous button
+		// previous button
 		ImageIcon prevBtnImage = new ImageIcon("lib/prev-image-btn.png");
-		
-		//Image xa = prevBtnImage.getImage().getScaledInstance(RIGHT_PANEL_SIZE.width/5, RIGHT_PANEL_SIZE.height/18, java.awt.Image.SCALE_SMOOTH);
 		Image xa = prevBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
 		prevBtnImage = new ImageIcon(xa);
-		
-
 		prevImageButton = new JButton(prevBtnImage);
 		prevImageButton.addActionListener(this);
 		prevImageButton.setActionCommand("Previous Image");
 		imageButtonPanel.add(prevImageButton);
 		
-		
-		//flag/unflag button
+		// flag and unflag button
 		ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
 		xa = flagBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
 		flagBtnImage = new ImageIcon(xa);
-		
 		flagImageButton = new JButton(flagBtnImage);
-		
-		//unflagImageButton = new JButton(unflagBtnImage);
 		flagImageButton.addActionListener(this);
-		//unflagImageButton.addActionListener(this);
 		flagImageButton.setActionCommand("Flag Image");
-		//unflagImageButton.setActionCommand("Unflag Image");
 		imageButtonPanel.add(flagImageButton);
-		//imageButtonPanel.add(unflagImageButton);
 		
-		//auto button
+		// auto analyze button
 		ImageIcon autoButtonImage = new ImageIcon("lib/auto-analyse-btn-gold.png");
 		xa = autoButtonImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
 		autoButtonImage = new ImageIcon(xa);
@@ -276,18 +263,16 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		autobutton.addActionListener(this);
 		imageButtonPanel.add(autobutton);
 		
-		//next button
+		// next image button
 		ImageIcon nextBtnImage = new ImageIcon("lib/next-image-btn.png");
 		xa = nextBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
 		nextBtnImage = new ImageIcon(xa);
-		
 		nextImageButton = new JButton(nextBtnImage);
 		nextImageButton.setActionCommand("Next Image");
 		nextImageButton.addActionListener(this);
 		imageButtonPanel.add(nextImageButton);
-
 		
-		//meta-data pane below buttons
+		// meta-data pane below buttons
 		String metadataPlaceholderPath = "lib/metadata-panel-default.png";
 		try {
 			METADATA_PLACEHOLDER = ImageIO.read(new File(metadataPlaceholderPath));
@@ -298,26 +283,30 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		imageMetadataPanel.setPreferredSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setMaximumSize(IMAGE_METADATA_PANEL_SIZE);
 		imageMetadataPanel.setBackground(new Color(153, 157, 158));
-		if(imageGrid.getSelectedImage()== null)
+		if(imageGrid.getSelectedImage() ==  null)
 			imageMetadataPanel.add(new JLabel(new ImageIcon(METADATA_PLACEHOLDER.getScaledInstance(IMAGE_METADATA_PANEL_SIZE.width, 
 					IMAGE_METADATA_PANEL_SIZE.height, Image.SCALE_FAST))));
 		else
 			imageMetadataPanel.add(metaDataLabel);
 		
+		// adds all inner panels to the right panel
 		rightPanel.add(mainImageViewCanvas);
 		rightPanel.add(imageButtonPanel);
 		rightPanel.add(imageMetadataPanel);
 		
-		//leftPanel
+		// sets up the left panel of the window
 		JPanel leftPanel = new JPanel();
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+		
 		JPanel importExportPanel = new JPanel();
 		importExportPanel.setLayout(new GridLayout(1, 2));
+		importExportPanel.setPreferredSize(IMEX_BUTTON_PANEL_SIZE);
+		importExportPanel.setMaximumSize(IMEX_BUTTON_PANEL_SIZE);	
+		
 		ImageIcon importBtnImage = new ImageIcon("lib/import-images-btn.png");
 		xa = importBtnImage.getImage().getScaledInstance(IMEX_BUTTON_PANEL_SIZE.width/2, IMEX_BUTTON_PANEL_SIZE.height, java.awt.Image.SCALE_SMOOTH);
 		importBtnImage = new ImageIcon(xa);
 		importButton = new JButton(importBtnImage);
-
 		importButton.setActionCommand("Import");
 		importButton.addActionListener(this);
 		importExportPanel.add(importButton);
@@ -329,10 +318,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		exportButton.addActionListener(this);
 		exportButton.setActionCommand("Export");
 		importExportPanel.add(exportButton);
-		importExportPanel.setPreferredSize(IMEX_BUTTON_PANEL_SIZE);
-		importExportPanel.setMaximumSize(IMEX_BUTTON_PANEL_SIZE);		
-		//importExportPanel.setPreferredSize(new Dimension(leftPaneSize.width, leftPaneSize.height/18));
-		//importExportPanel.setMaximumSize(new Dimension(leftPaneSize.width, leftPaneSize.height/18));
 		
 		JPanel analyseAllPanel = new JPanel();
 		ImageIcon analyseAllButtonImage = new ImageIcon("lib/analyse-all-btn.png");
@@ -349,33 +334,32 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		leftPanel.add(leftPane);
 		leftPanel.add(analyseAllPanel);
 		
-		//enable buttons
-		flagImageButton.setEnabled(false);
-		prevImageButton.setEnabled(false);
-		nextImageButton.setEnabled(false);
-		analyzeAllButton.setEnabled(false);
-				
+		// disable buttons
+		setButtonsStatus(false);
 		
 		add(leftPanel);
 		add(rightPanel);
 		
 		pack();
 	}
-
-	public Canvas getMainCanvas(){
-		return mainImageViewCanvas;
-	}
 	
-	public void setButtonsEnabled(boolean enabled){
-		flagImageButton.setEnabled(enabled);
+	/**
+	 * Changes the status of all buttons according to the specification.
+	 * @param enabled
+	 */
+	private void setButtonsStatus(boolean enabled) {
 		prevImageButton.setEnabled(enabled);
-		nextImageButton.setEnabled(enabled);
+		flagImageButton.setEnabled(enabled);
 		autobutton.setEnabled(enabled);
-		//analyzeAllButton.setEnabled(enabled); not controlled here jm 051012
+		nextImageButton.setEnabled(enabled);
 	}
 	
+	/**
+	 * Changes the image of flag/unflag button according to the specification.
+	 * @param flag
+	 */
 	public void toggleFlagButton(boolean flag) {
-		if (flag) {
+		if(flag) {
 			//set to flag
 			ImageIcon flagBtnImage = new ImageIcon("lib/flag-image-btn.png");
 			Image img = flagBtnImage.getImage().getScaledInstance(IMAGE_BUTTON_PANEL_SIZE.width/4, IMAGE_BUTTON_PANEL_SIZE.height, Image.SCALE_SMOOTH);
@@ -391,18 +375,36 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			flagImageButton.setActionCommand("Unflag Image");
 		}
 	}
-
+	
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
-		//Debug:
-		//System.out.println(action); //jm 070912
-
-		if (action.equals("Import")) {
-			importImageSet();
+		
+		if(action.equals("Import")) {
+			final ApplicationWindow aw = this;
+			new Thread(new Runnable() {
+				public void run() {
+					List<TaggableImage> importSet = imageLoader.importImages(aw);
+					pw = new ProgressWindow(rightPanel, 0);
+					if (importSet == null) {
+						pw.dispose();
+						return;
+					}
+					setImportedImageList(importSet);
+					imageGrid.setImageList(getImportedImageList());
+					imageGrid.initialise(pw);
+					imageGrid.repaint();
+					mainImageViewCanvas.repaint();
+					if (!getImportedImageList().isEmpty()) {
+						analyzeAllButton.setEnabled(true);
+					}
+					repaint();
+					pw.dispose();
+				}
+			}).start();
+			
 		}
-		else if (action.equals("Export")) {
-			//export features
-			if(!ask) {
+		else if(action.equals("Export")) {
+			if(!ask) { // indicates save location has been specified already
 				String exportPath = location;
 				int byteread = 0;
 				InputStream in = null;
@@ -423,7 +425,8 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				}
 				return;
 			}
-				
+			
+			// prompts dialog for user to choose save location
 			JFileChooser fc = new JFileChooser();
 			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			fc.setDialogTitle("Save images to");
@@ -450,7 +453,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			}
 		}
 		else if (action.equals("Quit")) {
-			//quit popup
 			if(!warning) System.exit(0);
 			int n = JOptionPane.showConfirmDialog(
 				    this,
@@ -460,19 +462,18 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			if(n == 0){System.exit(0);}
 		}
 		else if (action.equals("Flag Image")) {
-			//flag currently selected image
+			// flag currently selected image
 			imageGrid.getSelectedImage().setTag(ImageTag.INFRINGEMENT);
 			imageGrid.repaint();
 			toggleFlagButton(false);
 		}
 		else if (action.equals("Unflag Image")) {
-			//unflag the selected image
+			// unflag the selected image
 			imageGrid.getSelectedImage().setTag(ImageTag.UNTAGGED);
 			imageGrid.repaint();
 			toggleFlagButton(true);
 		}
 		else if (action.equals("Preferences")) {
-			//open preferences window
 			checkSetting();
 			new PreferenceDialog(this);
 			checkSetting();
@@ -481,7 +482,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			//manual features
 		}
 		else if (action.equals("About")) {
-			//about dialog
 			Object[] option = {"Close"};
 			JOptionPane pane = new JOptionPane("<html><font size = 5>WAI UAVTool</font></html>\nVersion 1.0\n<html><br>Developed by James McCann, James Watling, Sam Etheridge, Yan Dai, Yang Yu</html>\n" +
 					"<html><br>WAI UAVTool is an automatic image classification tool</html>\n\n" + 
@@ -496,13 +496,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 				}
 			}
 		}
-		else if (action.equals("Show Metadata")) {
-			JOptionPane.showMessageDialog(
-					null,
-					imageGrid!=null&&imageGrid.getSelectedImage()!=null&&imageGrid.getSelectedImage().getMetaData()!=null?
-							imageGrid.getSelectedImage().getMetaData():
-								"NO METADATA");
-		}
 		else if (action.equals("Previous Image")) {
 			imageGrid.browse("previous");
 		}
@@ -510,25 +503,41 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			imageGrid.browse("next");
 		}
 		else if(action.equals("Auto Analyse")) {
-			BufferedImage processedImage = new ImageClassifier().findRiverImage(imageGrid.getSelectedImage().getSource().getPath());
-			imageGrid.getSelectedImage().setImage(processedImage);
-			imageGrid.update();
-			processedImage.flush();
+			pw = new ProgressWindow(rightPanel, 1);
+			new Thread(new Runnable() {
+				public void run() {
+					BufferedImage processedImage = new ImageClassifier().findRiverImage(imageGrid.getSelectedImage().getSource().getPath());
+					imageGrid.getSelectedImage().setImage(processedImage);
+					imageGrid.update();
+					processedImage.flush();
+					pw.dispose();
+				}
+			}).start();
 		}
 		else if(action.equals("Analyze All")) {
-			BufferedImage processedImage = null;
-			boolean first = true;
-			for(ImageThumbPanel itp: imageGrid.getPanels()) {
-				processedImage = new ImageClassifier().findRiverImage(itp.getImage().getSource().getPath());
-				itp.getImage().setImage(processedImage);
-				if(first) {
-					imageGrid.update();
-					first = false;
+			pw = new ProgressWindow(rightPanel, 1);
+			new Thread(new Runnable() {
+				public void run() {
+					int interval = 100/importedImageList.size() + 1;
+					int progress = 1;
+					BufferedImage processedImage = null;
+					boolean first = true;
+					for(ImageThumbPanel itp: imageGrid.getPanels()) {
+						if(itp.getImage() == null) break;
+						processedImage = new ImageClassifier().findRiverImage(itp.getImage().getSource().getPath());
+						itp.getImage().setImage(processedImage);
+						if(first) {
+							imageGrid.update();
+							first = false;
+						}
+						processedImage.flush();
+						pw.setValue((progress++) * interval);
+					}
+					pw.dispose();
 				}
-				processedImage.flush();
-			}
+			}).start();
 		}
-		else if (action.equals("PDF Report")){ //jm 081012
+		else if(action.equals("PDF Report")) { //jm 081012
 			TaggableImage selectedImage = imageGrid.getSelectedImage();
 			if (selectedImage==null) {
 				JOptionPane.showMessageDialog(this, "Please select an Image to export!", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -547,8 +556,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			ImagePdfExporter export = new ImagePdfExporter(exportPath, selectedImage, description);
 		}
 	}
-
-	public void windowOpened(WindowEvent e) {}
+	
 	public void windowClosing(WindowEvent e) {
 		if(!warning) System.exit(0);
 		int n = JOptionPane.showConfirmDialog(
@@ -559,6 +567,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 		if(n == 0){System.exit(0);}
 	}
 	
+	public void windowOpened(WindowEvent e) {}
 	public void windowClosed(WindowEvent e) {}	
 	public void windowIconified(WindowEvent e) {}
 	public void windowDeiconified(WindowEvent e) {}
@@ -574,10 +583,10 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	}
 	
 	/**
-	 * This listener is added to each imageThumbPanel
+	 * This listener is added to each imageThumbPanel.
 	 */
 	public void mouseClicked(MouseEvent e) {
-		setButtonsEnabled(imageGrid.getSelectedImage()!=null);
+		setButtonsStatus(imageGrid.getSelectedImage()!=null);
 		String data = (imageGrid.getSelectedImage()!=null?imageGrid.getSelectedImage().getMetaData():"EMPTY");
 		System.out.println(data);
 		metaDataLabel.setText(data);
@@ -649,20 +658,6 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 	    repaint();
 	}
 	
-	public void importImageSet() {
-		List<TaggableImage> importSet = imageLoader.importImages(this);
-		if (importSet == null) return;
-		setImportedImageList(importSet);
-		imageGrid.setImageList(getImportedImageList());
-		imageGrid.initialise();
-		imageGrid.repaint();
-		mainImageViewCanvas.repaint();
-		if (!getImportedImageList().isEmpty()) {
-			analyzeAllButton.setEnabled(true);
-		}
-		repaint();
-	}
-	
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
@@ -676,14 +671,13 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			else minimize = false;
 			if(sc.next().equals("warning=true")) {warning = true;}
 			else warning = false;
-			if(sc.next().equals("proxy=true"))
-				useProxy=true;
+			if(sc.next().equals("proxy=true")) useProxy=true;
 			else useProxy=false;
-			String a=sc.nextLine();
-			a=sc.nextLine();
-			System.out.println(a);
-			proxyUrl=a.split("=", 2)[1];
-			proxyPort=Integer.parseInt(sc.nextLine().split("=",2)[1]);
+			String s = sc.nextLine();
+			s = sc.nextLine();
+			System.out.println(s);
+			proxyUrl = s.split("=", 2)[1];
+			proxyPort = Integer.parseInt(sc.nextLine().split("=",2)[1]);
 			if(sc.next().equals("ask=true")) {
 				ask = true;
 				location = null;
@@ -695,5 +689,7 @@ public class ApplicationWindow extends JFrame implements ActionListener, WindowL
 			e.printStackTrace();
 		}
 	}
+	
+	public JPanel getRightPanel() { return rightPanel; }
 	
 }

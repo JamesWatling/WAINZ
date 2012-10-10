@@ -50,7 +50,6 @@ public class ImageClassifier {
 			double blue = cvGet2D(originalImage, r.y(), r.x()).blue();
 			double green = cvGet2D(originalImage, r.y(), r.x()).green();
 			double red = cvGet2D(originalImage, r.y(), r.x()).red();
-			System.out.println(blue + " " + green + " " + red);
 			
 			if(red >= 85 && red <= 140 && green >= 100 && green <= 140 && blue >=105 && blue <= 145) {
 				cvRectangle(originalImage, cvPoint(r.x(), r.y()), cvPoint(r.x() + r.width(), r.y() + r.height()), CvScalar.RED, 3, CV_AA, 0);

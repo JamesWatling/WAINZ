@@ -1,4 +1,5 @@
 package gui;
+
 import images.ImageTag;
 import images.TaggableImage;
 
@@ -20,9 +21,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
 public class ImageGridPanel extends JPanel implements MouseListener{
-
 	private static final long serialVersionUID = 1L;
 	private static final Dimension gridPanelSize = new Dimension(100, 100);
 	private List<TaggableImage> images;
@@ -32,21 +31,20 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 	private JPanel gridbox;
 	private JLabel importedLabel;
 	private ApplicationWindow window;
-	//private TaggableImage selectedImage;
 
 	public ImageGridPanel(List<TaggableImage> imageList, ApplicationWindow window) {
 		this.window = window;
-		if(imageList == null || imageList.size()==0)
-			selectedImage=null;
+		if(imageList == null || imageList.size() == 0)
+			selectedImage = null;
 		else
 			selectedImage = imageList.get(0);
 		imageThumbPanels = new ArrayList<ImageThumbPanel>();
 		images = imageList;
 		setLayout(new BorderLayout());
-		initialise();
+		initialise(null);
 	}
 	
-	public void setCanvas(Canvas c){
+	public void setCanvas(Canvas c) {
 		this.canvas = c;
 	}
 	
@@ -54,39 +52,40 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		images = newImageList;
 	}
 
-	public void initialise() {
-		//trash the existing contents of the image panel if there
-		//are already images (on a reload)
+	public void initialise(ProgressWindow pw) {
+		// trash the existing contents of the image panel if there
+		// are already images (on a reload)
 		removeAll();
 		
-		if(images==null || images.isEmpty()){
-			//paint the placeholder image to fill box
-			//called via paintComponent jm 190812
+		if(images == null || images.isEmpty()) {
+			// paint the placeholder image to fill box
+			// called via paintComponent jm 190812
 			repaint();
 			return;
 		}
 		
-		importedLabel = new JLabel("Imported Images: "+images.size()+" images.");
-		add(importedLabel,BorderLayout.NORTH);
+		importedLabel = new JLabel("Imported Images: " + images.size() + " images.");
+		add(importedLabel, BorderLayout.NORTH);
 		
 		gridbox = new JPanel();
 		gridbox.setLayout(new GridLayout(0, 2));
 		
-		
-		//Debug:
-		System.out.println("initialise imageGrid");
 		ImageThumbPanel itp;
-		if(images != null){
+		if(images != null) {
 			imageThumbPanels.clear();
-			for(TaggableImage timg: images){
+			int progress = 0;
+			int interval = 100/images.size() + 1;
+			for(TaggableImage timg: images) {
 				itp = new ImageThumbPanel(timg, gridPanelSize, this);
 				imageThumbPanels.add(itp);
 				itp.addMouseListener(this);
 				itp.addMouseListener(window);
 				gridbox.add(itp);
+				pw.setValue((progress + 1) * interval);
+				progress++;
 			}
-			if(images.size()<10){
-				for(int i = images.size();i<10;i++){
+			if(images.size() < 10) {
+				for(int i = images.size(); i<10; i++){
 					itp = new ImageThumbPanel(null, gridPanelSize, this);
 					imageThumbPanels.add(itp);
 					gridbox.add(itp);
@@ -98,25 +97,24 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		repaint();
 	}
 	
-	//jm 190912
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (images == null || images.isEmpty()) {
-			//paint the placeholder image
+			// paint the placeholder image
 			Graphics2D g2d = (Graphics2D)g;
 			BufferedImage placeholder = ApplicationWindow.IMPORT_PLACEHOLDER;
 			Image scaledPlaceholder = placeholder.getScaledInstance(this.getWidth(), placeholder.getHeight(null), Image.SCALE_SMOOTH);
 			int x = (this.getWidth() - scaledPlaceholder.getWidth(null)) / 2;
 			int y = (this.getHeight() - scaledPlaceholder.getHeight(null)) / 2;
-			g2d.setColor(new Color(153, 157, 158)); //placeholder background
+			g2d.setColor(new Color(153, 157, 158)); // placeholder background
 			g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
 			g2d.drawImage(scaledPlaceholder, x, y, null);
 		}
 	}
-			
+		
 	public void browse(String direction) {
-		System.out.println("browsing: " + direction);
 		if(selectedImage == null) return;
+		
 		for(int i=0; i<imageThumbPanels.size(); i++) {
 			ImageThumbPanel current = imageThumbPanels.get(i);
 			
@@ -136,6 +134,7 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 					setSelectedImage(next.getImage());
 					next.imageLabel().setBorder(BorderFactory.createLineBorder(Color.red, 3));
 				}
+				
 				canvas.repaint();
 				break;
 			}
@@ -147,7 +146,26 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 	}
 	
 	public List<ImageThumbPanel> getPanels() {
-		return this.imageThumbPanels;
+		return imageThumbPanels;
+	}
+	
+	private void setSelectedImage(TaggableImage image) {selectedImage = image;}
+	
+	public TaggableImage getSelectedImage(){return selectedImage;}
+	
+	public void removeImage(ImageThumbPanel imagePanel) {
+		if (imagePanel.getImage() == selectedImage) {
+			selectedImage = null;
+		}
+		if (imageThumbPanels.size() == 1) {
+			//last image
+			imageThumbPanels.clear();
+			images.clear();
+			initialise(null);
+		}
+		imageThumbPanels.remove(imagePanel);
+		images.remove(imagePanel.getImage());
+		initialise(null);
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -161,28 +179,11 @@ public class ImageGridPanel extends JPanel implements MouseListener{
 		setSelectedImage(clickedThumb.getImage());
 		window.toggleFlagButton(selectedImage.getTag()==ImageTag.UNTAGGED);
 		canvas.repaint();
-		
 	}
-	private void setSelectedImage(TaggableImage image) {selectedImage = image;}
-	public TaggableImage getSelectedImage(){return selectedImage;}
 
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
-
-	public void removeImage(ImageThumbPanel imagePanel) {
-		if (imagePanel.getImage() == selectedImage) {
-			selectedImage = null;
-		}
-		if (imageThumbPanels.size() == 1) {
-			//last image
-			imageThumbPanels.clear();
-			images.clear();
-			initialise();
-		}
-		imageThumbPanels.remove(imagePanel);
-		images.remove(imagePanel.getImage());
-		initialise();
-	}
+	
 }

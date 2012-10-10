@@ -1,6 +1,7 @@
 package application;
 
 import gui.ApplicationWindow;
+import gui.ProgressWindow;
 import images.TaggableImage;
 
 import java.io.File;
@@ -12,8 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 public class ImageLoader {
-
-	JFileChooser fileChooser;
+	private JFileChooser fileChooser;
 	private File[] selectedImageFiles;
 
 	public ImageLoader() {
@@ -22,7 +22,7 @@ public class ImageLoader {
 		fileChooser.setMultiSelectionEnabled(true);
 	}
 
-	public List<TaggableImage> importImages(ApplicationWindow app){
+	public List<TaggableImage> importImages(ApplicationWindow app) {
 		List<TaggableImage> result = new ArrayList<TaggableImage>();
 		int i = fileChooser.showOpenDialog(app);
 		if (i == JFileChooser.CANCEL_OPTION) { return null; } 
@@ -49,25 +49,12 @@ public class ImageLoader {
 			return null;
 		}
 	}
-	
-	// for testing
-	public void setSelectedFiletoDefaultValue(File[] input){
-		//		selectedImageFiles;
-		selectedImageFiles = input;
-	}
 
-	// for testing
-	public JFileChooser fileChooser(){
-		return fileChooser;
-	}
-
-	public int ImportImageAction(ApplicationWindow app){		
+	public int ImportImageAction(ApplicationWindow app) {		
 		if(selectedImageFiles == null || selectedImageFiles.length == 0){
 			return 0; //will overwrite existing image set (which will be empty)
 		}
-		Object[] options = {"Yes, Overwrite",
-				"Yes, Add to existing",
-		"Cancel"};
+		Object[] options = {"Yes, Overwrite", "Yes, Add to existing", "Cancel"};
 		int n = JOptionPane.showOptionDialog(app, "Overwrite existing images or add to set ",
 				"Import Action",
 				JOptionPane.YES_NO_CANCEL_OPTION,
@@ -78,9 +65,8 @@ public class ImageLoader {
 		return n;
 	}
 
-	public class ImageFileFilter extends FileFilter{
-		private final String[] okFileExtensions = 
-				new String[] {"jpg", "png", "gif", "bmp"};
+	public class ImageFileFilter extends FileFilter {
+		private final String[] okFileExtensions = new String[] {"jpg", "png", "gif", "bmp"};
 
 		public boolean accept(File file)
 		{
@@ -94,10 +80,19 @@ public class ImageLoader {
 			return false;
 		}
 
-		@Override
 		public String getDescription() {
-			// TODO Auto-generated method stub
 			return null;
 		}
 	}
+	
+	// for testing
+	public void setSelectedFiletoDefaultValue(File[] input) {
+		selectedImageFiles = input;
+	}
+
+	// for testing
+	public JFileChooser fileChooser() {
+		return fileChooser;
+	}
+	
 }
